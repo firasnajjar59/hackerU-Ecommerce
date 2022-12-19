@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const productsRouter = require("./products/products");
-const usersRouter = require("./users/users");
-const adminRouter = require("./admin/admin");
-const reviewsRouter = require("./reviews/reviews");
+const productsRouter = require("./productsRouter");
+const usersRouter = require("./usersRouter");
+const adminRouter = require("./adminRouter");
+const reviewsRouter = require("./reviewsRouter");
 
 /* GET Products Router. */
 router.use('/products', productsRouter);

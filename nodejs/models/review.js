@@ -1,15 +1,10 @@
 const mongoose = require("mongoose");
 
 const reviewsSchema=new mongoose.Schema({
-    productId: { type: mongoose.Schema.Types.ObjectId, ref: "products",required:true },
-    reviewValue:{type:String,required:true},
-    user_id:{type: mongoose.Schema.Types.ObjectId,ref: "users",required:true}
+    productId: { type: mongoose.Schema.Types.ObjectId, ref: "products",required:[true,"A productId must have a product Id"] },
+    reviewValue:{type:String,required:[true,"A reviewValue must have a content"]},
+    user_id:{type: mongoose.Schema.Types.ObjectId,ref: "users",required:[true,"A user_id must have a user Id"]}
 })
 const Reviews = mongoose.model("reviews",reviewsSchema)
-const createReviewDB = (userInput) => {
-  const review = new Reviews(userInput);
-  return review.save();
-};
-module.exports = {
-  createReviewDB
-  };
+
+module.exports = Reviews;

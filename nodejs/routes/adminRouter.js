@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const checkRole=require("../../middlewares/cheackRole")
+const checkRole=require("../middlewares/cheackRole")
+const adminController = require("../controller/adminController")
 
 /* /api/v1/admin */
 /*

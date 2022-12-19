@@ -42,6 +42,4 @@ const createUserDB=(userInput)=>{
     return user.save()
 }
 
-module.exports = {
-    createUserDB
-};
+module.exports = Users;

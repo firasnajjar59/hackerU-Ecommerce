@@ -1,0 +1,1 @@
+const Admins = require("../models/admin")
