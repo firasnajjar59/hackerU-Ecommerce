@@ -30,7 +30,7 @@ router.post("/",reviewController.createReview);
 * token need
 * check if user have permission to udate card "admin or review owner"
 */
-router.put("/:id", (req, res) => {
+router.patch("/:id", (req, res) => {
   res.json({ data: "PUT /api/v1/reviews update review" });
 });
 

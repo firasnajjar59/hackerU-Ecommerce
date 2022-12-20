@@ -1,1 +1,1 @@
-const Admins = require("../models/admin")
+const Admins = require("../models/adminModel")

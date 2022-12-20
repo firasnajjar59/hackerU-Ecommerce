@@ -2,7 +2,6 @@
 
 const express = require('express');
 const router = express.Router();
-const productFunc = require('../models/product');
 const checkRole = require('../middlewares/cheackRole');
 const checkIdInParams = require('../middlewares/checkIdInParams');
 const productController = require("../controller/productController")
@@ -56,7 +55,7 @@ router.post('/', productController.createProduct);
  * check if user have permission to delete card "admin or card owner"
  *
  */
-router.put('/', (req, res) => {
+router.patch('/', (req, res) => {
   res.json({ data: 'PUT /api/v1/products update product' });
 });
 

@@ -36,7 +36,7 @@ router.post('/', (req,res)=>{
 *
 *
 */
-router.put("/", (req, res) => {
+router.patch("/", (req, res) => {
     res.json({ data: "PUT /api/v1/admin update admin" });
 });
 /* /api/v1/admin delete admin */

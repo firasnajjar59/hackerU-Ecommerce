@@ -1,5 +1,5 @@
-const Products = require("../models/product")
-const functionsFactory=require("./functionsFactory")
+const Products = require("../models/productmodel")
+const functionsFactory=require("../services/functionsFactory")
 
 
 const createProduct =  functionsFactory.createDocumant(Products)

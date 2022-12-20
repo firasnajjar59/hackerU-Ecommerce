@@ -41,7 +41,7 @@ router.post('/', userController.createUser);
  *
  */
 
-router.put('/', (req, res) => {
+router.patch('/', (req, res) => {
   res.json({ data: 'PUT /api/v1/users update user' });
 });
 /* /api/v1/users delete user */

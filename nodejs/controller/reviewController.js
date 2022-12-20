@@ -1,6 +1,5 @@
-const Reviews=require("../models/review")
-
-const functionsFactory=require("./functionsFactory")
+const Reviews=require("../models/reviewModel")
+const functionsFactory=require("../services/functionsFactory")
 
 
 const createReview =  functionsFactory.createDocumant(Reviews)

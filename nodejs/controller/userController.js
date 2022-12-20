@@ -1,5 +1,5 @@
-const Users = require("../models/user")
-const functionsFactory=require("./functionsFactory")
+const Users = require("../models/userModel")
+const functionsFactory=require("../services/functionsFactory")
 
 
 const createUser =  functionsFactory.createDocumant(Users)
