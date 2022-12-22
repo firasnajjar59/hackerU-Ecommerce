@@ -1,7 +1,6 @@
 /** @format */
 
 const mongoose = require('mongoose');
-const validator = require('validator');
 const slugify = require('slugify');
 const productsSchema = new mongoose.Schema({
   name: {
@@ -9,10 +8,9 @@ const productsSchema = new mongoose.Schema({
     unique: true,
     trim: true,
     required: [true, 'A product must have a name'],
-    validate:[validator.isAlpha,'Product name must only contain characters']
   },
-  slug:{
-    type:String
+  slug: {
+    type: String,
   },
   description: {
     type: String,
@@ -21,8 +19,13 @@ const productsSchema = new mongoose.Schema({
   imgs: [{ type: String }],
   price: { type: Number, required: [true, 'A product must have a price'] },
   createdAt: { type: Date },
-  premium:{type:Boolean,default:false}
-});
+  premium: { type: Boolean, default: false },
+},
+{
+  toJSON:{virtuals:true},
+  toObject:{virtuals:true}
+}
+);
 //* document middleware
 productsSchema.pre('save', function (next) {
   this.createdAt = Date.now();
@@ -33,26 +36,19 @@ productsSchema.pre('save', function (next) {
   next();
 });
 //* Query middleware
-productsSchema.pre(/^find/,function (next){
-  this.find({premium:{$ne:true}})
-  next()
-})
+productsSchema.pre(/^find/, function (next) {
+  this.find({ premium: { $ne: true } });
+  next();
+});
+//* virtual fields
+productsSchema.virtual('reviews', {
+  ref: 'reviews',
+  foreignField: 'productId',
+  localField: '_id',
+});
 
 const Products = mongoose.model('products', productsSchema);
 module.exports = Products;
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //* after finish save
 // productsSchema.post('save', function (doc,next) {

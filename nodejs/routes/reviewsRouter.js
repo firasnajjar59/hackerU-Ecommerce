@@ -1,44 +1,36 @@
-const express = require("express");
-const router = express.Router();
-const reviewController = require("../controller/reviewController")
+/** @format */
 
-/* /api/v1/reviews get all reviews */
-/*
-* no token need
-*/
-router.get("/", reviewController.getAllReviews);
+const express = require('express');
+// mergeParams because review is nested router and we need access to the params from the products router
+const router = express.Router({ mergeParams: true });
+const reviewController = require('../controller/reviewController');
 
-/* /api/v1/reviews/my-reviews get user reviews */
+/* /api/v1/reviews */
 /*
-* token need
-*/
-router.get("/:id", reviewController.getReviewsByUserID);
-/* /api/v1/reviews get one review */
+ * no token need
+ */
+router
+  .route('/')
+  .get(reviewController.getAllReviews)
+  .post(reviewController.createReview);
+/* api/v1/products/product/:productID/reviews get reviews for product */
 /*
-* no token need
-*/
-router.get("/review/:id", reviewController.getReviewByID);
+ * token need
+ */
+router.get('/reviews', reviewController.getReviewsByproductId);
+/* /api/v1/reviews/my-reviews */
+/*
+ * token need
+ */
+router
+  .route('/review/:id')
+  .get(reviewController.getReviewByID)
+  .delete(reviewController.deleteReview)
+  .patch((req, res) => {
+    res.json({ data: 'PUT /api/v1/reviews update review' });
+  });
 
-/* /api/v1/reviews add review */
-/*
-* token need
-*/
-router.post("/",reviewController.createReview);
 
-/* /api/v1/reviews update review */
-/*
-* token need
-* check if user have permission to udate card "admin or review owner"
-*/
-router.patch("/:id", (req, res) => {
-  res.json({ data: "PUT /api/v1/reviews update review" });
-});
 
-/* /api/v1/reviews delete review */
-/*
-* token need
-* check if user have permission to delete review "admin or review owner"
-*/
-router.delete("/:id", reviewController.deleteReview);
 
 module.exports = router;

@@ -6,6 +6,12 @@ const handleCastError = err => {
   const message = `Invalid ${err.path}:${err.value}`;
   return new AppError(message, 400);
 };
+// * handle JWT invalid signature
+const handleJsonWebTokenError = () =>
+  new AppError('Invalid token please login again', 401);
+// * handle JWT Token Expired Error
+const handleTokenExpiredError = () =>
+  new AppError('Your token has expired please login again', 401);
 // * handle mongo validation Error
 const handleValidatorError = err => {
   const message = `${err.message}`;
@@ -30,10 +36,10 @@ const sendErrorDev = (err, res) => {
 // * handling Errors for production Envirment
 const sendErrorProd = (err, res) => {
   /*
-  * operational error
-  * this error pass throw our AppError class and get the 'isOperational'
-  * so we handle this error in the class, and we can send it to the client
-  */ 
+   * operational error
+   * this error pass throw our AppError class and get the 'isOperational'
+   * so we handle this error in the class, and we can send it to the client
+   */
   if (err.isOperational) {
     // send the error
     res.status(err.statusCode).json({
@@ -56,12 +62,12 @@ const sendErrorProd = (err, res) => {
   }
 };
 
-/* 
-* the errorController: handling which envirment we are
-* and execute relivant function
-* also in production envirment cheack if the Error caused by mongo
-* if yes then muniplate the error object and send it at the response
-*/ 
+/*
+ * the errorController: handling which envirment we are
+ * and execute relivant function
+ * also in production envirment cheack if the Error caused by mongo
+ * if yes then muniplate the error object and send it at the response
+ */
 module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || 'error';
@@ -70,7 +76,9 @@ module.exports = (err, req, res, next) => {
     console.log(error);
     if (error.name === 'CastError') error = handleCastError(error);
     if (error.code === 11000) error = handleDuplicateField(error);
-    if (error.name === "ValidationError") error = handleValidatorError(error);
+    if (error.name === 'ValidationError') error = handleValidatorError(error);
+    if (error.name === 'JsonWebTokenError') error = handleJsonWebTokenError();
+    if (error.name === 'TokenExpiredError') error = handleTokenExpiredError();
     sendErrorProd(error, res);
   } else if (process.env.NODE_ENV === 'development') {
     sendErrorDev(err, res);

@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
 
-const generateToken = (payload, expDate = "30d") => {
+const generateJWTToken = (payload, expDate = "30d") => {
   return new Promise((resolve, reject) => {
-    jwt.sign(payload, process.env.JWT, { expiresIn: expDate }, (err, token) => {
+    jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: expDate }, (err, token) => {
       if (err) reject(err);
       else resolve(token);
     });
@@ -11,7 +11,7 @@ const generateToken = (payload, expDate = "30d") => {
 
 const verifyToken = (token) => {
   return new Promise((resolve, reject) => {
-    jwt.verify(token, process.env.JWT, (err, payload) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, payload) => {
       if (err) reject(err);
       else resolve(payload);
     });
@@ -19,6 +19,6 @@ const verifyToken = (token) => {
 };
 
 module.exports = {
-    generateToken,
+  generateJWTToken,
     verifyToken,
 };

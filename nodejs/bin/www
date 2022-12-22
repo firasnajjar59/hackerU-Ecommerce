@@ -12,6 +12,7 @@ require("dotenv").config({
 process.on("uncaughtException",err=>{
   console.log("uncaughtException")
   console.log(err.name,err.message)
+  console.log(err)
   console.log("Shutting down")
   server.close(()=>{
     process.exit(1)
