@@ -16,10 +16,25 @@ const productsSchema = new mongoose.Schema({
     type: String,
     required: [true, 'A product must have a description'],
   },
+  imgCover: [{ type: String }],
   imgs: [{ type: String }],
   price: { type: Number, required: [true, 'A product must have a price'] },
   createdAt: { type: Date },
   premium: { type: Boolean, default: false },
+  selectOption:[
+    {
+      name:{type:String},
+      options:[String]
+    }
+  ],
+  properties:[
+    {
+      name:{type:String},
+      description:{type:String}
+    }
+  ],
+  category:[String],
+  
 },
 {
   toJSON:{virtuals:true},

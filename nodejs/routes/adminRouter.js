@@ -3,44 +3,30 @@
 const express = require('express');
 const router = express.Router();
 const adminController = require('../controller/adminController');
-const protect= require('../middlewares/protect');
+const protect = require('../middlewares/protect');
 const permissionTo = require('../middlewares/permissionTo');
-
+const webContentRouter = require('./webContentRouter');
+const catchAsync = require('../services/catchAsync');
+const generateToken = require('../middlewares/generateToken');
+const AppError = require('../utils/appError');
 // middlewares
-router.use(protect)
-router.use(permissionTo('admin'))
+router.use(protect);
+router.use(permissionTo('admin'));
+//* nested route api/v1/users/admin/webcontent
+router.use('/webcontent', webContentRouter);
 
+/*
+ * api/v1/users/admin
+ */
+router.route('/').get((req,res,next)=>{
+  return next(new AppError('Route not defined yet',400))
+}).post(adminController.createAdmin,generateToken);
 
-/* /api/v1/admin */
-/*
- *
- *
- *
- */
-router
-  .route('/')
-  .get((req, res) => {
-    res.json({ data: 'GET /api/v1/admin' });
-  })
-  .post((req, res) => {
-    res.json({ data: 'POST /api/v1/admin create admin' });
-  });
-/* /api/v1/admin/:id get one user */
-/*
- *
- *
- *
- */
 router
   .route('/:id')
-  .get((req, res) => {
-    res.json({ data: 'GET /api/v1/admin/:id get one admin' });
-  })
-  .patch( (req, res) => {
-    res.json({ data: 'PUT /api/v1/admin update admin' });
-  })
-  .delete( (req, res) => {
-    res.json({ data: 'DELETE /api/v1/admin delete admin' });
-  });
+  .patch(
+   adminController.updateUser,generateToken
+  )
+  .delete(adminController.deletUser);
 
 module.exports = router;

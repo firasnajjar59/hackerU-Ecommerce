@@ -6,22 +6,13 @@ const router = express.Router({ mergeParams: true });
 const reviewController = require('../controller/reviewController');
 
 /* /api/v1/reviews */
-/*
- * no token need
- */
 router
   .route('/')
   .get(reviewController.getAllReviews)
   .post(reviewController.createReview);
 /* api/v1/products/product/:productID/reviews get reviews for product */
-/*
- * token need
- */
 router.get('/reviews', reviewController.getReviewsByproductId);
 /* /api/v1/reviews/my-reviews */
-/*
- * token need
- */
 router
   .route('/review/:id')
   .get(reviewController.getReviewByID)

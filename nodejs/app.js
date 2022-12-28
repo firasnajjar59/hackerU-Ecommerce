@@ -14,7 +14,6 @@ const apiRouter = require('./routes/api');
 const globalErrorHandler = require('./controller/errorContoller');
 
 const app = express();
-app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

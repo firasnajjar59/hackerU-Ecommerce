@@ -8,7 +8,7 @@ const reviewsRouter = require("./reviewsRouter");
 router.use('/products', productsRouter);
 /* GET Users Router. */
 router.use('/users', usersRouter);
-/* GET Admin Router. */
+/* GET reviews Router. */
 router.use('/reviews', reviewsRouter);
 
 module.exports = router;

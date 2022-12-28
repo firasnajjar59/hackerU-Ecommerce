@@ -17,7 +17,7 @@ const protect = catchAsync(async (req, res, next) => {
   //
   if (!token) {
     return next(
-      new AppError('Your are not logged in. Please log in to get acces', 401)
+      new AppError('Your are not logged in. Please log in to get access', 401)
     );
   }
   // validate token

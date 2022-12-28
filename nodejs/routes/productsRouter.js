@@ -10,34 +10,26 @@ const reviewsRouter = require('./reviewsRouter');
 
 router.param('id', checkIdInParams);
 /* /api/v1/products nesting route */
-/*
- *
- *
- */
 // router.use('/product/:id', reviewsRouter);
 router.use('/product/:id', reviewsRouter);
 
-
 /* /api/v1/products */
-/*
- * no token need
- *
- */
 router
   .route('/')
   .get(productController.getAllProducts)
-  .post(protect, permissionTo('admin'),productController.createProduct);
+  .post(protect, permissionTo('admin'), productController.createProduct);
 
 /* /api/v1/products/:productId get user products */
-/*
- * token need
- *
- *
- */
 router
-  .route('/:id').get(productController.getProductByID)
-  .patch(protect, permissionTo('admin', 'contributor'),(req, res) => {
+  .route('/:id')
+  .get(productController.getProductByID)
+  .patch(protect, permissionTo('admin', 'contributor'), (req, res) => {
     res.json({ data: 'PUT /api/v1/products update product' });
-  }).delete(protect, permissionTo('admin', 'contributor'),productController.deleteProduct);
+  })
+  .delete(
+    protect,
+    permissionTo('admin', 'contributor'),
+    productController.deleteProduct
+  );
 
 module.exports = router;
