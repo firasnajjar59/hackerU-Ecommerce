@@ -1,0 +1,32 @@
+
+    
+    .navBarWrapper{
+      display: flex;
+        padding: 1em !important;
+      align-items: center;
+      justify-content: space-between;
+    
+      .navLinks{
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-evenly;
+          flex-grow: 1;
+          color: var(--primary-color);
+        
+      }
+    }
+
+
+    @media screen and (max-width: 600px) {
+  
+      .navBarWrapper{
+        display: none !important;
+   
+      
+        .navLinks{
+           
+          
+        }
+      }
+    }

@@ -1,0 +1,17 @@
+.navLink{
+    text-decoration: none;
+    font-size: 1em;
+    color:var(--primary-color);
+    padding: 0em 0.5em !important;
+    &:hover{
+        color:var(--primary-color);
+        border-bottom: 2px solid var(--primary-color);
+        
+      }
+    }
+    .active-NavLink{
+      font-weight: 600;
+      border-bottom: 4px solid var(--primary-color);
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+  }

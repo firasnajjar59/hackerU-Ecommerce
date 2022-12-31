@@ -1,0 +1,31 @@
+.caruselOurCustemers{
+    background-color: var(--primary-color);
+    width: 100%;
+    padding: 1em !important;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    position: relative;
+    overflow-x: hidden;
+    .OurCustemers-title{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        h2{
+            color: var(--secondary-color);
+            font-size: 3em;
+        }
+    }
+    .OurCustemersCards{
+        width: fit-content;
+        min-width: 100% !important;
+        margin: auto !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        bottom: 3%;
+        left: 0;
+       
+    }
+}

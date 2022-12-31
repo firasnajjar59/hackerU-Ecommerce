@@ -1,0 +1,33 @@
+/** @format */
+
+.logoAndMemberSection {
+  padding: 1em !important;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: flex-end;
+
+
+
+  .hamburger {
+    display: flex;
+    justify-content: end;
+    color: var(--primary-color);
+    display: none;
+  }
+}
+
+
+@media screen and (max-width: 600px) {
+  
+.logoAndMemberSection {
+  
+
+  .memberSection {
+  opacity: 0;
+  }
+
+  .hamburger {
+    display:flex ;
+  }
+}
+}

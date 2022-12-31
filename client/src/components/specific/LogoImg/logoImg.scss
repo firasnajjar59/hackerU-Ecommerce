@@ -1,0 +1,21 @@
+.logoWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img{
+        width: 10rem;
+        aspect-ratio: 4/2;
+            object-fit: contain;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .logoWrapper{
+        img{
+            width: 7rem;
+            aspect-ratio: 4/2;
+            object-fit: contain;
+        }
+    }
+}

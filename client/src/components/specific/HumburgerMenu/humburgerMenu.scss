@@ -1,0 +1,39 @@
+.humburger-popup{
+    
+    position: fixed;
+    z-index: 121;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--primary-back-ground);
+    border-radius: 1em;
+    border-top: 4px solid var(--primary-color);
+    height: 100vh;
+    left: 0;
+    top: 0;
+    border-radius: 0;
+    width: 85%;
+}
+.humburger-children-popup{
+    width: 80% !important;
+    margin:0 auto !important;
+    flex-direction: column;
+    justify-content: start !important;
+
+}
+.humburger-ul{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.fs-Menu{
+    font-size: 1.5em;
+}
+.login-widget-wrapper{
+display: flex;
+justify-content: center;
+margin-bottom: 1em !important;
+}
+.login-widget{
+    display: flex;
+    gap: 2em;
+}

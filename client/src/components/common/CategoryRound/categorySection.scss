@@ -1,0 +1,29 @@
+.trans{
+    transform: skew(0deg,4deg);    
+    position: relative;
+    z-index: 100;
+    margin-top: 3em !important;
+    margin-bottom: 3em !important;
+    
+    .trans-inner{
+        transform: skew(0deg,-4deg);
+        .category-round-wrapper{
+            width: 25% !important;
+        }
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+    .trans{
+        margin-top: 1em !important;
+        margin-bottom: 1em !important;
+        .trans-inner{
+           .category-round-wrapper{
+            width: 50% !important;
+        }
+        }
+    }
+}
+
+

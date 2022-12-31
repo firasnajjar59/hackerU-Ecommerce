@@ -1,0 +1,15 @@
+@import "../src/style/color";
+
+.App {
+//   height: 10vh;
+  width: 100%;
+  background-color: var(--primary-back-ground);
+  position: relative;
+}
+
+.color1 {color: #959ed3;}
+.color2 {color: #d3a2c4;}
+.color3 {color: #e8c8c9;}
+.color4 {color: #edeedd;}
+.colorWhite {color: #f3f3f3;}
+

@@ -1,0 +1,12 @@
+.categore{
+    user-select: none;
+    .categore-title{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        .filter-title{
+            font-size: 1em;
+        }
+    }
+   
+}
