@@ -1,9 +1,15 @@
 @import "../src/style/color";
 @import "../src/style/font";
+@import "./style/global";
 body{
-  background-color: var(--primary-back-ground);
+  background-color: var(--secondary-back-ground);
+  min-height: 100vh;
+}
+#root{
+  min-height: 100vh;
 }
 *{
+  
   padding: 0 !important;
   margin: 0 !important;
   box-sizing: border-box;
@@ -33,4 +39,15 @@ code {
 @keyframes fadeIn {
   0% { opacity: 0; }
   100% { opacity: 1; }
+}
+
+@media screen and (max-width: 950px) {
+  *{
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 600px) {
+  *{
+    font-size: 16px;
+  }
 }

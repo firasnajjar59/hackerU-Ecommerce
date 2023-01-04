@@ -3,18 +3,17 @@
 .searchWrapper{
     width: fit-content;
     position: relative;
-   
     .search-button{
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: var(--primary-color);
-        border-top-right-radius: 0.3em;
-        border-bottom-right-radius: 0.3em;
-        border: 1px solid var(--primary-color);
+        background-color: var(--primary-button-back-ground);
+        border-top-right-radius: var(--small-radius);
+        border-bottom-right-radius: var(--small-radius);
+        border: var(--small-border) solid var(--border-color);
         border-left: none;
         span{
-            padding: 0.3em;
+            padding:var(--small-padding);
             color: var(--secondary-color);
         }
     }

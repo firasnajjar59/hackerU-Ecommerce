@@ -1,8 +1,8 @@
 .primary-button{
     width: 100%;
     border: none;
-    background-color: var(--primary-color);
-    padding: 0.5em !important;
-    color: var(--secondary-color);
-    font-size: 1.2em;
+    background-color: var(--primary-button-back-ground);
+    padding: var(--medium-padding) !important;
+    color: var(--secondary-text);
+    font-size: var(--small-p);
 }

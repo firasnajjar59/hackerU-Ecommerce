@@ -1,5 +1,5 @@
 /** @format */
-
+import './loginPopup.scss'
 import Button from 'components/common/Button/Button';
 import Input from 'components/common/Input/Input';
 import MaterialIcon from 'components/common/MaterialIcon/MaterialIcon';
@@ -12,7 +12,7 @@ const LoginPopUp = props => {
       classes={`gap-3 ${props.classes}`}
       popupClasses='popup'>
       <MaterialIcon
-        classes='d-flex justify-content-center fs-1'
+        classes='d-flex justify-content-center fs-1 icon-color-login-popup'
         title='person'
       />
       <Input

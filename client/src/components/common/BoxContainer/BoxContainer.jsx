@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import "./sideSortComponent.scss";
+import "./boxContainer.scss";
 const SideSortComponent = (props) => {
   const borderColor = useRef()
   useEffect(()=>{
@@ -10,8 +10,8 @@ const SideSortComponent = (props) => {
   return (
     <div className="right" ref={borderColor}>
     <div className="filter-Wrapper">
-    <h2 className="title">{props.title}</h2>
-    <hr/>
+    {props.title && <><h2 className="title">{props.title}</h2>
+    <hr/></>}
     {props.children}
     </div>
     </div>

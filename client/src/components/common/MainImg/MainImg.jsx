@@ -5,7 +5,7 @@ const MainImg = (props) => {
     <div className="main-img">
     <img
       src={props.src}
-      alt="props.alt"
+      alt={props.alt}
     />
   </div>
   )

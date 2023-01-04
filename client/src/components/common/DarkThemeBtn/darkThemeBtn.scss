@@ -1,0 +1,30 @@
+.theme-wrapper{
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: end;
+    .theme-btn{
+      cursor: pointer;
+      width: 2.2em;
+      height: 1.2em;
+      border-radius: 1em;
+      background-color: var(--secondary-back-ground);
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      border: var(--small-border) solid var(--border-color);
+      padding: 0.1em !important;
+      .theme-btn-inner{
+        aspect-ratio: 1/1;
+        height: 100%;
+        border-radius: 1em;
+        background-color: var(--primary-color);
+      }
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+      .theme-wrapper-sm{
+      display: none;
+      }
+    }

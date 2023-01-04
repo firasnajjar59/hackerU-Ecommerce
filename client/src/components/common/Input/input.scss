@@ -1,22 +1,22 @@
 .input{
-   
     padding-left: 1em !important;
     width: 100%;
     border-radius: 0.3em;
-    border: 1px solid var(--primary-color);
+    border: var(--small-border) solid var(--border-color);
+    color: var(--primary-text);
+    outline: none;
     &::placeholder{
-        color: var(--primary-color);
-     
+        color: var(--primary-text);
     }
     &:focus{
-        border: 1px solid var(--primary-color);
-       outline: none;
+        border: var(--medium-border) solid var(--primary-color);
     }
 }
 .border-right-none{
-    border-top-left-radius: 0.3em;
-    border-bottom-left-radius: 0.3em;
+    border-top-left-radius: var(--small-radius);
+    border-bottom-left-radius: var(--small-radius);
     border-top-right-radius: 0;
     border-bottom-right-radius:0;
-    border: 1px solid var(--primary-color);
+    border: var(--small-border) solid var(--border-color);
+    color: var(--primary-text);
 }

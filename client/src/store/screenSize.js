@@ -3,15 +3,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  screenSize: window.innerWidth,
+  screenWidth: window.innerWidth,
+  screenHeight: window.innerHeight,
 };
 const screenSizeSlice = createSlice({
   name: 'screenSize',
   initialState,
   reducers: {
-    setScreenSize(state, { payload }) {
-      state.screenSize = payload;
-      console.log(payload);
+    setScreenSize(state) {
+      state.screenWidth = window.innerWidth;
+      state.screenHeight = window.innerHeight;
     },
   },
 });

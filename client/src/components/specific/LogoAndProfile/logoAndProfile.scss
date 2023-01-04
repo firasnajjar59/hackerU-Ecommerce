@@ -5,13 +5,11 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: flex-end;
-
-
-
+  
   .hamburger {
     display: flex;
     justify-content: end;
-    color: var(--primary-color);
+    color: var(--primary-text);
     display: none;
   }
 }

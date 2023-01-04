@@ -8,9 +8,7 @@ import custemersArr from 'data/Custemers.db';
 import RoundedImg from 'components/common/RoundedImg/RoundedImg';
 import CategorySection from 'components/common/CategoryRound/CategorySection';
 import categoryArr from 'data/category';
-import { useSelector } from 'react-redux';
 const HomePage = () => {
-  const screenSize=useSelector(state=>state.screenSize.screenSize)
   document.title = 'HomePage | ofwood';
   return (
     <>

@@ -7,11 +7,11 @@ import  Li  from '../List/Li/Li';
 import { useSelector } from 'react-redux';
 
 const FilterByElement = props => {
-  const screenSize=useSelector(state=>state.screenSize.screenSize)
-  const [hidden,setHidden]=useState(screenSize>600?false:true)
+  const screenWidth=useSelector(state=>state.screenSize.screenWidth)
+  const [hidden,setHidden]=useState(screenWidth>600?false:true)
   useEffect(() => {
-    setHidden(screenSize>600?false:true)
-  }, [screenSize]);
+    setHidden(screenWidth>600?false:true)
+  }, [screenWidth]);
   return (
     <div className='categore mt-1'>
       <div className='categore-title'>
@@ -24,7 +24,7 @@ const FilterByElement = props => {
       </div>
       <div className='categore-Item'>
         <Ul classes={hidden?"hidden":""}>
-          {props.options.map(item =><Li classes={`ps-3`} title={item}/>)}
+          {props.options.map((item,indx) =><Li key={indx} classes={`ps-3`} title={item}/>)}
         </Ul>
       </div>
     </div>

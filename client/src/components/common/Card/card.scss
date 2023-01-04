@@ -1,13 +1,12 @@
 .caruselCardWrapper{
+    user-select: none;
     width: 100%;
     position: relative;
-    z-index: 50;
-    background-color: var(--white);
-    box-shadow: 5px 10px 15px 0px var(--shadow-color);
+    box-shadow: 0px 5px 20px 0px var(--shadow-color);
     transition: transform 300ms;
     transition-timing-function: ease-in-out;
     &:hover{
-        box-shadow: none;
+        // box-shadow: none;
         transform: translate(0px, -5px);
     }
     img{
@@ -20,16 +19,16 @@
         justify-content: center;
         flex-direction: column;
         width: 100%;
-        background-color: var(--white);
+        background-color: var(--secondary-back-ground);
 
       
         h3{
             color: var(--primary-color);
-            font-size: 1.1em;
+            font-size: var(--small-title);
         }
         p{
             color: var(--primary-color);
-            font-size: 1em;
+            font-size: var(--small-p);
         }
    
     }
@@ -37,7 +36,7 @@
 
   @media screen and (max-width: 600px) {
     .caruselCardWrapper{
-        min-width: 100%;
+        min-width: 90%;
         &:hover{
             box-shadow: none;
             transform: translate(0px, -5px);
@@ -52,9 +51,6 @@
             justify-content: center;
             flex-direction: column;
             width: 100%;
-            background-color: var(--white);
-    
-          
             h3{
                
             }

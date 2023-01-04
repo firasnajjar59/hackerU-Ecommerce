@@ -1,9 +1,11 @@
 @import "../src/style/color";
 
 .App {
-//   height: 10vh;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  background-color: var(--primary-back-ground);
+  min-height: 100vh;
+  background-color: var(--secondary-back-ground);
   position: relative;
 }
 

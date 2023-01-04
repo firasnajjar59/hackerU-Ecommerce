@@ -1,0 +1,31 @@
+.ratio-1{
+    aspect-ratio: 1/1;
+}
+.contact-us-card-dark{
+    padding: 4em 2em !important;
+    display: flex;
+    gap: var(--meduim-gap);
+    flex-direction: column;
+    justify-content: end;
+    color:var(--secondary-text)
+}
+.contact-us-card-light{
+    @extend .contact-us-card-dark;
+    color:var(--primary-text)
+}
+.align-parts{
+    display: flex;
+    font-size: var(--big-p);
+    align-items: center;
+    gap: var(--meduim-gap);
+    width: 100%;
+}
+.bold{
+    color: var(--third-color);
+    font-weight: 600;
+}
+@media screen and (max-width: 600px) {
+    .ratio-1{
+        aspect-ratio: 4/3;
+    }
+}

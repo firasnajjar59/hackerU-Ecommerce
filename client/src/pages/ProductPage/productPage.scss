@@ -1,0 +1,30 @@
+/** @format */
+
+.oneProductCaruselWrapper {
+  margin: auto !important;
+  margin-top: var(--medium-margin) !important;
+  max-width: 100%;
+  color: var(--primary-text);
+  .title-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: var(--small-margin) 0em !important;
+  }
+  .descriptionWrapper {
+    display: flex;
+    gap: var(--meduim-gap);
+    width: 90%;
+    margin: auto !important;
+  }
+}
+@media screen and (max-width: 600px) {
+  .oneProductCaruselWrapper {
+    .descriptionWrapper {
+      margin-bottom: var(--medium-margin) !important;
+      margin-top: var(--small-margin) !important;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

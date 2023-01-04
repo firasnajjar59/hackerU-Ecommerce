@@ -18,8 +18,8 @@ const Card = props => {
         alt='s'
       />
       <div className='deatils'>
-        <h3 className='m-2'>hi</h3>
-        <p className='m-2'>sadflsdaflsadds</p>
+        <h3 className='m-2'>{props.title?props.title:"hi"}</h3>
+        <p className='m-2'>{props.desc?props.desc:"sadflsdaflsadds"}</p>
         <Button classes='primary-button'>Add to cart</Button>
       </div>
     </div>

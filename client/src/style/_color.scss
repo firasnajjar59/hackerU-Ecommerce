@@ -1,13 +1,94 @@
 /** @format */
 
-:root {
+// * green style
+:root[data-theme="theme-light"] {
+  // color
   --primary-color: #2a7c6f;
-  --secondary-color: white;
-  --primary-back-ground: #fcfcfc;
+  --secondary-color: #f9f9f9;
+  --third-color: #ffa384;
+  // text color
+  --primary-text: var(--primary-color);
+  --secondary-text: var(--secondary-color);
+  --bold-text: var(--third-color);
+  --dark-text: #0f0f0f;
+  --light-text:#f1f1f1;
+  // opacity
+  --primary-color-opacity: rgba(42, 124, 111,0.3);
+  --secondary-color-opacity: rgba(249, 249, 249,0.5);
+  --third-color-opacity: rgba(255, 163, 132,0.5);
+  // background
+  --primary-back-ground: var(--primary-color);
+  --primary-button-back-ground: var(--primary-color);
+  --secondary-back-ground: var(--secondary-color);
+  --secondary-button-back-ground: var(--secondary-color);
   --white: #ffffff;
-  --shadow-color: rgba(216, 216, 216, 0.928);
+  --shadow-color: #d8d8d8ed;
+  --border-color:var(--primary-color);
 }
+// * blue style
+// :root {
+//   // color
+//   --primary-color: #184451;
+//   --secondary-color: #f9f9f9;
+//   --third-color: #f4a460;
+//   // text color
+//   --primary-text: var(--primary-color);
+//   --secondary-text: var(--secondary-color);
+//   --bold-text: var(--third-color);
+//   --dark-text: #0f0f0f;
+//   --light-text:#f1f1f1;
+//   // opacity
+//   --primary-color-opacity: rgba(24, 68, 81,0.5);
+//   --secondary-color-opacity: rgba(249, 249, 249,0.5);
+//   --third-color-opacity: rgba(244, 164, 96,0.5);
+//   // background
+//   --primary-back-ground: var(--primary-color);
+//   --primary-button-back-ground: var(--primary-color);
+//   --secondary-back-ground: var(--secondary-color);
+//   --secondary-button-back-ground: var(--secondary-color);
+//   --white: #ffffff;
+//   --shadow-color: #d8d8d8ed;
+// --border-color:var(--primary-color);
+// }
+// dark style
+:root[data-theme="theme-dark"] {
+  // color
+  --primary-color: #f1f1f1;
+  --secondary-color: #0f0f0f;
+  --third-color: #bf1b1b;
+  // text color
+  --primary-text: var(--primary-color);
+  --secondary-text: #aaa;
+  --bold-text: var(--third-color);
+  --dark-text: #0f0f0f;
+  --light-text:#f1f1f1;
+  // opacity
+  --primary-color-opacity: rgba(24, 68, 81,0.5);
+  --secondary-color-opacity: rgba(170, 170, 170,0.5);
+  --third-color-opacity: rgba(191, 27, 27,0.5);
+  // background
+  --primary-back-ground: var(--primary-color);
+  --primary-button-back-ground: #303030;
+  --secondary-back-ground: var(--secondary-color);
+  --secondary-button-back-ground: var(--secondary-color);
+  --white: #ffffff;
+  --shadow-color: #000000;
+  --border-color:#aaa;
+}
+// * 
+// :root {
+//   --primary-color: #f1f1f1;
+//   --primary-color-opacity: rgba(173, 173, 173,0.7);
+//   --secondary-color:  #0f0f0f;
+//   --bold-color: #BF1B1B;
+//   --primary-back-ground: var(--secondary-color);
+//   --white: #212121;
+//   // --shadow-color: #181818ed;
+// }
 
 .bg-primary-ofwood{
  background-color: var(--primary-color);   
+}
+.bg-secondary-ofwood{
+ background-color: var(--secondary-back-ground);   
 }

@@ -1,17 +1,17 @@
 .navLink{
     text-decoration: none;
-    font-size: 1em;
-    color:var(--primary-color);
-    padding: 0em 0.5em !important;
+    font-size: var(--medium-p);
+    color:var(--primary-text);
+    padding: 0em var(--medium-padding) !important;
     &:hover{
-        color:var(--primary-color);
-        border-bottom: 2px solid var(--primary-color);
-        
+        color:var(--third-color);
+        border-bottom: var(--small-border) solid var(--third-color);
       }
     }
     .active-NavLink{
-      font-weight: 600;
-      border-bottom: 4px solid var(--primary-color);
-      border-bottom-left-radius: 6px;
-      border-bottom-right-radius: 6px;
+      font-weight: 500;
+      border-bottom: var(--medium-border) solid var(--border-color);
+      color: var(--primary-text);
+      border-bottom-left-radius: var(--small-radius);
+      border-bottom-right-radius: var(--small-radius);
   }
