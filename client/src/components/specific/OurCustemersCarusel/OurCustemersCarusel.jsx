@@ -14,7 +14,7 @@ const OurCustemersCarusel = props => {
     }px`;
   }, []);
   const animateCarusel=()=>{
-    setCounter(counter - 3);
+    setCounter(counter - 1.7);
     if (div.current.offsetWidth > window.innerWidth) {
       div.current.style.left = `${counter}px`;
       if ((div.current.offsetWidth - window.outerWidth) * -1 >= counter)

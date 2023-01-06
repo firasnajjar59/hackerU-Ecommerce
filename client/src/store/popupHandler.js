@@ -2,9 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   loginHidden:true,
+  registerHidden:true,
   cartHidden:true,
   hamburgerMenuHidden:true,
-  productImgHidden:true
+  productImgHidden:true,
 };
 const popupHandlerSlice = createSlice({
   name: 'loggedIn',

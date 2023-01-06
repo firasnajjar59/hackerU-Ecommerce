@@ -6,7 +6,7 @@ const PopUp = props => {
 
   return (
     <>
-      <div className={`popup-overlay ${props.classes}`}></div>
+      <div onClick={props.onclick} className={`popup-overlay ${props.classes}`}></div>
       <div className={`${props.popupClasses} ${props.classes}`}>
         <div className='row p-3 w-100'>
           <MaterialIcon

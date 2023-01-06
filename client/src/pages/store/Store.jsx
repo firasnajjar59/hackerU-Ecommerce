@@ -5,11 +5,14 @@ import Ribbon from 'components/common/Ribbon/Ribbon';
 import SideSortComponent from 'components/common/BoxContainer/BoxContainer';
 import FilterByElement from 'components/specific/FilterByElement/filterByElement/FilterByElement';
 import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 const Store = () => {
   const arr = [1, 1, 1, 1, 1, 1, 1, 1, 1];
   document.title = 'Store | ofwood';
   const screenWidth = useSelector(state => state.screenSize.screenWidth);
+  const theme = useSelector(state => state.theme.theme);
+
 
   return (
     <div className='container m-auto'>
@@ -35,7 +38,7 @@ const Store = () => {
             <div className='col mt-3'>
               <SideSortComponent
                 title='Sort By:'
-                color={window.getComputedStyle(document.documentElement).getPropertyValue('--third-color')}>
+                color={theme&&window.getComputedStyle(document.documentElement).getPropertyValue('--third-color')}>
                 <FilterByElement
                   title='Sort'
                   options={['Price', 'A-Z']}

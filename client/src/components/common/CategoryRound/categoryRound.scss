@@ -1,62 +1,59 @@
-.category-wrapper{
-    width: 100%;
-    aspect-ratio: 1/1;
-    position: relative;
+/** @format */
+
+.category-wrapper {
+  width: 100%;
+  aspect-ratio: 1/1;
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  &:hover {
+    .category-overlay {
+      background-color: var(--secondary-color-opacity);
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+    }
+  }
+  .category-overlay {
+    transition: all 400ms ease-in-out;
     border-radius: 50%;
-    overflow: hidden;
-    &:hover{
-        .category-overlay{
-            background-color: var(--secondary-color-opacity);
-            width: 100%;
-            height: 100%;
-            opacity: 1;
-        }
-    }
-    .category-overlay{
-        transition: all 400ms ease-in-out;
-        border-radius: 50%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        border-radius: 50%;
-        width: 0%;
-        height: 0%;
-        background-color: var(--secondary-color-opacity);
-        opacity: 0;
-    }
-    
-    .category-title{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        color: var(--primary-text);
-        transform: translate(-50%,-50%);
-        text-shadow: -1px 1px 3px var(--secondary-color-opacity);
-    }
-    .category-img{
-        border-radius: 50%;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    width: 0%;
+    height: 0%;
+    background-color: var(--secondary-color-opacity);
+    opacity: 0;
+  }
+
+  .category-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: var(--primary-text);
+    transform: translate(-50%, -50%);
+    text-shadow: -1px 1px 3px var(--secondary-color-opacity);
+  }
+  .category-img {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 @media screen and (max-width: 600px) {
-    .category-wrapper{
-      width: 100;
-        .category-overlay{
-       
-            &:hover{
-             
-              
-            }
-        }
-        
-        .category-title{
-        
-        }
-        .category-img{
-            
-        }
+  .category-wrapper {
+    width: 100;
+    .category-overlay {
+      &:hover {
+      }
     }
+
+    .category-title {
+    }
+    .category-img {
+    }
+  }
 }

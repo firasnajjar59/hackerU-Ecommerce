@@ -9,6 +9,7 @@ const SideSortComponent = props => {
       borderColor.current.style.borderColor = props.color;
     }
   }, []);
+ 
   return (
     <div
       className='right'

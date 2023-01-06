@@ -24,7 +24,7 @@ const OneProductCarusel = () => {
       src={imgsArr[imgIndex].src}
       alt={imgsArr[imgIndex].alt}
       onClick={()=>{dispatch(setShow("productImgHidden"))}}
-      />:imgsArr.map((img,indx)=><img
+      />:imgsArr.map((img,indx)=><img key={indx}
       onClick={()=>{setClick(true);setImgIndex(indx)}}
     src={img.src}
     alt={img.alt}
@@ -34,7 +34,7 @@ const OneProductCarusel = () => {
   <div
     id='indecator'
     className='indecator'>
-    {imgsArr.map((img,indx)=><div onClick={()=>setImgIndex(indx)} className={`dots ${imgIndex==indx?"active":""}`}></div>)}
+    {imgsArr.map((img,indx)=><div key={indx} onClick={()=>setImgIndex(indx)} className={`dots ${imgIndex==indx?"active":""}`}></div>)}
   </div>
     </>
   )

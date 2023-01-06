@@ -1,0 +1,100 @@
+/** @format */
+
+.cart-wrapper {
+  display: grid;
+  grid-template-areas:
+    'products products products checkOut'
+    'info info info info ';
+  .cart-check-out-wrapper {
+    padding: var(--medium-padding) !important;
+    min-height: 100px;
+    grid-area: checkOut;
+  }
+  .cart-products-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--meduim-gap);
+    min-height: 100px;
+    grid-area: products;
+    padding: var(--medium-padding) !important;
+    .cart-product-list-wrapper{
+        display: flex;
+    .product-list-img-wrapper{
+        width: 15%;
+        img{
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: contain;
+        }
+    }
+    .product-list-details-wrapper{
+        flex-grow: 1;
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        justify-items: center;
+        align-content: center;
+        .product-details-title{
+            grid-column-start: 1;
+            grid-column-end: 3;
+        }
+    }
+}
+  }
+  .cart-info-wrapper {
+    min-height: 100px;
+    grid-area: info;
+    display: grid;
+    padding: var(--medium-padding) !important;
+    .info-wrapper{
+        display: grid;
+        gap: var(--meduim-gap);
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+}
+@media screen and (max-width: 600px) {
+    .cart-wrapper {
+        display: grid;
+        grid-template-areas:
+        "checkOut"
+          'products'
+          'info';
+        .cart-check-out-wrapper {
+          padding: var(--medium-padding) !important;
+          min-height: 100px;
+          grid-area: checkOut;
+        }
+        .cart-products-list-wrapper{
+            .cart-product-list-wrapper{
+              flex-direction: column;
+              gap: var(--meduim-gap);
+              
+          .product-list-img-wrapper{
+              width: 100%;
+              img{
+                
+              }
+          }
+          .product-list-details-wrapper{
+            gap: var(--meduim-gap);
+            grid-template-columns: repeat(2,1fr);
+
+              .product-details-title{
+                  grid-column-start: 1;
+                  grid-column-end: 3;
+              }
+          }
+      }
+        }
+        .cart-info-wrapper {
+        //   min-height: 100px;
+        //   grid-area: info;
+        //   padding: var(--medium-padding) !important;
+          .info-wrapper{
+            display: grid;
+            
+            grid-template-columns: repeat(1,1fr);
+        }
+        }
+      }
+}

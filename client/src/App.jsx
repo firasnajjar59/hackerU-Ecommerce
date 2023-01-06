@@ -14,6 +14,7 @@ import { useEffect } from 'react';
 import { setScreenSize } from 'store/screenSize';
 import GalleryPage from 'pages/Gallery/GalleryPage';
 import ContactUsPage from 'pages/ContactUs/ContactUsPage';
+import Cart from 'pages/Cart/Cart';
 
 const App=()=> {
   const dispatch=useDispatch()
@@ -55,6 +56,10 @@ const App=()=> {
           <Route
             path='/contactus'
             component={ContactUsPage}
+          />
+          <Route
+            path='/cart'
+            component={Cart}
           />
         </Switch>
       

@@ -1,30 +1,56 @@
-import { useDispatch, useSelector } from "react-redux"
-import MaterialIcon from "../MaterialIcon/MaterialIcon"
-import "./loginWidget.scss"
-import LoginPopUp from "components/specific/LoginPop/LoginPopUp"
-import { setHidden, setShow } from "store/popupHandler"
+/** @format */
 
-const LoginWidget = (props) => {
-  const loginHidden=useSelector(state=>state.popupHandler.loginHidden)
-  const dispatch=useDispatch()
-  const openPopup=()=>{
-    if(props.closeParentPopup)props.closeParentPopup()
-    dispatch(setShow('loginHidden'))
-  }
+import { useDispatch, useSelector } from 'react-redux';
+import MaterialIcon from '../MaterialIcon/MaterialIcon';
+import './loginWidget.scss';
+import LoginPopUp from 'components/specific/LoginPop/LoginPopUp';
+import { setHidden, setShow } from 'store/popupHandler';
+import RegisterPopup from 'components/specific/RegisterPopup/RegisterPopup';
+import { useHistory } from 'react-router-dom';
+
+const LoginWidget = props => {
+  const history=useHistory()
+  const loggedIn = useSelector(state => state.loggedIn.loggedIn);
+  const loginHidden = useSelector(state => state.popupHandler.loginHidden);
+  const registerHidden = useSelector(
+    state => state.popupHandler.registerHidden
+  );
+  const dispatch = useDispatch();
+  const openPopup = whitchPopp => () => {
+    if (props.closeParentPopup) props.closeParentPopup();
+    dispatch(setShow(whitchPopp));
+  };
+  const switchPage = url => () => {
+    if (props.closeParentPopup) props.closeParentPopup();
+    history.push(`/${url}`)
+  };
   return (
     <>
-      <LoginPopUp onclick={()=>{dispatch(setHidden("loginHidden"))}} classes={loginHidden?"hidden":""}></LoginPopUp>
-    <div className={`memberSection ${props.classes}`}>
-        <MaterialIcon title='shopping_cart' />
+      <RegisterPopup
+        onclick={() => {
+          dispatch(setHidden('registerHidden'));
+        }}
+        classes={registerHidden ? 'hidden' : ''}
+      />
+      <LoginPopUp
+        onclick={() => {
+          dispatch(setHidden('loginHidden'));
+        }}
+        classes={loginHidden ? 'hidden' : ''}></LoginPopUp>
+      <div className={`memberSection ${props.classes}`}>
         <MaterialIcon
-          onclick={openPopup}
-          title='login'
+          onclick={openPopup('loginHidden')}
+          title={loggedIn ? 'logout' : 'login'}
         />
-        <MaterialIcon title='account_circle' />
-        <MaterialIcon title='favorite' />
+        <MaterialIcon
+          onclick={openPopup('registerHidden')}
+          title={loggedIn ? 'account_circle' : 'app_registration'}
+        />
+        <MaterialIcon onclick={switchPage("cart")} title='shopping_cart' />
+        {loggedIn?<MaterialIcon title='favorite' />:""}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default LoginWidget
+export default LoginWidget;

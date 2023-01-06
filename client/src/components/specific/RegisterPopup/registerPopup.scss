@@ -1,0 +1,29 @@
+.icon-color-register-popup{
+    color: var(--primary-color);
+}
+.register-popup{
+    position: fixed;
+    top: 50vh;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 1001;
+    width: 50%;
+    max-width: 600px;
+    min-height: 50vh;
+    padding-bottom: var(--big-padding) !important;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--secondary-back-ground);
+    border-top: var(--medium-border) solid var(--border-color);
+    box-shadow: 5px 5px 10px 0px var(--shadow-color),-5px 0px 10px 0px var(--shadow-color);
+}
+
+@media screen and (max-width: 600px) {
+    .register-popup{
+        left: 0;
+        top: 0;
+        transform: translate(0,0);
+        width: 100vw;
+        height: 100vh;
+    }
+}
