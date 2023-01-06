@@ -10,7 +10,7 @@ const LoginPopUp = props => {
     <PopUp
       onclick={props.onclick}
       classes={`gap-3 ${props.classes}`}
-      popupClasses='popup'>
+      popupClasses='login-popup'>
       <MaterialIcon
         classes='d-flex justify-content-center fs-1 icon-color-login-popup'
         title='person'

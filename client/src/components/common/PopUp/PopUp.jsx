@@ -3,6 +3,7 @@
 import MaterialIcon from 'components/common/MaterialIcon/MaterialIcon';
 import './popUp.scss';
 const PopUp = props => {
+
   return (
     <>
       <div className={`popup-overlay ${props.classes}`}></div>

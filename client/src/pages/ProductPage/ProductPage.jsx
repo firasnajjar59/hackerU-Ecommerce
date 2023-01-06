@@ -7,7 +7,6 @@ import RightSideProductPage from 'components/specific/RightSideProductPage/Right
 import OneProductCarusel from 'components/common/OneProductCarusel/OneProductCarusel';
 const ProductPage = () => {
   const { productId } = useParams();
-  console.log(productId);
   document.title = `product | ${productId}`;
   return (
     <div className='container oneProductCaruselWrapper '>

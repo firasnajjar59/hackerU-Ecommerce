@@ -1,63 +1,60 @@
-.caruselCardWrapper{
-    user-select: none;
+/** @format */
+
+.caruselCardWrapper {
+  user-select: none;
+  width: 100%;
+  position: relative;
+  box-shadow: 0px 5px 20px 0px var(--shadow-color);
+  transition: transform 300ms;
+  transition-timing-function: ease-in-out;
+  &:hover {
+    // box-shadow: none;
+    transform: translate(0px, -5px);
+  }
+  img {
+    cursor: pointer;
     width: 100%;
-    position: relative;
-    box-shadow: 0px 5px 20px 0px var(--shadow-color);
-    transition: transform 300ms;
-    transition-timing-function: ease-in-out;
-    &:hover{
-        // box-shadow: none;
-        transform: translate(0px, -5px);
-    }
-    img{
-        cursor: pointer;
-        width: 100%;
-    }
-    .deatils{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        width: 100%;
-        background-color: var(--secondary-back-ground);
+  }
+  .deatils {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--secondary-back-ground);
 
-      
-        h3{
-            color: var(--primary-color);
-            font-size: var(--small-title);
-        }
-        p{
-            color: var(--primary-color);
-            font-size: var(--small-p);
-        }
-   
+    h3 {
+      color: var(--primary-color);
+      font-size: var(--small-title);
+    }
+    p {
+      color: var(--primary-color);
+      font-size: var(--small-p);
     }
   }
+}
 
-  @media screen and (max-width: 600px) {
-    .caruselCardWrapper{
-        min-width: 90%;
-        &:hover{
-            box-shadow: none;
-            transform: translate(0px, -5px);
-        }
-        img{
-            cursor: pointer;
-            width: 100%;
-        }
-        .deatils{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            width: 100%;
-            h3{
-               
-            }
-            p{
-              
-            }
-       
-        }
+@media screen and (max-width: 600px) {
+  .caruselCardWrapper {
+    min-width: 90%;
+    &:hover {
+      box-shadow: none;
+      transform: translate(0px, -5px);
+    }
+    img {
+      cursor: pointer;
+      width: 100%;
+    }
+    .deatils {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      width: 100%;
+      h3 {
       }
+      p {
+      }
+    }
   }
+}

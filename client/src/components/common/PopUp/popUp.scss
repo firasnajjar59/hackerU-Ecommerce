@@ -1,5 +1,5 @@
 .popup-overlay{
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     width: 100%;
@@ -9,7 +9,7 @@
     
 }
 .popup{
-    position: absolute;
+    position: fixed;
     top: 50vh;
     left: 50%;
     transform: translate(-50%,-50%);
@@ -24,14 +24,15 @@
     border-top: var(--medium-border) solid var(--border-color);
     box-shadow: 5px 5px 10px 0px var(--shadow-color),-5px 0px 10px 0px var(--shadow-color);
  
-    .popup-children{
-        height: 100%;
-        width: 60%;
-        margin: auto !important;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+}
+.popup-children{
+    
+    width: 80%;
+    max-width: 500px;
+    margin: auto !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .popup-close{
     display: flex;
@@ -54,6 +55,7 @@
        
         }
         .popup-children{
+            
         }
     }
 }

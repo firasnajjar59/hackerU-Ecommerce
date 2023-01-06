@@ -14,7 +14,6 @@ const DarkThemeBtn = (props) => {
         const innerBtn=innerBtnRef.current
         document.querySelector('html').dataset.theme=theme
         theme=='theme-dark'?innerBtn.style.justifyContent="end":innerBtn.style.justifyContent="start"
-        console.log(theme);
     },[theme])
   return (
     <div className={`theme-wrapper ${props.classes}`}>
