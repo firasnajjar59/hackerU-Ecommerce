@@ -16,6 +16,9 @@
     background-color: var(--secondary-back-ground);
     border-top: var(--medium-border) solid var(--border-color);
     box-shadow: 5px 5px 10px 0px var(--shadow-color),-5px 0px 10px 0px var(--shadow-color);
+    .register-button{
+        margin-bottom: var(--medium-margin) !important;
+    }
 }
 
 @media screen and (max-width: 600px) {

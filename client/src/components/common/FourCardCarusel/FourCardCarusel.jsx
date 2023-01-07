@@ -3,10 +3,10 @@
 import './fourCardCarusel.scss';
 import Card from 'components/common/Card/Card';
 import Ribbon from 'components/common/Ribbon/Ribbon';
-import productArr from 'data/product';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 const FourCardCarusel = props => {
+  const [productArr,setProductArr]=useState(props.arr)
   const screenWidth=useSelector(state=>state.screenSize.screenWidth)
   const [cardToDisplay,setCardToDisplay]=useState({
     firstCard:0,
@@ -37,20 +37,22 @@ const FourCardCarusel = props => {
     <div className='caruselWrapper'>
       <h2 dir={props.dir || 'ltr'}>Products</h2>
       <div className='caruselcardsWrapper'>
-        {screenWidth>600?<><Card title={productArr[cardToDisplay.firstCard].title} desc={productArr[cardToDisplay.firstCard].desc}>
-          <Ribbon>{productArr[cardToDisplay.firstCard].ribbon}</Ribbon>
+        {props.arr.length>0?screenWidth>600?<>
+        <Card _id={productArr[cardToDisplay.firstCard]._id} slug={productArr[cardToDisplay.firstCard].slug} title={productArr[cardToDisplay.firstCard].name} img={productArr[cardToDisplay.firstCard].imgs[0]} desc={productArr[cardToDisplay.firstCard].description}>
+          <Ribbon>new</Ribbon>
         </Card>
-        <Card title={productArr[cardToDisplay.secondCard].title} desc={productArr[cardToDisplay.secondCard].desc}>
-          <Ribbon>{productArr[cardToDisplay.secondCard].ribbon}</Ribbon>
+        <Card _id={productArr[cardToDisplay.secondCard]._id} slug={productArr[cardToDisplay.secondCard].slug} title={productArr[cardToDisplay.secondCard].name} img={productArr[cardToDisplay.secondCard].imgs[0]} desc={productArr[cardToDisplay.secondCard].description}>
+          <Ribbon>new</Ribbon>
         </Card>
-        <Card  title={productArr[cardToDisplay.thirdCard].title} desc={productArr[cardToDisplay.thirdCard].desc}>
-          <Ribbon>{productArr[cardToDisplay.thirdCard].ribbon}</Ribbon>
+        <Card _id={productArr[cardToDisplay.thirdCard]._id} slug={productArr[cardToDisplay.thirdCard].slug} title={productArr[cardToDisplay.thirdCard].name} img={productArr[cardToDisplay.thirdCard].imgs[0]} desc={productArr[cardToDisplay.thirdCard].description}>
+          <Ribbon>new</Ribbon>
         </Card>
-        <Card title={productArr[cardToDisplay.fourthCard].title} desc={productArr[cardToDisplay.fourthCard].desc}>
-          <Ribbon >{productArr[cardToDisplay.fourthCard].ribbon}</Ribbon>
-        </Card></>:productArr.map((item,indx)=><Card key={indx} title={item.title} desc={item.desc}>
-          <Ribbon>{item.ribbon}</Ribbon>
-        </Card>)}
+        <Card _id={productArr[cardToDisplay.fourthCard]._id} slug={productArr[cardToDisplay.fourthCard].slug} title={productArr[cardToDisplay.fourthCard].name} img={productArr[cardToDisplay.fourthCard].imgs[0]} desc={productArr[cardToDisplay.fourthCard].description}>
+          <Ribbon>new</Ribbon>
+        </Card>
+        </>:productArr.map((product,indx)=><Card key={indx} slug={product.slug} _id={product._id} img={product.imgs[0]} title={product.name} desc={product.description}>
+          <Ribbon>new</Ribbon>
+        </Card>):""}
         
 
         <div onClick={leftMove} className='arrow-btn-left'>

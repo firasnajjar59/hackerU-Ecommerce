@@ -10,11 +10,11 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
 
 
-axios.defaults.baseURL = 'http://127.0.0.1/27017';
+axios.defaults.baseURL = 'http://127.0.0.1:8000/api';
 axios.interceptors.request.use(config=>{
   const token = localStorage.getItem("token");
   if (token) {
-    config.headers["x-auth-token"] = token;
+    config.headers["authorization"] = `bearer ${token}`;
   }
   return config;
 })

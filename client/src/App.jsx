@@ -15,6 +15,7 @@ import { setScreenSize } from 'store/screenSize';
 import GalleryPage from 'pages/Gallery/GalleryPage';
 import ContactUsPage from 'pages/ContactUs/ContactUsPage';
 import Cart from 'pages/Cart/Cart';
+import { setLogIn, setLogOut } from 'store/loggedIn';
 
 const App=()=> {
   const dispatch=useDispatch()
@@ -23,6 +24,11 @@ const App=()=> {
       dispatch(setScreenSize())
     }
     )
+  },[])
+  useEffect(()=>{
+    if(localStorage.getItem("token")){
+      dispatch(setLogIn())
+    }
   },[])
   return (
     <div className='container-fluid App'>
@@ -42,7 +48,7 @@ const App=()=> {
             component={Store}
           />
           <Route
-            path='/products/:productId'
+            path='/products/:slug/:productId'
             component={ProductPage}
           />
           <Route

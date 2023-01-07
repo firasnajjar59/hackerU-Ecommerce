@@ -72,9 +72,9 @@ exports.getAllDocumantsByID = (Model, key) =>
     filterOption[key] = req.params.id;
     const doc = await Model.find(filterOption);
     if (!doc.length) {
-      return next(new AppError('document not found', 404));
+      res.json({ status: 'success', result: doc.length, doc:[] });
     }
-    res.json({ status: 'success', result: doc.length, data: { doc } });
+    res.json({ status: 'success', result: doc.length, doc  });
   });
 
 //*

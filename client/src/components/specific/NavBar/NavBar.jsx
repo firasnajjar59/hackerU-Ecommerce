@@ -11,7 +11,7 @@ const NavBar = props => {
 
   return (
     <>
-    <LogoAndProfile src={theme=="theme-dark"?"../assets/logo/White on Transparent.png":'../assets/logo/OriginalonTransparent.png'} />
+    <LogoAndProfile src={theme=="theme-dark"?"http://localhost:3000/assets/logo/White on Transparent.png":'http://localhost:3000/assets/logo/OriginalonTransparent.png'} />
       <hr />
       <div className='navBarWrapper '>
         <SearchBar value="" onchange={()=>{}}/>

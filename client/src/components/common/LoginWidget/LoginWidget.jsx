@@ -7,6 +7,7 @@ import LoginPopUp from 'components/specific/LoginPop/LoginPopUp';
 import { setHidden, setShow } from 'store/popupHandler';
 import RegisterPopup from 'components/specific/RegisterPopup/RegisterPopup';
 import { useHistory } from 'react-router-dom';
+import { setLogOut } from 'store/loggedIn';
 
 const LoginWidget = props => {
   const history=useHistory()
@@ -39,7 +40,7 @@ const LoginWidget = props => {
         classes={loginHidden ? 'hidden' : ''}></LoginPopUp>
       <div className={`memberSection ${props.classes}`}>
         <MaterialIcon
-          onclick={openPopup('loginHidden')}
+          onclick={loggedIn?()=>{localStorage.removeItem("token");dispatch(setLogOut())}:openPopup('loginHidden')}
           title={loggedIn ? 'logout' : 'login'}
         />
         <MaterialIcon

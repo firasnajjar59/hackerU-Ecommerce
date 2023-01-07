@@ -1,12 +1,11 @@
 .trans{
-    transform: skew(0deg,4deg);    
+    transform: skew(0deg,2deg);    
     position: relative;
     z-index: 100;
     margin-top: var(--big-margin) !important;
     margin-bottom: var(--big-margin) !important;
-    box-shadow: 0px 5px 10px 0px var(--shadow-color),0px -5px 10px 0px var(--shadow-color);
     .trans-inner{
-        transform: skew(0deg,-4deg);
+        transform: skew(0deg,-2deg);
         .category-round-wrapper{
             width: 25% !important;
         }
