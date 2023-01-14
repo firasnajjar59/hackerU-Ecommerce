@@ -2,15 +2,19 @@
 
 import MaterialIcon from 'components/common/MaterialIcon/MaterialIcon';
 import './popUp.scss';
+import { useHistory } from 'react-router-dom';
 const PopUp = props => {
-
+const history=useHistory()
+  const closePopup=()=>{
+history.goBack()
+}
   return (
     <>
-      <div onClick={props.onclick} className={`popup-overlay ${props.classes}`}></div>
+      <div onClick={closePopup} className={`popup-overlay ${props.classes}`}></div>
       <div className={`${props.popupClasses} ${props.classes}`}>
         <div className='row p-3 w-100'>
           <MaterialIcon
-            onclick={props.onclick}
+            onclick={closePopup}
             classes='popup-close'
             title='close'
           />

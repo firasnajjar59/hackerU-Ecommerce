@@ -9,12 +9,9 @@ import Li from '../FilterByElement/List/Li/Li';
 import navLinks from 'data/navLinks';
 import LoginWidget from 'components/common/LoginWidget/LoginWidget';
 import DarkThemeBtn from 'components/common/DarkThemeBtn/DarkThemeBtn';
-import { setHidden } from 'store/popupHandler';
-import { useDispatch } from 'react-redux';
 
 const HumburgerMenu = props => {
  
-  const dispatch=useDispatch()
 
   return (
     <PopUp
@@ -28,7 +25,6 @@ const HumburgerMenu = props => {
       </div>
       <div className='login-widget-wrapper'>
         <LoginWidget
-        closeParentPopup={()=>{dispatch(setHidden('hamburgerMenuHidden'))}}
           classes='login-widget'
         />
       </div>

@@ -4,7 +4,7 @@ import CategoryRound from './CategoryRound';
 
 const CategorySection = props => {
   return (
-    <section className='container-fluid bg-primary-ofwood trans'>
+    <section className='container-fluid bg-primary-opacity trans'>
       <div className='container m-auto mt-5 p-5 trans-inner'>
         <div className='row '>
           {props.options &&

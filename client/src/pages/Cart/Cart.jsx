@@ -1,78 +1,91 @@
 /** @format */
 
-import SideSortComponent from 'components/common/BoxContainer/BoxContainer';
+import BoxContainer from 'components/common/BoxContainer/BoxContainer';
 import './cart.scss';
 
-import React from 'react';
 import Button from 'components/common/Button/Button';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { removeProuctFromCart } from 'store/cart';
+import Box from 'components/common/Box/Box';
 
-const Cart = () => {
+const Cart = (props) => {
+  document.title = `Cart | ofwood`;
+  const dispatch=useDispatch()
+  const cart=useSelector(state=>state.cart.cart)
+  const [cartProducts,setCartProduct]=useState([])
+  const [price,setPrice]=useState()
+  let renderPolices=true
+  if(props.polices)renderPolices=props.polices=="true"
+  useEffect(()=>{
+    if(cart.length>0){
+      (async ()=>{
+        try {
+          const {data}=await axios.post("/v1/products/cart",{_id:cart})
+          setCartProduct(data.data.doc)
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      )()
+    }
+  },[])
+  useEffect(()=>{
+    if(cartProducts.length>0){
+      let total=0
+      for(let product of cartProducts){
+        total+=product.price
+      }
+      setPrice(total)
+    }
+  },[cartProducts])
+ const handleDeleteProduct=(indx)=>()=>{
+  setCartProduct(prev=>{
+    prev.splice(indx,1)
+    return[
+      ...prev
+    ]
+  })
+  dispatch(removeProuctFromCart(indx))
+  let cart=JSON.parse(localStorage.getItem('cart'))
+  cart.splice(indx,1)
+  localStorage.setItem('cart',JSON.stringify(cart))
+ }
+
   return (
     <div className='container m-auto'>
       <h1>Cart</h1>
-      <div className='cart-wrapper'>
+     {cartProducts.length>0?<div className={renderPolices?`cart-wrapper-polices`:`cart-wrapper`}>
         <div className='cart-check-out-wrapper'>
-          <SideSortComponent title="Check Out">
-                hi
+          <BoxContainer title="Check Out">
+                Total price: {price} $
                 <Button classes="primary-button">Check Out</Button>
-            </SideSortComponent>
+            </BoxContainer>
         </div>
         <div className='cart-products-list-wrapper'>
-          <SideSortComponent>
+          {cartProducts.map((product,indx)=><BoxContainer key={indx}>
             <div className='cart-product-list-wrapper'>
               <div className='product-list-img-wrapper'>
                 <img
-                  src='../../../zahi_v1_2022-Mar-10_10-44-17AM-000_CustomizedView3183948036.png'
+                  src={product.imgs[0]&&product.imgs[0].startsWith("http")?product.imgs[0]:`${process.env.REACT_APP_SERVER_URL}/images/products/${product.imgs[0]}`}
                   alt=''
                 />
               </div>
               <div className='product-list-details-wrapper'>
                 <h3 className='product-details-title'>
-                  Lorem ipsum dolor sit.
+                  {product.name}
                 </h3>
                 <p>Qty: 100</p>
-                <p>Price: 600$</p>
+                <p>Price: {product.price}$</p>
+                <Button onclick={handleDeleteProduct(indx)} classes="danger-button grid-button">Remove</Button>
               </div>
             </div>
-          </SideSortComponent>
-          <SideSortComponent>
-            <div className='cart-product-list-wrapper'>
-              <div className='product-list-img-wrapper'>
-                <img
-                  src='../../../zahi_v1_2022-Mar-10_10-44-17AM-000_CustomizedView3183948036.png'
-                  alt=''
-                />
-              </div>
-              <div className='product-list-details-wrapper'>
-                <h3 className='product-details-title'>
-                  Lorem ipsum dolor sit.
-                </h3>
-                <p>Qty: 100</p>
-                <p>Price: 600$</p>
-              </div>
-            </div>
-          </SideSortComponent>
-          <SideSortComponent>
-            <div className='cart-product-list-wrapper'>
-              <div className='product-list-img-wrapper'>
-                <img
-                  src='../../../zahi_v1_2022-Mar-10_10-44-17AM-000_CustomizedView3183948036.png'
-                  alt=''
-                />
-              </div>
-              <div className='product-list-details-wrapper'>
-                <h3 className='product-details-title'>
-                  Lorem ipsum dolor sit.
-                </h3>
-                <p>Qty: 100</p>
-                <p>Price: 600$</p>
-              </div>
-            </div>
-          </SideSortComponent>
+          </BoxContainer>)}
         </div>
-        <div className='cart-info-wrapper'>
-          <SideSortComponent title='Delivery Information'>
-            <div className='info-wrapper'>
+        {renderPolices?<div className='cart-info-wrapper'>
+          <BoxContainer title='Delivery Information'>
+            <div className='info-wrapper mt-3'>
               <div className='info-card'>
                 <h5>Lorem, ipsum dolor.</h5>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid
@@ -109,9 +122,10 @@ const Cart = () => {
                 quo!
               </div>
             </div>
-          </SideSortComponent>
-        </div>
-      </div>
+          </BoxContainer>
+        </div>:null}
+      </div>:<Box classes="bg-secondary-ofwood"><div className='no-product-wrapper '><h5>No products in your cart</h5></div></Box>
+        }
     </div>
   );
 };

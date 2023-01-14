@@ -1,0 +1,24 @@
+
+
+
+.option-wrapper{
+    display: flex;
+    gap: var(--small-gap);
+    align-items: flex-end;
+    .option-title{
+        width: 40%;
+    }
+    .option-option{
+        flex-grow: 1;
+    }
+    label{user-select: none;}
+}
+.add-option{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--small-padding) !important;
+    border-radius: var(--medium-radius);
+    border: var(--small-border) dashed var(--primary-color);
+}

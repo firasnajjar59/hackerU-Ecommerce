@@ -13,6 +13,8 @@ const generateToken = catchAsync(async (req, res, next) => {
     wishlist: req.doc.wishlist,
     role: req.doc.role,
     phone: req.doc.phone,
+    userImg: req.doc.userImg,
+    birthday:req.doc.birthday
   });
   res.cookie('Token', token, {
     expires: new Date(

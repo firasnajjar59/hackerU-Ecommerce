@@ -13,6 +13,8 @@ const AppError = require('../utils/appError');
 //* if there is document so we send success respones with the relevant document
 exports.getAllDocumants = Model =>
   catchAsync(async (req, res, next) => {
+    // console.log(req.cookie.token);
+    const docNumber=await Model.countDocuments({})
     const features = new ApiFeatures(Model.find(), req.query)
       .filter()
       .sort()
@@ -26,6 +28,7 @@ exports.getAllDocumants = Model =>
     }
     res.json({
       status: 'success',
+      docsInDB:docNumber,
       info: {
         result: doc.length,
         previous:
@@ -38,6 +41,22 @@ exports.getAllDocumants = Model =>
           (skip + 2 * limit) / limit
         }&limit=${limit}`,
       },
+      data: { doc },
+    });
+  });
+exports.getAllDocumantsNOQuery = Model =>
+  catchAsync(async (req, res, next) => {
+    // console.log(req.cookie.token);
+    // const docNumber=await Model.countDocuments({})
+    const doc=await Model.find( req.body)
+    console.log();
+
+    if (!doc.length) {
+      return next(new AppError('document not found', 404));
+    }
+
+    res.json({
+      status: 'success',
       data: { doc },
     });
   });
@@ -80,6 +99,7 @@ exports.getAllDocumantsByID = (Model, key) =>
 //*
 exports.updateDocumantByID = Model =>
   catchAsync(async (req, res, next) => {
+    console.log(req.body);
     const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,

@@ -1,13 +1,14 @@
 /** @format */
 
 import Button from 'components/common/Button/Button';
-import SideSortComponent from '../../common/BoxContainer/BoxContainer';
 import './leftSideProductPage.scss';
+import TextArea from 'components/common/Input/TextArea';
+import BoxContainer from '../../common/BoxContainer/BoxContainer';
 
-const LeftsideProductPage = () => {
+const LeftsideProductPage = (props) => {
   return (
-    <div className='leftAside'>
-      <SideSortComponent>
+    <div className={`leftAside ${props.classes}`}>
+      <BoxContainer>
         <div className='colorComponent'>
           <p>Color</p>
           <div className='colorPicker'>
@@ -34,11 +35,11 @@ const LeftsideProductPage = () => {
         </div>
         <div className='textareaCust'>
           <p>Notes</p>
-          <textarea placeholder='Add note'
-            id='custumizeText'/>
+          
+            <TextArea placeholder="Add note" id="custumizeText" />
         </div>
-      </SideSortComponent>
-      <SideSortComponent>
+      </BoxContainer>
+      <BoxContainer>
         <div className='counterWrapper'>
           <p>Quantity</p>
           <input
@@ -48,9 +49,9 @@ const LeftsideProductPage = () => {
             value="1"
           />
         </div>
-        <p className='price'>600 $</p>
+        <p className='price'>{props.product.price} $</p>
         <Button classes='primary-button'>Add To Cart</Button>
-      </SideSortComponent>
+      </BoxContainer>
     </div>
   );
 };

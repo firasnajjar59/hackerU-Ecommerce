@@ -10,11 +10,11 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
 
 
-axios.defaults.baseURL = 'http://127.0.0.1:8000/api';
+axios.defaults.baseURL = `${process.env.REACT_APP_SERVER_URL}/api`;
 axios.interceptors.request.use(config=>{
   const token = localStorage.getItem("token");
   if (token) {
-    config.headers["authorization"] = `bearer ${token}`;
+    config.headers["authorization"] = `Bearer ${token}`;
   }
   return config;
 })

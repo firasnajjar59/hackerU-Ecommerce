@@ -3,8 +3,9 @@
 import './fourCardCarusel.scss';
 import Card from 'components/common/Card/Card';
 import Ribbon from 'components/common/Ribbon/Ribbon';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import PlaceholderCard from '../PlaceholderCard/PlaceholderCard';
 const FourCardCarusel = props => {
   const [productArr,setProductArr]=useState(props.arr)
   const screenWidth=useSelector(state=>state.screenSize.screenWidth)
@@ -14,6 +15,10 @@ const FourCardCarusel = props => {
     thirdCard:2,
     fourthCard:3,
   })
+  
+  useEffect(()=>{
+    setProductArr(props.arr)
+  },[props.arr])
   const leftMove=()=>{
     setCardToDisplay(prev=>{
       prev.firstCard>0?prev.firstCard-=1:prev.firstCard=productArr.length-1
@@ -33,11 +38,14 @@ const FourCardCarusel = props => {
     })
   }
 
+
   return (
     <div className='caruselWrapper'>
       <h2 dir={props.dir || 'ltr'}>Products</h2>
       <div className='caruselcardsWrapper'>
-        {props.arr.length>0?screenWidth>600?<>
+        {productArr.length>0?
+        screenWidth>600?
+        <>
         <Card _id={productArr[cardToDisplay.firstCard]._id} slug={productArr[cardToDisplay.firstCard].slug} title={productArr[cardToDisplay.firstCard].name} img={productArr[cardToDisplay.firstCard].imgs[0]} desc={productArr[cardToDisplay.firstCard].description}>
           <Ribbon>new</Ribbon>
         </Card>
@@ -50,11 +58,19 @@ const FourCardCarusel = props => {
         <Card _id={productArr[cardToDisplay.fourthCard]._id} slug={productArr[cardToDisplay.fourthCard].slug} title={productArr[cardToDisplay.fourthCard].name} img={productArr[cardToDisplay.fourthCard].imgs[0]} desc={productArr[cardToDisplay.fourthCard].description}>
           <Ribbon>new</Ribbon>
         </Card>
-        </>:productArr.map((product,indx)=><Card key={indx} slug={product.slug} _id={product._id} img={product.imgs[0]} title={product.name} desc={product.description}>
+        </>
+        :
+        productArr.map((product,indx)=><Card key={indx} slug={product.slug} _id={product._id} img={product.imgs[0]} title={product.name} desc={product.description}>
           <Ribbon>new</Ribbon>
-        </Card>):""}
-        
+        </Card>)
+        :<>
+        <PlaceholderCard/>
+        <PlaceholderCard/>
+        <PlaceholderCard/>
+        <PlaceholderCard/>
+        </>}
 
+      
         <div onClick={leftMove} className='arrow-btn-left'>
           <img
             src='./assets/icons/left.png'

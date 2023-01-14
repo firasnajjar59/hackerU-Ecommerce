@@ -21,6 +21,7 @@
   --primary-button-back-ground: var(--primary-color);
   --secondary-back-ground: var(--secondary-color);
   --secondary-button-back-ground: var(--secondary-color);
+  --bold-button-back-ground: var(--third-color);
   --white: #ffffff;
   --shadow-color: #d8d8d8ed;
   --border-color:var(--primary-color);
@@ -63,7 +64,7 @@
   --dark-text: #0f0f0f;
   --light-text:#f1f1f1;
   // opacity
-  --primary-color-opacity: rgba(24, 68, 81,0.5);
+  --primary-color-opacity: rgba(24, 68, 81,0.8);
   --secondary-color-opacity: rgba(170, 170, 170,0.5);
   --third-color-opacity: rgba(191, 27, 27,0.5);
   // background
@@ -71,6 +72,7 @@
   --primary-button-back-ground: #303030;
   --secondary-back-ground: var(--secondary-color);
   --secondary-button-back-ground: var(--secondary-color);
+  --bold-button-back-ground: var(--third-color);
   --white: #ffffff;
   --shadow-color: #000000;
   --border-color:#aaa;
@@ -91,4 +93,7 @@
 }
 .bg-secondary-ofwood{
  background-color: var(--secondary-back-ground);   
+}
+.bg-primary-opacity{
+ background-color: var(--primary-color-opacity);   
 }

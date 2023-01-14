@@ -3,6 +3,7 @@
     font-size: var(--medium-p);
     color:var(--primary-text);
     padding: 0em var(--medium-padding) !important;
+    border-bottom: var(--small-border) solid transparent;
     &:hover{
         color:var(--third-color);
         border-bottom: var(--small-border) solid var(--third-color);
@@ -10,7 +11,7 @@
     }
     .active-NavLink{
       font-weight: 500;
-      border-bottom: var(--medium-border) solid var(--border-color);
+      border-bottom: var(--small-border) solid var(--border-color);
       color: var(--primary-text);
       border-bottom-left-radius: var(--small-radius);
       border-bottom-right-radius: var(--small-radius);

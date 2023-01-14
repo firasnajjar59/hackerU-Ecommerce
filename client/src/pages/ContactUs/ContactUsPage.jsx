@@ -6,6 +6,8 @@ import './contactUsPage.scss';
 import ContactUs from 'components/specific/ContactUs/ContactUs';
 
 const ContactUsPage = () => {
+  document.title = `Contact Us | ofwood`;
+
   const screenWidth = useSelector(state => state.screenSize.screenWidth);
   return (
     <div className='container-fluid '>

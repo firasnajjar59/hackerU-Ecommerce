@@ -12,11 +12,17 @@
   .filter-Wrapper {
     display: flex;
     flex-direction: column;
-    gap: var(--meduim-gap);
+    gap: var(--medium-gap);
     color: var(--primary-text);
     cursor: pointer;
     .title {
       font-size: var(--medium-title);
     }
+  }
+}
+@media screen and (max-width: 600px) {
+  .right{
+    width: 98%;
+    margin: auto !important;
   }
 }

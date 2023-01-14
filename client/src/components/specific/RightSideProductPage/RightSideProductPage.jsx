@@ -2,24 +2,24 @@
 
 import Accordion from 'components/common/Accordion/Accordion';
 import './rightSideProductPage.scss';
-import SideSortComponent from '../../common/BoxContainer/BoxContainer';
 import Comment from 'components/common/Comment/Comment';
 import AddComment from 'components/common/Comment/AddComment';
+import BoxContainer from 'components/common/BoxContainer/BoxContainer';
 
 const RightSideProductPage = (props) => {
   return (
-    <div className='rightAside'>
-      <SideSortComponent title='Description'>
+    <div className={`rightAside ${props.classes}`}>
+      <BoxContainer title='Description'>
         <p className='product-description'>{props.description}</p>
-      </SideSortComponent>
-      <SideSortComponent>
+      </BoxContainer>
+      <BoxContainer>
         <Accordion />
-      </SideSortComponent>
+      </BoxContainer>
 
-      <SideSortComponent title='Reviews'>
+      <BoxContainer title='Reviews'>
         {props.reviews.length>0?props.reviews.map((item,indx)=><Comment key={indx} review={item} />):""}
-        <AddComment/>
-      </SideSortComponent>
+        <AddComment onAddReview={props.onAddReview} id={props.id}/>
+      </BoxContainer>
     </div>
   );
 };

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import './boxContainer.scss';
-const SideSortComponent = props => {
+const BoxContainer = props => {
   const borderColor = useRef();
   useEffect(() => {
     if (props.color) {
@@ -27,4 +27,4 @@ const SideSortComponent = props => {
   );
 };
 
-export default SideSortComponent;
+export default BoxContainer;

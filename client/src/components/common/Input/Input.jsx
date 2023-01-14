@@ -9,6 +9,8 @@ const Input = (props) => {
   value={props.value}
   onChange={props.onchange}
   data-label={props.datalabel}
+  name={props.name}
+  multiple={props.multi&&props.multi}
 />
   )
 }

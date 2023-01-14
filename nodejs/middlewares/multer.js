@@ -22,6 +22,9 @@ const multerFilter = (req, file, cb) => {
     cb(new AppError('Not an image! please upload images only', 400), false);
 };
 
+
+
+
 const resizePhoto = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
   req.file.filename = `user-${req.doc._id}-${Date.now()}.jpeg`;
@@ -33,6 +36,24 @@ const resizePhoto = catchAsync(async (req, res, next) => {
   next();
 });
 
+
+const resizeMultiPhotos = catchAsync(async (req, res, next) => {
+  if (!req.files.length>0) return next();
+  console.log(req.files);
+  req.body.imgs=[]
+  await Promise.all(req.files.map(async (file,i)=>{
+    const filename = `user-${req.doc._id}-${Date.now()}-${i+1}.jpeg`;
+    await sharp(file.buffer)
+      .resize(500, 500)
+      .toFormat('jpeg')
+      .jpeg({ quality: 90 })
+      .toFile(`public/images/products/${filename}`);
+      req.body.imgs.push(filename)
+    }))
+    console.log(req);
+  next();
+});
+
 const upload = multer({
   storage: multerStorge,
   fileFilter: multerFilter,
@@ -41,4 +62,5 @@ const upload = multer({
 module.exports = {
   upload,
   resizePhoto,
+  resizeMultiPhotos
 };

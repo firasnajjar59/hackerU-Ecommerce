@@ -7,10 +7,16 @@ const DarkThemeBtn = (props) => {
     const theme=useSelector(state=>state.theme.theme)
     const dispatch=useDispatch()
     const innerBtnRef=useRef()
-
-    useEffect(()=>{
+  const handleThemeBtn=()=>{
+    dispatch(setTheme(theme=='theme-dark'?'theme-light':'theme-dark'))
+  }
+  useEffect(()=>{
+    if(localStorage.getItem("theme")){
+        dispatch(setTheme(localStorage.getItem("theme")))
+      }
     },[])
     useEffect(()=>{
+        localStorage.setItem("theme",theme)
         const innerBtn=innerBtnRef.current
         document.querySelector('html').dataset.theme=theme
         theme=='theme-dark'?innerBtn.style.justifyContent="end":innerBtn.style.justifyContent="start"

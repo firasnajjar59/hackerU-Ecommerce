@@ -5,9 +5,10 @@ const NavBarLink = props => {
   return (
     // <li className="nav-item">
     <NavLink
+    onClick={props.onclick?props.onclick:()=>{}}
       isActive={match => match && match.isExact}
       className={isActive =>
-        'navLink' + (!isActive ? ' ' : ' active-NavLink')
+        'navLink ' + `${props.classes} ` + (!isActive ? ' ' : ' active-NavLink')
       }
       to={props.path}>
       {props.label}

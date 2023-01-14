@@ -1,0 +1,8 @@
+.box{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: var(--medium-padding) !important;
+    gap: var(--small-gap);
+    border-radius: var(--medium-radius);
+}

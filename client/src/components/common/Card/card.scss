@@ -1,5 +1,14 @@
 /** @format */
-
+.wishlist-icon{
+  position: absolute;
+  left: 3%;
+  top: 3%;
+  width: fit-content !important;
+  border-radius: 50% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .caruselCardWrapper {
   display: flex;
   flex-direction: column;

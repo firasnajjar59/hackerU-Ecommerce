@@ -7,17 +7,19 @@ import RightSideProductPage from 'components/specific/RightSideProductPage/Right
 import OneProductCarusel from 'components/common/OneProductCarusel/OneProductCarusel';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-const ProductPage = () => {
+const ProductPage = (props) => {
+  const {id:productId}=props.location.state
+  const {slug}=useParams()
   const [product,setProudact]=useState()
   const [reviews,setReviews]=useState()
-  const { productId } = useParams();
-  document.title = `product | ${productId}`;
+  document.title = `Product | ${slug.split("-").join(" ").toUpperCase()}`;
   useEffect(()=>{
     (
       async ()=>{
         try {
           let {data:products}=await axios.get(`/v1/products/${productId}`)
           let {data:reviews}=await axios.get(`/v1/products/product/${productId}/reviews`)
+          console.log(reviews);
           setProudact(products.doc)
           setReviews(reviews.doc)
         } catch (error) {
@@ -26,15 +28,18 @@ const ProductPage = () => {
       }
     )()
   },[])
+  const handLocalReview=(reviews)=>{
+    setReviews(reviews)
+  }
   return (
     <div className='container oneProductCaruselWrapper '>
      {product&&<> <div className="title-wrapper">
       <h1>{product.name}</h1>
       </div>
-      <OneProductCarusel imgs={product.imgs} />
+      <OneProductCarusel imgs={product.imgs} _id={productId} />
       <div className='descriptionWrapper'>
-        <LeftsideProductPage />
-        <RightSideProductPage reviews={reviews} description={product.description} />
+        <LeftsideProductPage classes="descriptionWrapper-left" product={product} />
+        <RightSideProductPage classes="descriptionWrapper-right" reviews={reviews} id={productId} onAddReview={handLocalReview} description={product.description} />
       </div></>}
     </div>
   );

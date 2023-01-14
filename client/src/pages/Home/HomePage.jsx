@@ -16,7 +16,7 @@ const HomePage = () => {
   useEffect(()=>{
     (async ()=>{
       try {
-        let {data:res}=await axios.get("/v1/products?fields=name,description,imgs&limit=100")
+        let {data:res}=await axios.get("/v1/products?fields=name,description,imgs,slug&limit=100")
         setProudactArr(res.data.doc)
       } catch (error) {
         console.log(error);
@@ -26,7 +26,7 @@ const HomePage = () => {
   return (
     <>
       <div className='container m-auto'>
-        {productArr.length>0?<FourCardCarusel arr={productArr}></FourCardCarusel>:""}
+        {<FourCardCarusel arr={productArr}></FourCardCarusel>}
       </div>
 
 
@@ -35,7 +35,7 @@ const HomePage = () => {
         alt='Main img'
         src='https://static.wixstatic.com/media/1d63b2_6c40dcff0d9947138f630628db17f25b~mv2.jpg/v1/fill/w_1440,h_393,al_c,q_85,enc_auto/1d63b2_6c40dcff0d9947138f630628db17f25b~mv2.jpg'
       />
-      <div className='container-fluid bg-primary-ofwood'>
+      <div className='container-fluid bg-primary-opacity'>
         <OurCustemersCarusel>
           {custemersArr.map((item,indx) => (
             <RoundedImg key={indx} src={item} />

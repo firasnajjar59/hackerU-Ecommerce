@@ -1,0 +1,98 @@
+:root{
+    --img-width:30%
+}
+.loading-over-lay{
+    position: fixed;
+    left: 50vw;
+    top: 50vh;
+    transform: translate(-50%,-50%);
+    z-index: 3000;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--primary-color);
+    opacity: 1;
+}
+
+.loading-img{
+    position: fixed;
+    z-index: 3001;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: var(--img-width);
+    opacity: 1;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+}
+.fade-in{
+    opacity: 0;
+    animation: fadeIn 500ms forwards;
+}
+.fade-out{
+    animation: fadeOut 800ms 500ms forwards;
+}
+.img-fade-in{
+    width: 0%;
+    opacity: 0;
+    animation: imgFadeIn 800ms 400ms forwards ease-in-out;
+}
+.img-fade-out{
+    animation: imgFadeOut 500ms forwards ease-in-out;
+}
+
+@media screen and (max-width: 600px) {
+    :root{
+        --img-width:70%;
+    }
+    .loading-img{
+        width:var(--img-width);
+    }
+}
+
+
+
+
+
+@keyframes fadeIn {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+@keyframes fadeOut {
+    0%{
+        opacity: 1;
+    }
+   99%{
+    left:50%;
+    top:50%;
+   }
+    100%{
+        opacity: 0;
+        width: 0;
+        left: 0;
+        top: 0;
+    }
+}
+@keyframes imgFadeIn {
+    0%{
+        width: 0;
+        opacity: 0;
+    }
+    100%{
+        width: var(--img-width);
+        opacity: 1;
+    }
+}
+@keyframes imgFadeOut {
+    0%{
+        width: var(--img-width);
+        opacity: 1;
+    }
+    100%{
+        width: 0%;
+        opacity: 0;
+    }
+}

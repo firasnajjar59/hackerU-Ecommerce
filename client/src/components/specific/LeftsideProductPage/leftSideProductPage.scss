@@ -4,7 +4,7 @@
   width: 35%;
   display: flex;
   flex-direction: column;
-  gap: var(--meduim-gap);
+  gap: var(--medium-gap);
 
   p {
     font-size: var(--medium-p);
@@ -17,7 +17,7 @@
     .colorPicker {
       display: flex;
       align-items: center;
-      gap: var(--meduim-gap);
+      gap: var(--medium-gap);
       .color {
         width: 1.2rem;
         aspect-ratio: 1/1;
@@ -52,19 +52,6 @@
     display: flex;
     flex-direction: column;
     gap: var(--small-gap);
-    #custumizeText {
-      width: 100%;
-      min-height: 3em;
-      padding: var(--medium-padding) !important;
-      border: var(--small-border) solid var(--border-color);
-      border-radius: var(--medium-radius);
-      background-color: var(--secondary-color);
-      resize: none;
-      color: var(--primary-text);
-      &:focus {
-        outline: none;
-      }
-    }
   }
   .counterWrapper {
     width: 100%;

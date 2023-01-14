@@ -1,0 +1,23 @@
+
+    .file-input-label{
+        cursor: pointer;
+        user-select: none;
+        border-radius: var(--medium-radius);
+        width: 100%;
+        padding: var(--medium-padding) !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        border: var(--small-border) dashed var(--primary-color);
+        border-style: dashed;
+        color: var(--primary-text);
+        .file-input{
+            display: none;
+        }
+        .file-name{
+            color: var(--bold-text);
+            font-size: var(--small-p);
+            font-weight: 400;
+        }
+    }

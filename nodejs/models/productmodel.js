@@ -24,23 +24,23 @@ const productsSchema = new mongoose.Schema({
   selectOption:[
     {
       name:{type:String},
-      options:[String]
+      option:[String]
     }
   ],
   properties:[
     {
       name:{type:String},
-      description:{type:String}
+      option:{type:String}
     }
   ],
   category:[String],
-  
 },
 {
   toJSON:{virtuals:true},
   toObject:{virtuals:true}
 }
 );
+
 //* document middleware
 productsSchema.pre('save', function (next) {
   this.createdAt = Date.now();

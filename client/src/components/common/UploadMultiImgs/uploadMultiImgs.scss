@@ -1,0 +1,17 @@
+.multi-imgs-label{
+    border-radius: var(--medium-radius);
+    border: var(--small-border) dashed var(--primary-color);
+    padding: var(--medium-padding) !important;
+    display: flex;
+    flex-direction: column;
+    gap: var(--small-gap);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    .imgs-names-wrapper{
+        color: var(--bold-text);
+    }
+    .multi-imgs-input{
+        display: none;
+    }
+}

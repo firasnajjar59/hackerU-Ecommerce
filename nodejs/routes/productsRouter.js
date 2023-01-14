@@ -4,9 +4,11 @@ const express = require('express');
 const router = express.Router();
 const checkIdInParams = require('../middlewares/checkIdInParams');
 const productController = require('../controller/productController');
+const cartController = require('../controller/cartController');
 const permissionTo = require('../middlewares/permissionTo');
 const protect = require('../middlewares/protect');
 const reviewsRouter = require('./reviewsRouter');
+const { resizeMultiPhotos } = require('../middlewares/multer');
 
 router.param('id', checkIdInParams);
 /* /api/v1/products nesting route */
@@ -17,15 +19,18 @@ router.use('/product/:id', reviewsRouter);
 router
   .route('/')
   .get(productController.getAllProducts)
-  .post(protect, permissionTo('admin'), productController.createProduct);
+  .post(protect, permissionTo('admin'),productController.uploadProductPhotos,resizeMultiPhotos,productController.handleOptionsInReq, productController.createProduct);
+  
+  /* /api/v1/products/cart */
+  router
+    .route('/cart')
+    .post(cartController.getAllCartProducts)
 
 /* /api/v1/products/:productId get user products */
 router
   .route('/:id')
   .get(productController.getProductByID)
-  .patch(protect, permissionTo('admin', 'contributor'), (req, res) => {
-    res.json({ data: 'PUT /api/v1/products update product' });
-  })
+  .patch(protect, permissionTo('admin', 'contributor'),productController.uploadProductPhotos,resizeMultiPhotos,productController.handleOptionsInReq, productController.updateProduct)
   .delete(
     protect,
     permissionTo('admin', 'contributor'),

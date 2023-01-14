@@ -1,12 +1,14 @@
+import { useSelector } from 'react-redux'
 import './comment.scss'
 
 
 const Comment = ({review}) => {
+  const user=useSelector(state=>state.loggedUser.user)
   return (
     <div className='comment'>
           <div className='comment-img'>
             <img
-              src={review.user_id.userImg}
+              src={review.user_id.userImg.startsWith("http")?review.user_id.userImg:`${process.env.REACT_APP_SERVER_URL}/images/users/${review.user_id.userImg}`}
               alt=''
             />
           </div>

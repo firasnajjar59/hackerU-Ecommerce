@@ -5,15 +5,14 @@
   border-radius: var(--medium-radius);
   padding: var(--medium-padding) !important;
   display: flex;
-  gap: var(--meduim-gap);
-  // box-shadow: 0px 1px 10px 0px var(--shadow-color);
+  gap: var(--medium-gap);
 
   .comment-img {
     border-radius: 50%;
     img {
       width: 3em;
       aspect-ratio: 1/1;
-      object-fit: contain;
+      object-fit: cover;
       border-radius: 50%;
     }
   }
@@ -29,7 +28,7 @@
     width: 100%;
     .comment-add-inp-btn {
       display: flex;
-      gap: var(--meduim-gap);
+      gap: var(--medium-gap);
       .comment-textarea {
         width: 80%;
         min-height: 4em;

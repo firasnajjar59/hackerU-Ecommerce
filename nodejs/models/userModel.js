@@ -35,7 +35,7 @@ const usersSchema = new mongoose.Schema({
     },
   },
   userName: { type: String, required: true },
-  activeUser: { type: Boolean, default: true, select: false },
+  activeUser: { type: Boolean, default: true, select: true },
   phone: { type: String, required: true },
   cart: [{ type: mongoose.Schema.Types.ObjectId, ref: 'products' }],
   wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: 'products' }],
@@ -83,10 +83,10 @@ usersSchema.pre('save',function(next){
   next()
 })
 // query middleware
-usersSchema.pre(/^find/,function (next){
-  this.find({activeUser:true})
-  next()
-})
+// usersSchema.pre(/^find/,function (next){
+//   this.find({activeUser:true})
+//   next()
+// })
 // method
 usersSchema.methods.changedPasswordAfter = function (JWTTimesStamp) {
   // this field build only when user change password so we check

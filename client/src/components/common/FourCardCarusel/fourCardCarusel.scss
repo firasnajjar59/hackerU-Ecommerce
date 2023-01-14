@@ -13,8 +13,8 @@
 
   .caruselcardsWrapper {
     display: flex;
-    gap: var(--meduim-gap);
-    width: 100%;
+    gap: var(--medium-gap);
+    width: 90%;
     margin: auto !important;
     position: relative;
     z-index: 170;
@@ -26,7 +26,7 @@
       top: 50%;
       padding: var(--big-padding);
       z-index: 100;
-      transform: translate(-130%, -100%);
+      transform: translate(-110%, -100%);
 
       img {
         width: 2rem;
@@ -39,7 +39,7 @@
       right: 0;
       top: 50%;
       z-index: 100;
-      transform: translate(130%, -100%);
+      transform: translate(110%, -100%);
       padding: var(--big-padding);
       img {
         width: 2rem;

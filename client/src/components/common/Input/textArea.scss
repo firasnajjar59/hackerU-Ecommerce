@@ -1,0 +1,16 @@
+
+
+
+.text-area {
+      width: 100%;
+      min-height: 3em;
+      padding: var(--medium-padding) !important;
+      border: var(--small-border) solid var(--border-color);
+      border-radius: var(--medium-radius);
+      background-color: var(--secondary-color);
+      resize: none;
+      color: var(--primary-text);
+      &:focus {
+        outline: none;
+      }
+    }

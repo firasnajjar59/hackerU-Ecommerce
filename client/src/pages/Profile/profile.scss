@@ -1,0 +1,103 @@
+%grid-item{
+    border-radius: var(--medium-radius);
+    padding: var(--medium-padding) !important;
+}
+.profile-grid{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(10,1fr);
+    gap: var(--small-gap);
+    .profile-left{
+        @extend %grid-item;
+        grid-column: 1/4;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: var(--small-gap);
+        .profile-left-top{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .profile-img-wrapper{
+                width: 60%;
+                aspect-ratio: 1/1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                background-color: var(--secondary-back-ground);
+                // padding: var(--small-padding) !important;
+                img{
+                    width: 95%;
+                    aspect-ratio: 1/1;
+                    object-fit: contain;
+                    border-radius: 50%
+                    
+                }
+            }
+            span{
+                display: none;
+            }
+        }
+        .left-menu{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            
+            .menu-list{
+                border-radius: var(--medium-radius);
+                padding: var(--big-padding) !important;
+                display: flex;
+                flex-direction: column;
+                gap: var(--small-gap);
+                .menu-list-item{
+                    border-radius: var(--medium-radius);
+                    background-color: var(--secondary-back-ground);
+                    padding: var(--medium-padding) !important;
+                    .nav{
+                        width: 100%;
+                    }
+                }
+            }
+        }
+        }
+    .profile-right{
+        @extend %grid-item;
+        grid-column: 4/11;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .profile-grid{
+        grid-template-columns: repeat(1,1fr);
+        .profile-left{
+            grid-column: 1/2;
+
+            .profile-left-top{
+                grid-column: 1/1;
+                justify-content: space-between;
+            
+                .profile-img-wrapper{
+                    width: 20%;
+                    display: flex;
+                    img{
+                    }
+                }
+                span{
+                    display: flex;
+                }
+            }
+            .left-menu{
+                height: fit-content;
+                .menu-list{
+                    display: flex;
+                 
+                }
+            }
+        }
+        .profile-right{
+            grid-column: 1/2;
+            grid-row: 2/3;
+        }
+}
+}

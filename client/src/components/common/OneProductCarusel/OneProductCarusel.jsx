@@ -1,37 +1,32 @@
 import { useEffect, useState } from 'react'
 import './oneProductCarusel.scss'
 // import imgsArr from 'data/imgs'
-import { useDispatch, useSelector } from 'react-redux'
-import {  setShow } from 'store/popupHandler'
-import ProductImgPopup from 'components/specific/ProductImgPopup/ProductImgPopup'
+import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 const OneProductCarusel = (props) => {
   let [imgsArr,setImgsArr]=useState([])
-  const dispatch=useDispatch()
   const [imgIndex,setImgIndex]=useState(0)
   const screenWidth=useSelector(state=>state.screenSize.screenWidth)
-  const [click,setClick]=useState(false)
+  const history=useHistory()
   useEffect(()=>{
     setImgsArr(props.imgs)
   },[])
-  useEffect(()=>{
-    if(click){
-        dispatch(setShow("productImgHidden"))
-        setClick(false)
-    }
+ 
 
-  },[click])
+  const openImgPopup=(imgUrl)=>()=>{
+    history.push({pathname:`/imgs/${props._id}`,state:{imgUrl}})
+  }
   return (
     <>
-    <ProductImgPopup src={imgsArr[imgIndex]} alt="hi"/>
     <div className='caruselImgs'>
     {screenWidth>600?<img
-      src={imgsArr[imgIndex]}
+      src={imgsArr.length>0&&imgsArr[imgIndex].startsWith("http")?imgsArr[imgIndex]:`${process.env.REACT_APP_SERVER_URL}/images/products/${imgsArr[imgIndex]}`}
       alt={imgsArr[imgIndex]}
-      onClick={()=>{dispatch(setShow("productImgHidden"))}}
+      onClick={openImgPopup(imgsArr[imgIndex])}
       />:imgsArr.map((img,indx)=><img key={indx}
-      onClick={()=>{setClick(true);setImgIndex(indx)}}
-    src={img}
+      onClick={openImgPopup(img)}
+    src={img.startsWith("http")?img:`${process.env.REACT_APP_SERVER_URL}/images/products/${img}`}
     alt={img}
   />)}
   </div>

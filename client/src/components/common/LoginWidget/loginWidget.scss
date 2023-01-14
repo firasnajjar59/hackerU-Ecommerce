@@ -1,5 +1,43 @@
 .memberSection {
   display: flex;
-  gap: var(--meduim-gap);
-    color: var(--primary-color);
+  align-items: center;
+  gap: var(--medium-gap);
+  color: var(--primary-color);
+  // overflow: hidden;
+  .cart-number-wrapper{
+    width: 1.4em;
+    height: 1.4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color-opacity);
+    position: absolute;
+    // z-index: 10000;
+    right: -50%;
+    top: -50%;
+    font-weight: 400;
+    
+    font-size: var(--small-p);
+    border-radius: 50%;
+    color: var(--secondary-text);
   }
+  a{
+    position: relative;
+    img{
+      width: 2.5em;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+  P{
+    font-weight: 400;
+  }
+}
+@media screen and (max-width: 600px) {
+  .memberSection {
+  .user-name{
+    display: none;
+  }
+}
+}

@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import Circles from 'models/CanvasClasses/Circles';
 import Line from 'models/CanvasClasses/Line';
 const AboutUs = () => {
+  document.title = `About Us | ofwood`;
   const screenWidth=useSelector(state=>state.screenSize.screenWidth)
   const screenHeight=useSelector(state=>state.screenSize.screenHeight)
   const theme=useSelector(state=>state.theme.theme)

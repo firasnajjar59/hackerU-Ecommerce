@@ -39,12 +39,14 @@ class ApiFeatures {
   }
 
   paginate() {
-    const page = +this.requestQuery.page || 1;
-    const limit = +this.requestQuery.limit || 5;
-    const skip = (page - 1) * limit;
-    this.query = this.query.skip(skip).limit(limit);
-    this.skip=skip
-    this.limit=limit
+    if(+this.requestQuery.page&&this.requestQuery.limit){
+      const page = +this.requestQuery.page;
+      const limit = +this.requestQuery.limit;
+      const skip = (page - 1) * limit;
+      this.query = this.query.skip(skip).limit(limit);
+      this.skip=skip
+      this.limit=limit
+    }
     return this;
   }
 }
