@@ -14,7 +14,7 @@ const usersSchema = new mongoose.Schema({
     lowercase: true,
     validate: [validator.isEmail, 'Please provide a valid e-mail'],
   },
-  userImg: { type: String,default:'default.jpg' },
+  userImg: { type: String, default: 'default.jpg' },
   password: {
     type: String,
     required: [true, 'Please provide a password'],
@@ -37,7 +37,25 @@ const usersSchema = new mongoose.Schema({
   userName: { type: String, required: true },
   activeUser: { type: Boolean, default: true, select: true },
   phone: { type: String, required: true },
-  cart: [{ type: mongoose.Schema.Types.ObjectId, ref: 'products' }],
+  cart: [
+    {
+      product_id: { type: mongoose.Schema.Types.ObjectId, ref: 'products' },
+      selectOption: [
+        {
+          name: { type: String },
+          option: [String],
+        },
+      ],
+      properties: [
+        {
+          name: { type: String },
+          option: { type: String },
+        },
+      ],
+      quantity: { type: Number },
+      price: { type: Number },
+    },
+  ],
   wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: 'products' }],
   orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'orders' }],
   role: {
@@ -77,11 +95,11 @@ usersSchema.pre('save', async function (next) {
   next();
 });
 // save when the password changed
-usersSchema.pre('save',function(next){
-  if(!this.isModified('password')||this.isNew)return next()
-  this.passwordUpdatedAt=Date.now()-3000;
-  next()
-})
+usersSchema.pre('save', function (next) {
+  if (!this.isModified('password') || this.isNew) return next();
+  this.passwordUpdatedAt = Date.now() - 3000;
+  next();
+});
 // query middleware
 // usersSchema.pre(/^find/,function (next){
 //   this.find({activeUser:true})
@@ -96,7 +114,10 @@ usersSchema.methods.changedPasswordAfter = function (JWTTimesStamp) {
   // return false
   // * false means the user didnt change password after the token we recive
   if (this.passwordUpdatedAt) {
-    const passwordUpdatedAtStamp = parseInt(this.passwordUpdatedAt.getTime() / 1000, 10);
+    const passwordUpdatedAtStamp = parseInt(
+      this.passwordUpdatedAt.getTime() / 1000,
+      10
+    );
     return passwordUpdatedAtStamp > JWTTimesStamp;
   }
   return false;
@@ -105,7 +126,10 @@ usersSchema.methods.createPasswordResetToken = function () {
   // build a random string by buildin crypto
   const resetToken = crypto.randomBytes(32).toString('hex');
   // we hash the random string we generate one step before and save it in database
-  this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+  this.passwordResetToken = crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex');
   // here we give the token an expire date and store it in the database
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
   console.log({ resetToken }, this.passwordResetToken);

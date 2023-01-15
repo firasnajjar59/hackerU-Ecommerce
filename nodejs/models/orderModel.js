@@ -3,11 +3,25 @@
 const mongoose = require('mongoose');
 
 const ordersSchema = new mongoose.Schema({
-  product_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'products',
-    required: [true, 'The order should be belong to product'],
-  },
+  products: [
+    {
+      product_id: { type: mongoose.Schema.Types.ObjectId, ref: 'products' },
+      selectOption: [
+        {
+          name: { type: String },
+          option: [String],
+        },
+      ],
+      properties: [
+        {
+          name: { type: String },
+          option: { type: String },
+        },
+      ],
+      quantity: { type: Number },
+      price: { type: Number },
+    },
+  ],
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'users',

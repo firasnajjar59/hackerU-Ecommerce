@@ -16,6 +16,7 @@ import BoxContainer from 'components/common/BoxContainer/BoxContainer'
 import Wishlist from 'pages/Wishlist/Wishlist'
 import AdminProductsPage from 'pages/AdminProductsPage/AdminProductsPage'
 import AdminUser from 'pages/AminUser/AdminUser'
+import ContributorGard from 'guards/ContributorGard'
 
 
 const Profile = () => {
@@ -49,6 +50,11 @@ const Profile = () => {
                                 <Li classes="menu-list-item"><NavBarLink classes="nav" onclick={()=>{setDisplayMenu(false)}} path={`${url}/createproducts`} label="Add Products"/></Li>
                             </>:""
                             }
+                            {user.role=="contributor"?
+                                <>
+                                <Li classes="menu-list-item"><NavBarLink classes="nav" onclick={()=>{setDisplayMenu(false)}} path={`${url}/products`} label="Products"/></Li>
+                            </>:""
+                            }
                             <Li classes="menu-list-item"><NavBarLink classes="nav" onclick={()=>{setDisplayMenu(false)}} path={`${url}/orders`} label="Orders"/></Li>
                             <Li classes="menu-list-item"><NavBarLink classes="nav" onclick={()=>{setDisplayMenu(false)}} path={`${url}/wishlist`} label="Wishlist"/></Li>
                             <Li classes="menu-list-item"><NavBarLink classes="nav" onclick={()=>{setDisplayMenu(false)}} path={`${url}/cart`} label="Cart"/></Li>
@@ -61,7 +67,7 @@ const Profile = () => {
                     <Route path={`${path}/whishlist`} component={ChangePassword} />
                     <Route path={`${path}/cart`}><Cart polices="false"/></Route>
                     <Route path={`${path}/wishlist`}><Wishlist/></Route>
-                    <AdminGard path={`${path}/products`} component={AdminProductsPage} />
+                    <ContributorGard path={`${path}/products`} component={AdminProductsPage} />
                     <AdminGard path={`${path}/users`} component={AdminUser} />
                     <AdminGard path={`${path}/createproducts`} component={CreateProduct} />
                 </div>
