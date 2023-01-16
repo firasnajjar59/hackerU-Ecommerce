@@ -19,7 +19,7 @@ const ProductPage = (props) => {
         try {
           let {data:products}=await axios.get(`/v1/products/${productId}`)
           let {data:reviews}=await axios.get(`/v1/products/product/${productId}/reviews`)
-          console.log(reviews);
+          console.log(products);
           setProudact(products.doc)
           setReviews(reviews.doc)
         } catch (error) {
@@ -38,8 +38,8 @@ const ProductPage = (props) => {
       </div>
       <OneProductCarusel imgs={product.imgs} _id={productId} />
       <div className='descriptionWrapper'>
-        <LeftsideProductPage classes="descriptionWrapper-left" product={product} />
-        <RightSideProductPage classes="descriptionWrapper-right" reviews={reviews} id={productId} onAddReview={handLocalReview} description={product.description} />
+        <LeftsideProductPage id={productId} selectOption={product.selectOption} classes="descriptionWrapper-left" product={product} />
+        <RightSideProductPage properties={product.properties} classes="descriptionWrapper-right" reviews={reviews} id={productId} onAddReview={handLocalReview} description={product.description} />
       </div></>}
     </div>
   );

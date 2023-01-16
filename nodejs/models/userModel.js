@@ -43,17 +43,12 @@ const usersSchema = new mongoose.Schema({
       selectOption: [
         {
           name: { type: String },
-          option: [String],
-        },
-      ],
-      properties: [
-        {
-          name: { type: String },
           option: { type: String },
         },
       ],
       quantity: { type: Number },
       price: { type: Number },
+      note:{type:String}
     },
   ],
   wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: 'products' }],
@@ -94,6 +89,11 @@ usersSchema.pre('save', async function (next) {
   // at the end we call the next function to pass to the next middleware
   next();
 });
+usersSchema.pre(/^find/,function(next){
+  this.populate({path:'cart.product_id',select:'name imgs price'})
+  this.populate({path:'wishlist',select:'name imgs price'})
+  next()
+})
 // save when the password changed
 usersSchema.pre('save', function (next) {
   if (!this.isModified('password') || this.isNew) return next();
@@ -132,7 +132,6 @@ usersSchema.methods.createPasswordResetToken = function () {
     .digest('hex');
   // here we give the token an expire date and store it in the database
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
-  console.log({ resetToken }, this.passwordResetToken);
   // we return the password
   return resetToken;
 };

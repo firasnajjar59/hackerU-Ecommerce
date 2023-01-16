@@ -6,11 +6,13 @@ import Button from '../Button/Button';
 import MaterialIcon from '../MaterialIcon/MaterialIcon';
 import ExpandSection from '../ExpandSection/ExpandSection';
 import Box from '../Box/Box';
+import useUpdateUserRedux from 'hooks/useUpdateUserRedux';
 
 
 export const ChangeUserImg = () => {
     const [photo,setPhoto]=useState()
     const [photoName,setPhotoName]=useState("example.jpg/png")
+    const updateUser=useUpdateUserRedux()
     const handleImgSend=async()=>{
       try {
         const formData=new FormData();
@@ -18,8 +20,7 @@ export const ChangeUserImg = () => {
         console.log(formData.get("photo"));
         let {data}= await axios.patch("/v1/users/updateme",formData,{ headers: {'Content-Type': 'multipart/form-data'}})
         setPhotoName("Image Uploaded")
-        console.log(data.data.token);
-        localStorage.setItem("token",data.data.token)
+        updateUser(data.data.token)
       } catch (error) {
         console.log(error);
       }

@@ -6,9 +6,11 @@ import Input from '../Input/Input'
 import Button from '../Button/Button'
 import ExpandSection from '../ExpandSection/ExpandSection'
 import Box from '../Box/Box'
+import useUpdateUserRedux from 'hooks/useUpdateUserRedux'
 
 
 const ChangePassword = () => {
+  const updateUser=useUpdateUserRedux()
   const [inputs,setInputs]=useState({
     password:"",
     newPassword:"",
@@ -28,7 +30,7 @@ const ChangePassword = () => {
             newPassword:"",
             confirmNewPassword:""
           })
-          localStorage.setItem('token',data.data.token)
+          updateUser(data.data.token)
       } catch (error) {
           console.log(error);
       }

@@ -11,6 +11,13 @@ const RightSideProductPage = (props) => {
     <div className={`rightAside ${props.classes}`}>
       <BoxContainer title='Description'>
         <p className='product-description'>{props.description}</p>
+        {props.properties.length>0&&<div className="properties-wrapper">
+        {props.properties.map((property,indx)=><div className='properties' key={indx}>
+          <div key={`${property.name}`} className="properties-title">{property.name}:</div>
+          <div key={`${property.option}`} className="properties-option">{property.option}</div>
+          </div>
+        )}
+        </div>}
       </BoxContainer>
       <BoxContainer>
         <Accordion />

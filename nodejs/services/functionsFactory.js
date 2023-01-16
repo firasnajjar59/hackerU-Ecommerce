@@ -13,7 +13,6 @@ const AppError = require('../utils/appError');
 //* if there is document so we send success respones with the relevant document
 exports.getAllDocumants = Model =>
   catchAsync(async (req, res, next) => {
-    // console.log(req.cookie.token);
     const docNumber=await Model.countDocuments({})
     const features = new ApiFeatures(Model.find(), req.query)
       .filter()
@@ -46,10 +45,7 @@ exports.getAllDocumants = Model =>
   });
 exports.getAllDocumantsNOQuery = Model =>
   catchAsync(async (req, res, next) => {
-    // console.log(req.cookie.token);
-    // const docNumber=await Model.countDocuments({})
     const doc=await Model.find( req.body)
-    console.log();
 
     if (!doc.length) {
       return next(new AppError('document not found', 404));
@@ -99,7 +95,6 @@ exports.getAllDocumantsByID = (Model, key) =>
 //*
 exports.updateDocumantByID = Model =>
   catchAsync(async (req, res, next) => {
-    console.log(req.body);
     const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
@@ -117,7 +112,6 @@ exports.updateDocumantByID = Model =>
 //*
 exports.getDocumantByID = Model =>
   catchAsync(async (req, res, next) => {
-    console.log(req.params);
     const doc = await Model.findById(req.params.id);
     if (!doc) {
       return next(new AppError('document not found', 404));

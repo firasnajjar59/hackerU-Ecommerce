@@ -9,8 +9,10 @@ import Button from '../Button/Button';
 import axios from 'axios';
 import ExpandSection from '../ExpandSection/ExpandSection';
 import Box from '../Box/Box';
+import useUpdateUserRedux from 'hooks/useUpdateUserRedux';
 
 const UserDetailsChange = () => {
+  const updateUser=useUpdateUserRedux()
   const user = useSelector(state => state.loggedUser.user);
   const [inputs, setInputs] = useState({
     name: '',
@@ -35,8 +37,7 @@ const UserDetailsChange = () => {
   const handleChangeUserInfo = async () => {
     try {
       let { data } = await axios.patch('/v1/users/updateme', inputs);
-      console.log(data);
-      localStorage.setItem('token', data.data.token);
+      updateUser(data.data.token)
     } catch (error) {
       console.log(error);
     }

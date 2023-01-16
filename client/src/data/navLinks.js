@@ -4,7 +4,7 @@ const navLinks=[
     { path:"/aboutus",label:"About Us"},
     { path:"/gallery",label:"Gallery"},
     { path:"/contactus",label:"Contact Us"},
-    { path:"/profile",label:"Profile"},
+    // { path:"/profile",label:"Profile"},
   ]
   
   export default navLinks

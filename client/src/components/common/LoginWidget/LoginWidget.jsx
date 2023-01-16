@@ -5,6 +5,7 @@ import MaterialIcon from '../MaterialIcon/MaterialIcon';
 import './loginWidget.scss';
 import { Link } from 'react-router-dom';
 import { setLogOut } from 'store/loggedIn';
+import useLogoutUser from 'hooks/useLogoutUser';
 
 const LoginWidget = props => {
   const user = useSelector(state => state.loggedUser.user);
@@ -12,7 +13,10 @@ const LoginWidget = props => {
   const wishlist = useSelector(state => state.wishlist.wishlist);
   const loggedIn = useSelector(state => state.loggedIn.loggedIn);
   const dispatch = useDispatch();
-
+  const logout=useLogoutUser()
+  const handleLogout=()=>{
+    logout()
+  }
 
   return (
     <>
@@ -39,10 +43,7 @@ const LoginWidget = props => {
 
         {loggedIn ? (
           <Link
-            onClick={() => {
-              localStorage.removeItem('token');
-              dispatch(setLogOut());
-            }}
+            onClick={handleLogout}
             to='/'>
             <MaterialIcon title='logout' />
           </Link>

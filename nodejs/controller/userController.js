@@ -16,7 +16,7 @@ const updateMe = catchAsync(async (req, res, next) => {
   if (req.body.password || req.body.passwordConfirm)
     return next(new AppError("You can't update password", 400));
   //filter update values before update
-  const filteredBody = filterObj(req.body, 'name', 'userName','birthday', 'phone');
+  const filteredBody = filterObj(req.body, 'name', 'userName','birthday', 'phone','wishlist','cart');
   if (req.file) filteredBody.userImg = req.file.filename;
   // update user document
   const user = await Users.findByIdAndUpdate(req.doc._id, filteredBody, {

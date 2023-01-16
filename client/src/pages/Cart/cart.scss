@@ -59,6 +59,19 @@ h1{
         }
     }
 }
+.cart-product-option-wrapper{
+  display: flex;
+
+  gap: var(--medium-gap);
+  background-color: var(--primary-back-ground);
+  color: var(--secondary-color);
+  font-weight: 400;
+  padding: var(--medium-padding) !important;
+  border-radius: var(--medium-radius);
+  .option-wrapper{
+
+  }
+}
   }
   .cart-info-wrapper {
     min-height: 100px;
@@ -119,6 +132,12 @@ h1{
                 }
           }
       }
+        }
+        .cart-product-option-wrapper{
+          justify-content: center;
+          .option-wrapper{
+        
+          }
         }
         .cart-info-wrapper {
          

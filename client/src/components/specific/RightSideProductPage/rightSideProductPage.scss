@@ -8,6 +8,30 @@
     .product-description {
       font-size:var(--medium-p);
     }
+    .properties-wrapper{
+      border-radius: var(--medium-radius);
+      background-color: var(--primary-back-ground);
+      
+      .properties{
+        display: grid;
+        grid-template-columns: repeat(4,25%);
+        
+        .properties-title{
+          grid-column-start: 1;
+          grid-column-end: 2;
+          padding: var(--medium-padding) !important;
+          color: var(--secondary-color);
+        }
+        .properties-option{
+          grid-column-start: 2;
+          grid-column-end: 5;
+          background-color: var(--secondary-color-opacity);
+          padding: var(--medium-padding) !important;
+          color: var(--secondary-color);
+  
+        }
+      }
+    }
      
     }
 

@@ -9,23 +9,7 @@
   p {
     font-size: var(--medium-p);
   }
-  .colorComponent {
-    display: flex;
-    font-size: var(--small-p);
-    justify-content: space-between;
-    gap: var(--medium-gap);
-    .colorPicker {
-      display: flex;
-      align-items: center;
-      gap: var(--medium-gap);
-      .color {
-        width: 1.2rem;
-        aspect-ratio: 1/1;
-        border-radius: 50%;
-        border: var(--small-border) solid var(--border-color);
-      }
-    }
-  }
+ 
   .custWrapper {
     font-size: var(--small-p);
     width: 100%;

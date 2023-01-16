@@ -5,41 +5,72 @@ import Button from 'components/common/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import Box from 'components/common/Box/Box';
-import { removeProuctFromWishlist } from 'store/wishlist';
+import { addArrProductToWishlist, removeProuctFromWishlist } from 'store/wishlist';
+import useUpdateUserRedux from 'hooks/useUpdateUserRedux';
 
 
 const Wishlist = props => {
     document.title = `Cart | ofwood`;
     const dispatch=useDispatch()
     const wishlist=useSelector(state=>state.wishlist.wishlist)
+    const loggedIn=useSelector(state=>state.loggedIn.loggedIn)
     const [wishlistProducts,setwishlistProduct]=useState([])
+    const updateUser=useUpdateUserRedux()
+
    
     useEffect(()=>{
-      if(wishlist.length>0){
+      if(!loggedIn&&wishlist.length>0){
         (async ()=>{
           try {
             const {data}=await axios.post("/v1/products/cart",{_id:wishlist})
-            setwishlistProduct(data.data.doc)
-          } catch (error) {
-            console.log(error);
+            console.log(data);
+              setwishlistProduct(data.data.doc)
+            } catch (error) {
+              console.log(error);
+            }
           }
-        }
-        )()
+          )()
+      }else{
+        setwishlistProduct(wishlist)
       }
     },[])
+    // 
+    useEffect(()=>{
+      if(loggedIn){
+        setwishlistProduct(wishlist)
+      }
+        console.log(wishlist);
+    },[wishlist])
+    useEffect(()=>{
+       console.log(wishlistProducts);
+    },[wishlistProducts])
 
    const handleDeleteProduct=(indx)=>()=>{
-    setwishlistProduct(prev=>{
-      prev.splice(indx,1)
-      return[
-        ...prev
-      ]
-    })
-    dispatch(removeProuctFromWishlist(indx))
-    let wishlistLocal=JSON.parse(localStorage.getItem('wishlist'))
-    wishlistLocal.splice(indx,1)
-    console.log(wishlistLocal);
-    localStorage.setItem('wishlist',JSON.stringify(wishlistLocal))
+    if(loggedIn){
+      (async()=>{
+        try {
+            let wishlistArr=JSON.parse(JSON.stringify(wishlist))
+            wishlistArr.splice(indx,1)
+            wishlistArr=wishlistArr.map(product=>product.id)
+            let { data } = await axios.patch('/v1/users/updateme', {wishlist:wishlistArr});
+            updateUser(data.data.token)
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      )()
+    }else{
+      let wishlistLocal=JSON.parse(localStorage.getItem('wishlist'))
+      wishlistLocal.splice(indx,1)
+      localStorage.setItem('wishlist',JSON.stringify(wishlistLocal))
+      dispatch(addArrProductToWishlist(wishlistLocal))
+      setwishlistProduct(prev=>{
+        prev.splice(indx,1)
+        return [
+          ...prev
+        ]
+      })
+    }
    }
   return (
     <div className='container m-auto'>
@@ -50,8 +81,9 @@ const Wishlist = props => {
           <div className='cart-product-list-wrapper'>
             <div className='product-list-img-wrapper'>
               <img
-                src={product.imgs[0]&&product.imgs[0].startsWith("http")?product.imgs[0]:`${process.env.REACT_APP_SERVER_URL}/images/products/${product.imgs[0]}`}
+                src={product?.imgs[0].length>0&&product.imgs[0].startsWith("http")?product.imgs[0]:`${process.env.REACT_APP_SERVER_URL}/images/products/${product.imgs[0]}`}
                 alt=''
+                onClick={()=>console.log(`${process.env.REACT_APP_SERVER_URL}/images/products/${product.imgs[0]}`)}
               />
             </div>
             <div className='product-list-details-wrapper'>

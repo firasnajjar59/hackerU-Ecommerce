@@ -39,7 +39,6 @@ const resizePhoto = catchAsync(async (req, res, next) => {
 
 const resizeMultiPhotos = catchAsync(async (req, res, next) => {
   if (!req.files.length>0) return next();
-  console.log(req.files);
   req.body.imgs=[]
   await Promise.all(req.files.map(async (file,i)=>{
     const filename = `user-${req.doc._id}-${Date.now()}-${i+1}.jpeg`;
@@ -50,7 +49,6 @@ const resizeMultiPhotos = catchAsync(async (req, res, next) => {
       .toFile(`public/images/products/${filename}`);
       req.body.imgs.push(filename)
     }))
-    console.log(req);
   next();
 });
 

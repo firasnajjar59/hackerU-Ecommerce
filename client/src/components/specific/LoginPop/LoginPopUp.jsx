@@ -8,13 +8,11 @@ import PopUp from 'components/common/PopUp/PopUp';
 import updateInputs from 'functions/updateInputs';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setLogIn } from 'store/loggedIn';
-import jwtDecode from 'jwt-decode';
-import { setUser } from 'store/loggedUser';
 import { useHistory } from 'react-router-dom';
+import useUpdateUserRedux from 'hooks/useUpdateUserRedux';
 const LoginPopUp = props => {
   document.title = `Sign In | ofwood`;
-
+const updateUser=useUpdateUserRedux()
   //
   const history = useHistory();
   //
@@ -24,17 +22,14 @@ const LoginPopUp = props => {
     email: '',
     password: '',
   });
-
+// 
   const handleInputs = ev => updateInputs(ev, setInputs);
+  // 
   const handleLogin = async () => {
     try {
+      console.log(inputs);
       let data  = await axios.post('/v1/users/auth/login', inputs);
-      localStorage.setItem('token', data.data.data.token);
-      let user = jwtDecode(data.data.data.token);
-      console.log(user);
-      dispatch(setLogIn());
-      dispatch(setUser(user));
-      console.log(data.cookie);
+      updateUser(data.data.data.token)
       history.goBack();
     } catch (error) {
       console.log(error);

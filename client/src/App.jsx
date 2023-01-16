@@ -7,7 +7,7 @@ import Store from 'pages/Store/Store';
 import { Route, Switch } from 'react-router-dom';
 import HomePage from 'pages/Home/HomePage';
 import ProductPage from 'pages/ProductPage/ProductPage';
-import NavBar from 'components/specific/NavBar/NavBar';
+import NavBar from './components/specific/NavBar/NavBar';
 import AboutUs from 'pages/AboutUs/AboutUs';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -29,17 +29,20 @@ import LoginGard from 'guards/LoginGard';
 import  { addArrProductToCart } from 'store/cart';
 import Wishlist from 'pages/Wishlist/Wishlist';
 import { addArrProductToWishlist } from 'store/wishlist';
+import useUpdateUserRedux from 'hooks/useUpdateUserRedux';
 
 const App = () => {
+  const updateUser=useUpdateUserRedux()
   const cart=useSelector(state=>state.cart.cart)
   const wishlist=useSelector(state=>state.wishlist.wishlist)
   const dispatch = useDispatch();
   const [animate, setAnimate] = useState(true);
   const loading = useSelector(state => state.loading.loading);
+  const loggedIn = useSelector(state => state.loggedIn.loggedIn);
 useEffect(()=>{
   setTimeout(() => {
     setAnimate(false);
-  }, 2500);//3000
+  }, 300);//3000
 },[])
 
 
@@ -51,13 +54,13 @@ useEffect(()=>{
   }, []);
   // cart and wishlist
   useEffect(() => {
-    if (localStorage.getItem('cart')) {
+    if (!loading&&!loggedIn&&localStorage.getItem('cart')) {
     dispatch(addArrProductToCart(JSON.parse(localStorage.getItem('cart'))))
     }
-    if (localStorage.getItem('wishlist')) {
-    dispatch(addArrProductToWishlist(JSON.parse(localStorage.getItem('wishlist'))))
+    if (!loading&&!loggedIn&&localStorage.getItem('wishlist')) {
+      dispatch(addArrProductToWishlist(JSON.parse(localStorage.getItem('wishlist'))))
     }
-  }, []);
+  }, [loading]);
 
   useEffect(() => {
     
@@ -68,8 +71,7 @@ useEffect(()=>{
         let token = localStorage.getItem('token');
         try {
           let user = await jwtDecode(token);
-          dispatch(setUser(user));
-          dispatch(setLogIn());
+         updateUser(token)
       
         } catch (error) {
           localStorage.removeItem('token');
