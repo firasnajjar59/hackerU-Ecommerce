@@ -109,7 +109,9 @@ const EditProduct = () => {
 
   return (
     <>
-    <MaterialIcon onclick={backward} title="arrow_back_ios" />
+    <Box classes="bg-secondary-ofwood back-btn mb-3">
+      <MaterialIcon onclick={backward} title="arrow_back_ios" />
+    </Box>
     <h2 className='mb-3'>Edit Product</h2>
     <Box classes={"mb-3 bg-secondary-ofwood"}>
       <h5>Prodact details</h5>

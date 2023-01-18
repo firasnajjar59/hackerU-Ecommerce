@@ -5,7 +5,7 @@ import Button from 'components/common/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import Box from 'components/common/Box/Box';
-import { addArrProductToWishlist, removeProuctFromWishlist } from 'store/wishlist';
+import { addArrProductToWishlist } from 'store/wishlist';
 import useUpdateUserRedux from 'hooks/useUpdateUserRedux';
 
 

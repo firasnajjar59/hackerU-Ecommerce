@@ -53,6 +53,7 @@ const usersSchema = new mongoose.Schema({
   ],
   wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: 'products' }],
   orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'orders' }],
+  orderToken:{type:String},
   role: {
     type: String,
     required: true,
@@ -90,7 +91,7 @@ usersSchema.pre('save', async function (next) {
   next();
 });
 usersSchema.pre(/^find/,function(next){
-  this.populate({path:'cart.product_id',select:'name imgs price'})
+  this.populate({path:'cart.product_id',select:'name description imgs price'})
   this.populate({path:'wishlist',select:'name imgs price'})
   next()
 })
@@ -133,6 +134,17 @@ usersSchema.methods.createPasswordResetToken = function () {
   // here we give the token an expire date and store it in the database
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
   // we return the password
+  return resetToken;
+};
+usersSchema.methods.createOrderToken = function () {
+  // build a random string by buildin crypto
+  const resetToken = crypto.randomBytes(32).toString('hex');
+  // we hash the random string we generate one step before and save it in database
+  this.orderToken = crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex');
+  // we return the token
   return resetToken;
 };
 

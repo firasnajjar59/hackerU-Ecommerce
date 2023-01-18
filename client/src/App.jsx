@@ -30,7 +30,8 @@ import  { addArrProductToCart } from 'store/cart';
 import Wishlist from 'pages/Wishlist/Wishlist';
 import { addArrProductToWishlist } from 'store/wishlist';
 import useUpdateUserRedux from 'hooks/useUpdateUserRedux';
-
+import { Helmet } from 'react-helmet';
+import PlaceOrder from 'pages/PlaceOrder/PlaceOrder';
 const App = () => {
   const updateUser=useUpdateUserRedux()
   const cart=useSelector(state=>state.cart.cart)
@@ -83,7 +84,11 @@ useEffect(()=>{
     })();
   }, []);
   return (
+    
     <div className='container-fluid App'>
+    <Helmet>
+    <script src="https://js.stripe.com/v3/"></script>
+    </Helmet>
       <LoadingAnimate
         imgClasses={animate||loading ? `img-fade-in` : `img-fade-out`}
         classes={animate||loading ? `fade-in` : `fade-out`}
@@ -145,6 +150,8 @@ useEffect(()=>{
           />
           <LoginGard path={`/profile`}
             component={Profile} />
+          <LoginGard path={`/order/:ordertoken`}
+            component={PlaceOrder} />
           {/* <Route
             path={`/profile`}
             component={Profile}

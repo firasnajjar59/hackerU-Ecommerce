@@ -15,7 +15,7 @@ const ContactUsPage = () => {
       <MainImg
         src={
           screenWidth > 600
-            ? '../../../assets/letsTalk/Happy women sitting and talking to each other.jpg'
+            ? '../../../assets/letsTalk/123.jpg'
             : '../../../assets/letsTalk/5625.jpg'
         }
         alt='contact us'

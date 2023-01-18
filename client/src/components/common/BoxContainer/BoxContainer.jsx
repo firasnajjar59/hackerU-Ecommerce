@@ -12,7 +12,7 @@ const BoxContainer = props => {
  
   return (
     <div
-      className='right'
+      className={`right ${props.classes}`}
       ref={borderColor}>
       <div className='filter-Wrapper'>
         {props.title && (

@@ -14,5 +14,5 @@ const wishlistSlice = createSlice({
   },
 });
 
-export const { addArrProductToWishlist,addProductToWishlist,removeProuctFromWishlist } = wishlistSlice.actions;
+export const { addArrProductToWishlist, } = wishlistSlice.actions;
 export default wishlistSlice.reducer;

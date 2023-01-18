@@ -10,9 +10,11 @@ import axios from 'axios';
 import Box from 'components/common/Box/Box';
 import useUpdateUserRedux from 'hooks/useUpdateUserRedux';
 import { addArrProductToCart } from 'store/cart';
-
+import { Helmet } from 'react-helmet';
+import { useHistory } from 'react-router-dom';
 const Cart = props => {
   document.title = `Cart | ofwood`;
+  const history=useHistory()
   const dispatch = useDispatch();
   const updateUser = useUpdateUserRedux();
   const loggedIn = useSelector(state => state.loggedIn.loggedIn);
@@ -89,8 +91,21 @@ const Cart = props => {
     }
   };
 
+  const handleCheckout= async ()=>{
+    try {
+      const {data}=await axios.get('/v1/order/checkout')
+      window.location.href=`${data.session.url}`;
+    
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div className='container m-auto'>
+       <Helmet>
+    <script src="https://js.stripe.com/v3/"></script>
+    </Helmet>
       <h1>Cart</h1>
       {cartProducts.length > 0 ? (
         <div
@@ -98,7 +113,7 @@ const Cart = props => {
           <div className='cart-check-out-wrapper'>
             <BoxContainer title='Check Out'>
               Total price: {price} $
-              <Button classes='primary-button'>Check Out</Button>
+              <Button onclick={handleCheckout} classes='primary-button'>Check Out</Button>
             </BoxContainer>
           </div>
           <div className='cart-products-list-wrapper'>

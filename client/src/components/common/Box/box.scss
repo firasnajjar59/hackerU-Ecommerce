@@ -6,3 +6,10 @@
     gap: var(--small-gap);
     border-radius: var(--medium-radius);
 }
+.back-btn{
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}

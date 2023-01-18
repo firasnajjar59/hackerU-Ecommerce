@@ -44,12 +44,12 @@ exports.getAllDocumants = Model =>
     });
   });
 exports.getAllDocumantsNOQuery = Model =>
-  catchAsync(async (req, res, next) => {
-    const doc=await Model.find( req.body)
-
-    if (!doc.length) {
-      return next(new AppError('document not found', 404));
-    }
+catchAsync(async (req, res, next) => {
+    const doc=await Model.find(req.body)
+if (!doc.length) {
+  return next(new AppError('document not found', 404));
+}
+console.log(doc);
 
     res.json({
       status: 'success',

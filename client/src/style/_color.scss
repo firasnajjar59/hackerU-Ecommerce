@@ -89,10 +89,16 @@
 // }
 
 .bg-primary-ofwood{
- background-color: var(--primary-color);   
+ background-color: var(--primary-color) !important;   
+}
+.color-primary-ofwood{
+  color: var(--primary-text);
 }
 .bg-secondary-ofwood{
- background-color: var(--secondary-back-ground);   
+  background-color: var(--secondary-back-ground);   
+}
+.color-secondary-ofwood{
+  color: var(--secondary-text);
 }
 .bg-primary-opacity{
  background-color: var(--primary-color-opacity);   
