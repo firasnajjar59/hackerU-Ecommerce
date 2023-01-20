@@ -3,7 +3,7 @@
 }
 .register-popup{
     position: fixed;
-    top: 50vh;
+    top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     z-index: 1001;
@@ -23,10 +23,10 @@
 
 @media screen and (max-width: 600px) {
     .register-popup{
-        left: 0;
-        top: 0;
-        transform: translate(0,0);
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
         width: 100vw;
-        height: 100vh;
+        min-height: 100vh;
     }
 }

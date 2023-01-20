@@ -7,28 +7,61 @@ import Button from 'components/common/Button/Button';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory, useRouteMatch } from 'react-router-dom';
+import SearchBar from 'components/specific/SearchBar/SearchBar';
+import updateInputs from 'functions/updateInputs';
+import Input from 'components/common/Input/Input';
+import DropMenu from 'components/common/Input/DropMenu';
+import { handleSearchBtn } from './orderPageFunctions';
+import sortFunction from 'functions/sortByDate';
 
+let ordersArr=[];
 const Order = () => {
-  const history = useHistory();
-  const {url}=useRouteMatch()
-  console.log(url);
+  document.title = `Orders | ofwood`;
 
+  const history = useHistory();
+  const {url}=useRouteMatch();
   const [orders, setOrders] = useState([]);
+  const [inputs, setInputs] = useState({
+    search:"",
+    status:"Search By Status",
+    paid:"",
+    createdAt:""
+  });
   useEffect(() => {
     (async () => {
       try {
         const { data } = await axios.get('/v1/order');
-        console.log(data);
-        setOrders(data.data.doc);
+        ordersArr=data.data.doc;
+        sortFunction(ordersArr,setOrders)
       } catch (error) {
         console.log(error);
       }
     })();
   }, []);
   useEffect(() => {
-    console.log(orders);
-  }, [orders]);
-
+    let copyCards=JSON.parse(JSON.stringify(ordersArr))
+    let regex=new RegExp(inputs.createdAt,"i")
+    copyCards=copyCards.filter(item=>regex.test(item.createdAt))
+    sortFunction(copyCards,setOrders)
+  }, [inputs.createdAt]);
+  useEffect(() => {
+      let copyCards=JSON.parse(JSON.stringify(ordersArr))
+    if(inputs.status!="Search By Status"){
+        let regex=new RegExp(inputs.status,"i")
+        copyCards=copyCards.filter(item=>regex.test(item.status))
+    }
+sortFunction(copyCards,setOrders)
+}, [inputs.status]);
+  useEffect(() => {
+    let copyCards=JSON.parse(JSON.stringify(ordersArr))
+    if(inputs.paid=="Yes"){
+        copyCards=copyCards.filter(item=>item.paid)
+    }else if(inputs.paid=="No"){
+        copyCards=copyCards.filter(item=>!item.paid)
+    }
+    sortFunction(copyCards,setOrders)
+  }, [inputs.paid]);
+  const handleInputs = ev => updateInputs(ev, setInputs);
   const handleMoreInfoBtn = id => () => {
     history.push(`${url}/${id}`)
   };
@@ -36,6 +69,20 @@ const Order = () => {
     <div>
       <h1>Orders</h1>
       <Box classes='bg-secondary-ofwood'>
+        <div className="row d-flex ">
+            <div className="col-sm-3 px-1 py-1">
+                <SearchBar classes="w-100" value={inputs.search} onclick={handleSearchBtn(inputs.search,ordersArr,setOrders)} onchange={handleInputs}/>
+            </div>
+            <div className="col-sm-3 px-1 py-1">
+                <DropMenu datalabel="status" classes="custmizeSelection" onchange={handleInputs} options={["Search By Status", "The order has been received and is being processed","The order has been sent","The order has arrived"]} value={inputs.status} />
+            </div>
+            <div className="col-sm-3 px-1 py-1">
+                <DropMenu datalabel="paid" classes="custmizeSelection"  onchange={handleInputs} options={["Search By paid", "Yes","No"]} value={inputs.paid} />
+            </div>
+            <div className="col-sm-3 px-1 py-1 d-flex gap-1">
+                <Input datalabel="createdAt" type="date" value={inputs.createdAt} onchange={handleInputs} />
+            </div>
+        </div>
         {orders.length > 0
           ? orders.map((order, indx) => (
               <BoxContainer

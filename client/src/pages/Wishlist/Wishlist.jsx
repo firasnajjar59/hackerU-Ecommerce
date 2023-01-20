@@ -10,7 +10,7 @@ import useUpdateUserRedux from 'hooks/useUpdateUserRedux';
 
 
 const Wishlist = props => {
-    document.title = `Cart | ofwood`;
+    document.title = `Wishlist | ofwood`;
     const dispatch=useDispatch()
     const wishlist=useSelector(state=>state.wishlist.wishlist)
     const loggedIn=useSelector(state=>state.loggedIn.loggedIn)
@@ -23,7 +23,6 @@ const Wishlist = props => {
         (async ()=>{
           try {
             const {data}=await axios.post("/v1/products/cart",{_id:wishlist})
-            console.log(data);
               setwishlistProduct(data.data.doc)
             } catch (error) {
               console.log(error);
@@ -39,11 +38,7 @@ const Wishlist = props => {
       if(loggedIn){
         setwishlistProduct(wishlist)
       }
-        console.log(wishlist);
     },[wishlist])
-    useEffect(()=>{
-       console.log(wishlistProducts);
-    },[wishlistProducts])
 
    const handleDeleteProduct=(indx)=>()=>{
     if(loggedIn){

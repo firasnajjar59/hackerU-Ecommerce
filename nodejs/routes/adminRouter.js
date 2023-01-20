@@ -6,6 +6,7 @@ const adminController = require('../controller/adminController');
 const protect = require('../middlewares/protect');
 const permissionTo = require('../middlewares/permissionTo');
 const webContentRouter = require('./webContentRouter');
+const gallaryRouter = require('./gallaryRouter');
 const catchAsync = require('../services/catchAsync');
 const generateToken = require('../middlewares/generateToken');
 const AppError = require('../utils/appError');
@@ -14,6 +15,7 @@ router.use(protect);
 router.use(permissionTo('admin'));
 //* nested route api/v1/users/admin/webcontent
 router.use('/webcontent', webContentRouter);
+
 
 /*
  * api/v1/users/admin

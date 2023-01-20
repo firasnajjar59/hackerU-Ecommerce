@@ -20,8 +20,9 @@ const handleValidatorError = err => {
 // * handle duplicated field in mongo
 const handleDuplicateField = err => {
   const message = `Duplicaute field value ${JSON.stringify(
-    err.keyValue
+    Object.keys(err.keyValue)[0]
   ).replaceAll('"', '')}`;
+  console.log(message);
   return new AppError(message, 400);
 };
 // * handling Errors for development Envirment
@@ -42,6 +43,7 @@ const sendErrorProd = (err, res) => {
    */
   if (err.isOperational) {
     // send the error
+    // console.log(err);
     res.status(err.statusCode).json({
       status: err.status,
       message: err.message,
@@ -72,14 +74,14 @@ module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || 'error';
   if (process.env.NODE_ENV === 'production') {
-    let error = JSON.parse(JSON.stringify(err));
-    console.log(error);
-    if (error.name === 'CastError') error = handleCastError(error);
-    if (error.code === 11000) error = handleDuplicateField(error);
-    if (error.name === 'ValidationError') error = handleValidatorError(error);
-    if (error.name === 'JsonWebTokenError') error = handleJsonWebTokenError();
-    if (error.name === 'TokenExpiredError') error = handleTokenExpiredError();
-    sendErrorProd(error, res);
+
+    console.log("78",err);
+    if (err.name === 'CastError') err = handleCastError(err);
+    if (err.code === 11000) err = handleDuplicateField(err);
+    if (err.name === 'ValidationError') err = handleValidatorError(err);
+    if (err.name === 'JsonWebTokenError') err = handleJsonWebTokenError();
+    if (err.name === 'TokenExpiredError') err = handleTokenExpiredError();
+    sendErrorProd(err, res);
   } else if (process.env.NODE_ENV === 'development') {
     sendErrorDev(err, res);
   }

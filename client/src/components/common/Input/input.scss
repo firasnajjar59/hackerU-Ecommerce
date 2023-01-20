@@ -12,6 +12,16 @@
         border: var(--medium-border) solid var(--primary-color);
     }
 }
+.input[type="date"]::-webkit-calendar-picker-indicator{
+    color: var(--primary-color);
+    background-color: var(--primary-color);
+    padding: var(--small-padding);
+    border-radius: 50%;
+}
+.input[type="date"]::-webkit-calendar-picker-indicator:hover{
+    color: transparent;
+    background-color: var(--primary-color-opacity);
+}
 .border-right-none{
     border-top-left-radius: var(--small-radius);
     border-bottom-left-radius: var(--small-radius);

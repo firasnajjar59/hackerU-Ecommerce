@@ -69,9 +69,9 @@ const handleApplyBtn=async()=>{
                 <Box classes="bg-primary-opacity">
                     <div className="row d-flex align-items-center">
                         <div className="col-sm-2 px-2 py-1">Status:</div>
-                        <div className="col-sm-4 px-2 py-1"><DropMenu options={['The order has been received and is being processed', 'The order has been sent', 'The order has arrived']} datalabel="status" onchange={handleInputs} value={inputs.status} /></div>
+                        <div className="col-sm-4 px-2 py-1"><DropMenu classes="custmizeSelection" options={['The order has been received and is being processed', 'The order has been sent', 'The order has arrived']} datalabel="status" onchange={handleInputs} value={inputs.status} /></div>
                         <div className="col-sm-1 px-2 py-1">Paid:</div>
-                        <div className="col-sm-3 px-2 py-1"><DropMenu options={['No','Yes']} value={inputs.paid?"Yes":"No"} datalabel="paid" onchange={handleSelect}/></div>
+                        <div className="col-sm-3 px-2 py-1"><DropMenu classes="custmizeSelection" options={['No','Yes']} value={inputs.paid?"Yes":"No"} datalabel="paid" onchange={handleSelect}/></div>
                         <div className="col-sm-2 px-2 py-1"><Button onclick={handleApplyBtn} classes="primary-button">Apply</Button></div>
                     </div>
                 </Box>

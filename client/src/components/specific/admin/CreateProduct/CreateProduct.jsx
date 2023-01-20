@@ -1,6 +1,6 @@
 /** @format */
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './createProduct.scss';
 import Input from 'components/common/Input/Input';
 import DropMenu from 'components/common/Input/DropMenu';
@@ -13,6 +13,8 @@ import UploadMultiImgs from 'components/common/UploadMultiImgs/UploadMultiImgs';
 import Box from 'components/common/Box/Box';
 
 const CreateProduct = () => {
+  document.title = `Create Product | ofwood`;
+
   const [imgs,setImgs]=useState([])
   const [imgsName,setImgsName]=useState([])
   const [inputs, setInputs] = useState({

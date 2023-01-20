@@ -15,9 +15,7 @@ import { setScreenSize } from 'store/screenSize';
 import GalleryPage from 'pages/Gallery/GalleryPage';
 import ContactUsPage from 'pages/ContactUs/ContactUsPage';
 import Cart from 'pages/Cart/Cart';
-import { setLogIn } from 'store/loggedIn';
 import jwtDecode from 'jwt-decode';
-import { setUser } from 'store/loggedUser';
 import LoginPopUp from 'components/specific/LoginPop/LoginPopUp';
 import RegisterPopup from 'components/specific/RegisterPopup/RegisterPopup';
 import HumburgerMenu from 'components/specific/HumburgerMenu/HumburgerMenu';
@@ -64,9 +62,6 @@ useEffect(()=>{
   }, [loading]);
 
   useEffect(() => {
-    
-  }, [cart,wishlist]);
-  useEffect(() => {
     (async () => {
       if (localStorage.getItem('token')) {
         let token = localStorage.getItem('token');
@@ -86,9 +81,6 @@ useEffect(()=>{
   return (
     
     <div className='container-fluid App'>
-    <Helmet>
-    <script src="https://js.stripe.com/v3/"></script>
-    </Helmet>
       <LoadingAnimate
         imgClasses={animate||loading ? `img-fade-in` : `img-fade-out`}
         classes={animate||loading ? `fade-in` : `fade-out`}

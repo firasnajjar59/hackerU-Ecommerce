@@ -6,12 +6,19 @@ const { createHash } = require('../config/bcrypt');
 const crypto = require('crypto');
 
 const usersSchema = new mongoose.Schema({
-  name: { type: String, required: [true, 'Please enter your name'] },
+  name: {
+    type: String,
+    required: [true, 'Please enter your name'],
+    min: [2, 'Name should contain minimum 2 letters'],
+    max:[50,'Name can contain maximum 50 letters']
+  },
   email: {
     type: String,
     required: [true, 'Please provide your email'],
     unique: true,
     lowercase: true,
+    min: [6, 'E-mail should contain minimum 6 letters'],
+    max:[1024,'Email can contain maximum 1024 letters'],
     validate: [validator.isEmail, 'Please provide a valid e-mail'],
   },
   userImg: { type: String, default: 'default.jpg' },
@@ -19,7 +26,8 @@ const usersSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please provide a password'],
     select: false,
-    minlength: 8,
+    min: [8,"Password must contain minimum 8 letters"],
+    max:[20,'Password can contain maximum 20 letters'],
   },
   passwordConfirm: {
     type: String,
@@ -48,12 +56,12 @@ const usersSchema = new mongoose.Schema({
       ],
       quantity: { type: Number },
       price: { type: Number },
-      note:{type:String}
+      note: { type: String },
     },
   ],
   wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: 'products' }],
   orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'orders' }],
-  orderToken:{type:String},
+  orderToken: { type: String },
   role: {
     type: String,
     required: true,
@@ -90,11 +98,14 @@ usersSchema.pre('save', async function (next) {
   // at the end we call the next function to pass to the next middleware
   next();
 });
-usersSchema.pre(/^find/,function(next){
-  this.populate({path:'cart.product_id',select:'name description imgs price'})
-  this.populate({path:'wishlist',select:'name imgs price'})
-  next()
-})
+usersSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'cart.product_id',
+    select: 'name description imgs price',
+  });
+  this.populate({ path: 'wishlist', select: 'name imgs price' });
+  next();
+});
 // save when the password changed
 usersSchema.pre('save', function (next) {
   if (!this.isModified('password') || this.isNew) return next();

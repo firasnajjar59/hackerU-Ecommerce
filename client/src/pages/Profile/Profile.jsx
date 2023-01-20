@@ -20,6 +20,7 @@ import ContributorGard from 'guards/ContributorGard'
 import MyOrders from 'pages/MyOrders/MyOrders'
 import Order from 'components/specific/admin/Order/Order'
 import OneOrder from 'components/specific/admin/OneOrder/OneOrder'
+import WebContent from 'pages/WebContent/WebContent'
 
 
 const Profile = () => {
@@ -52,6 +53,7 @@ const Profile = () => {
                                 <Li classes="menu-list-item"><NavBarLink classes="nav" onclick={()=>{setDisplayMenu(false)}} path={`${url}/products`} label="Products"/></Li>
                                 <Li classes="menu-list-item"><NavBarLink classes="nav" onclick={()=>{setDisplayMenu(false)}} path={`${url}/createproducts`} label="Add Products"/></Li>
                                 <Li classes="menu-list-item"><NavBarLink classes="nav" onclick={()=>{setDisplayMenu(false)}} path={`${url}/orders`} label="Orders"/></Li>
+                                <Li classes="menu-list-item"><NavBarLink classes="nav" onclick={()=>{setDisplayMenu(false)}} path={`${url}/webcontent`} label="Web content"/></Li>
                             </>:""
                             }
                             {user.role=="contributor"?
@@ -59,6 +61,7 @@ const Profile = () => {
                                 <Li classes="menu-list-item"><NavBarLink classes="nav" onclick={()=>{setDisplayMenu(false)}} path={`${url}/products`} label="Products"/></Li>
                                 <Li classes="menu-list-item"><NavBarLink classes="nav" onclick={()=>{setDisplayMenu(false)}} path={`${url}/orders`} label="Orders"/></Li>
                                 <Li classes="menu-list-item"><NavBarLink classes="nav" onclick={()=>{setDisplayMenu(false)}} path={`${url}/orders`} label="Orders"/></Li>
+                                <Li classes="menu-list-item"><NavBarLink classes="nav" onclick={()=>{setDisplayMenu(false)}} path={`${url}/webcontent`} label="Web content"/></Li>
                             </>:""
                             }
                             <Li classes="menu-list-item"><NavBarLink classes="nav" onclick={()=>{setDisplayMenu(false)}} path={`${url}/myorders`} label="My orders"/></Li>
@@ -70,6 +73,7 @@ const Profile = () => {
                 <div className="profile-right bg-primary-opacity">
                     <Route path={`${path}`} exact component={ChangeInfo} />
                     <Route path={`${path}/orders`} exact component={Order} />
+                    <Route path={`${path}/webcontent`} exact component={WebContent} />
                     <Route path={`${path}/orders/:order_id`} component={OneOrder} />
                     <Route path={`${path}/myorders`} component={MyOrders} />
                     <Route path={`${path}/whishlist`} component={ChangePassword} />

@@ -1,0 +1,15 @@
+.custmizeSelection {
+    background-color: var(--secondary-back-ground);
+    color: var(--primary-color);
+    appearance: none;
+    font-size: inherit;
+    font-family: inherit;
+    cursor: pointer;
+    border-radius: var(--medium-radius);
+    padding: var(--small-padding) !important;
+    width: 100%;
+    border: var(--small-border) solid var(--border-color);
+    outline: none;
+
+   
+  }

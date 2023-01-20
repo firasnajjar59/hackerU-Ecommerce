@@ -5,7 +5,9 @@ const mongoose = require('mongoose');
 const webContentSchema = new mongoose.Schema(
   {
     name: { type: String, required:[true,"Please give a name for this content. must be unique"],unique:true, trim:true },
-    content: { type: String,required:[true,"Please provide a content"] },
+    content: { type: String },
+    imgs: [ String ],
+    img: { type: String },
   },
   {
     toJSON: { virtuals: true },

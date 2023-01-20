@@ -1,4 +1,4 @@
-import { useHistory, useLocation, useRouteMatch } from 'react-router-dom'
+import { useHistory, useLocation, useParams, useRouteMatch } from 'react-router-dom'
 import './editProduct.scss'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
@@ -14,7 +14,8 @@ import MaterialIcon from 'components/common/MaterialIcon/MaterialIcon'
 
 
 const EditProduct = () => {
-
+  const {slug}=useParams()
+  document.title = `Edit ${slug.split("-").join(" ").toUpperCase()} | ofwood`;
     const {url,path}=useRouteMatch()
     const history=useHistory()
     // 

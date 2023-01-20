@@ -21,6 +21,9 @@ const login = catchAsync(async (req, res, next) => {
   if (!user) {
     return next(new AppError('Invalid email or password', 401));
   }
+  if (!user.activeUser) {
+    return next(new AppError('Invalid email or password', 401));
+  }
   // check if the password is the same for user in database
   const isEquel = await compareHash(password, user.password);
   if (!isEquel) {

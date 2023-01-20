@@ -45,6 +45,7 @@ exports.getAllDocumants = Model =>
   });
 exports.getAllDocumantsNOQuery = Model =>
 catchAsync(async (req, res, next) => {
+  
     const doc=await Model.find(req.body)
 if (!doc.length) {
   return next(new AppError('document not found', 404));

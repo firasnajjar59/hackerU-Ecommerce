@@ -36,7 +36,7 @@ const EditUser = (props) => {
           datalabel='role'
           value={inputs.role}
           onchange={handleInputs}
-          classes='p-1 my-2'
+          classes='custmizeSelection p-1 my-2'
           options={['admin', 'contributor', 'user']}
           />
           <p>Active User</p>
@@ -44,7 +44,7 @@ const EditUser = (props) => {
           datalabel='activeUser'
           value={inputs.activeUser}
           onchange={handleInputs}
-          classes='p-1 my-2'
+          classes='custmizeSelection p-1 my-2'
           options={['true', 'false']}
         />
         <Button onclick={handleAppleButton} classes="primary-button">Apply</Button>

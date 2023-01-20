@@ -10,8 +10,7 @@ import axios from 'axios';
 import Box from 'components/common/Box/Box';
 import useUpdateUserRedux from 'hooks/useUpdateUserRedux';
 import { addArrProductToCart } from 'store/cart';
-import { Helmet } from 'react-helmet';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 const Cart = props => {
   document.title = `Cart | ofwood`;
   const history=useHistory()
@@ -103,9 +102,6 @@ const Cart = props => {
 
   return (
     <div className='container m-auto'>
-       <Helmet>
-    <script src="https://js.stripe.com/v3/"></script>
-    </Helmet>
       <h1>Cart</h1>
       {cartProducts.length > 0 ? (
         <div
@@ -113,7 +109,10 @@ const Cart = props => {
           <div className='cart-check-out-wrapper'>
             <BoxContainer title='Check Out'>
               Total price: {price} $
-              <Button onclick={handleCheckout} classes='primary-button'>Check Out</Button>
+              <Button onclick={loggedIn?handleCheckout:()=>{history.push("/signin")}} classes='primary-button'>{loggedIn?"Check Out":"Login for Checkout"}</Button>
+              {loggedIn?"":<div className='d-flex justify-content-center'>
+                <Link to="register">Or create new Account</Link>
+              </div>}
             </BoxContainer>
           </div>
           <div className='cart-products-list-wrapper'>

@@ -7,6 +7,8 @@ import EditUser from './EditUser/EditUser'
 
 
 const UserList = () => {
+  document.title = `Users | ofwood`;
+
     const [usersArr,setUsersArr]=useState()
     useEffect(()=>{
         (async ()=>{

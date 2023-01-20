@@ -6,6 +6,7 @@ class AppError extends Error{
         // * in the super we pass the message to the Error class
         super(message),
         // * and know we add more keys for our Error object
+        this.message=message
         this.statusCode=statusCode
         this.status=`${statusCode}`.startsWith('4')?"fail":"error"
         this.isOperational=true;

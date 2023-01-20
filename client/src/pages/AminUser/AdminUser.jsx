@@ -10,7 +10,6 @@ const AdminUser = () => {
   return (
     <Box classes={"bg-secondary-ofwood"}>
     <Route path={`${path}`} exact component={UserList} />
-    {/* <Route path={`${path}/:slug`} component={EditProduct} /> */}
 </Box>
   )
 }

@@ -25,28 +25,30 @@ const multerFilter = (req, file, cb) => {
 
 
 
-const resizePhoto = catchAsync(async (req, res, next) => {
+const resizePhoto = (name)=>catchAsync(async (req, res, next) => {
+  console.log("resize1");
   if (!req.file) return next();
-  req.file.filename = `user-${req.doc._id}-${Date.now()}.jpeg`;
+  console.log("resize12");
+  req.file.filename = `${name}-${req.doc._id}-${Date.now()}.png`;
   await sharp(req.file.buffer)
-    .resize(500, 500)
-    .toFormat('jpeg')
-    .jpeg({ quality: 90 })
-    .toFile(`public/images/users/${req.file.filename}`);
+    .resize(500, 500,{fit:"contain",background: { r: 255, g: 255, b: 255, alpha: 0 }})
+    .toFormat('png')
+    .png({ quality: 90 })
+    .toFile(`public/images/${name}/${req.file.filename}`);
   next();
 });
 
 
-const resizeMultiPhotos = catchAsync(async (req, res, next) => {
+const resizeMultiPhotos =(name)=> catchAsync(async (req, res, next) => {
   if (!req.files.length>0) return next();
   req.body.imgs=[]
   await Promise.all(req.files.map(async (file,i)=>{
-    const filename = `user-${req.doc._id}-${Date.now()}-${i+1}.jpeg`;
+    const filename = `${name}-${req.doc._id}-${Date.now()}-${i+1}.png`;
     await sharp(file.buffer)
-      .resize(500, 500)
-      .toFormat('jpeg')
-      .jpeg({ quality: 90 })
-      .toFile(`public/images/products/${filename}`);
+      .resize(500, 500,{fit:"contain",background: { r: 255, g: 255, b: 255, alpha: 0 }})
+      .toFormat('png')
+      .png({ quality: 90 })
+      .toFile(`public/images/${name}/${filename}`);
       req.body.imgs.push(filename)
     }))
   next();

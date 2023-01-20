@@ -8,6 +8,7 @@ const filterObj = require('../utils/checkIfObjHaveKeys');
 const { upload } = require('../middlewares/multer');
 
 const uploadUserPhoto = upload.single('photo');
+
 const getAllUsers = functionsFactory.getAllDocumants(Users);
 const getUserById = functionsFactory.getDocumantByID(Users);
 

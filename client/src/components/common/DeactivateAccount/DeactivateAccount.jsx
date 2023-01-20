@@ -16,6 +16,7 @@ const DeactivateAccount = () => {
     const handleDeactivateAccount=async()=>{
         try {
             let {data}=await axios.delete("/v1/users/deleteme")
+            console.log(data);
             localStorage.removeItem("token")
             dispatch(setLogOut())
             dispatch(removeUser())

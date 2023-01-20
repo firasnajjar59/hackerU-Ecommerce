@@ -30,7 +30,7 @@ router
 router
   .route('/:id')
   .get(productController.getProductByID)
-  .patch(protect, permissionTo('admin', 'contributor'),productController.uploadProductPhotos,resizeMultiPhotos,productController.handleOptionsInReq, productController.updateProduct)
+  .patch(protect, permissionTo('admin', 'contributor'),productController.uploadProductPhotos,resizeMultiPhotos("products"),productController.handleOptionsInReq, productController.updateProduct)
   .delete(
     protect,
     permissionTo('admin', 'contributor'),

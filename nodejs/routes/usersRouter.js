@@ -28,7 +28,7 @@ router.route('/:id').get(userController.getUserById);
 router.patch(
   '/updateme',
   userController.uploadUserPhoto,
-  resizePhoto,
+  resizePhoto("users"),
   userController.updateMe,
   generateToken
 );
