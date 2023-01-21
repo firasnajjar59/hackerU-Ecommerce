@@ -10,7 +10,6 @@ const functionsFactory = require('../services/functionsFactory');
 const getCheckoutSession = catchAsync(async (req,res,next)=>{
     const orderToken=req.doc.createOrderToken()
     await req.doc.save()
-    console.log(orderToken);
     // get product
     const orders=req.doc.cart
     const products=orders.map(product=>{
@@ -30,7 +29,7 @@ const getCheckoutSession = catchAsync(async (req,res,next)=>{
 // creat session
     const session= await stripe.checkout.sessions.create({
         payment_method_types:["card"],
-        success_url:`${process.env.REACT_APP_URL}/order/${orderToken}`,
+        success_url:`http://localhost:3000/order/${orderToken}`,
         cancel_url:`${process.env.REACT_APP_URL}/cart`,
         customer_email:req.doc.email,
         mode: 'payment',
@@ -57,7 +56,6 @@ const placeOrder=catchAsync(async(req,res,next)=>{
         user_id:req.doc._id,
     }
     const createdOrder=await Orders.create(order)
-    console.log(createdOrder);
     // delete order token
     req.doc.orderToken=undefined
     // delete cart from user
@@ -67,8 +65,6 @@ const placeOrder=catchAsync(async(req,res,next)=>{
 
     // next middleware to generate new token
     next()
-    console.log(req.doc.cart);
-    console.log(req.params.ordertoken);
 })
 // 
 const getMyOrders=functionsFactory.getAllDocumantsNOQuery(Orders)

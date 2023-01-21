@@ -8,6 +8,10 @@ import DisplayOrder from 'components/specific/DisplayOrder/DisplayOrder';
 import Button from 'components/common/Button/Button';
 import DropMenu from 'components/common/Input/DropMenu';
 import updateInputs from 'functions/updateInputs';
+import TextArea from 'components/common/Input/TextArea';
+import Input from 'components/common/Input/Input';
+import ExpandSection from 'components/common/ExpandSection/ExpandSection';
+import SendEmail from 'components/common/SendEmail/SendEmail';
 
 const OneOrder = () => {
 const history=useHistory()
@@ -30,6 +34,7 @@ useEffect(()=>{
                         ...prev
                     }
                 })
+                console.log(data)
             } catch (error) {
                 console.log(error);
             }
@@ -57,13 +62,13 @@ const handleApplyBtn=async()=>{
 
     const backward = () => history.goBack();
   return (
-    <div className="">
+    <div className="d-flex flex-column gap-2">
         <Box onclick={backward} classes="bg-secondary-ofwood back-btn mb-3">
             <MaterialIcon  title="arrow_back_ios" />
         </Box>
         {order&&
         <>
-            <h3>{order.id}</h3>
+            <h3>{order.user_id.email}</h3>
             <Box classes="bg-secondary-ofwood">
             <DisplayOrder order={order}>
                 <Box classes="bg-primary-opacity">
@@ -76,6 +81,11 @@ const handleApplyBtn=async()=>{
                     </div>
                 </Box>
             </DisplayOrder>
+            </Box>
+            <Box classes="bg-secondary-ofwood" >
+            <ExpandSection title="Send a message to the buyer" >
+                <SendEmail id={order._id} email={order.user_id.email} />
+            </ExpandSection>
             </Box>
         </>
             }

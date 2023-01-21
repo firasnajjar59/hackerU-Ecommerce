@@ -159,10 +159,6 @@ useEffect(()=>{
             component={Profile} />
           <LoginGard path={`/order/:ordertoken`}
             component={PlaceOrder} />
-          {/* <Route
-            path={`/profile`}
-            component={Profile}
-          /> */}
         </Switch>}
       </Body>
     </div>

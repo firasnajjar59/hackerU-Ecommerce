@@ -1,0 +1,59 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body id="body" style="text-align: center; display: flex; justify-content: center; align-items: center; width: 100%; min-height: 40rem; position: relative;">
+    <canvas style="z-index: -1;position: absolute;" id="canvas"></canvas>
+    <div style="margin: auto; width: 50%; min-height: 30rem; border: 3px solid #2a7c6f; padding: 3rem; box-sizing: border-box; background-color: #f9f9f9;" class="wrapper">
+        <h1 style="color:#2a7c6f;">req.body.subject</h1>
+        <p style="color: #2a7c6f; font-size: 1.3rem;">req.body.message</p>
+    </div>
+    <script>
+        const body=document.getElementById("body");
+        const canvas=document.getElementById("canvas");
+        console.dir(body);
+        canvas.height=body.clientHeight
+        canvas.width=body.clientWidth
+        const ctx = canvas.getContext('2d');
+        console.dir(canvas);
+        ctx.beginPath();
+        ctx.lineWidth ;
+        ctx.fillStyle="#ffa384";
+        ctx.arc(canvas.width-canvas.width/10,canvas.height/4 ,100,0,2*Math.PI);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.lineWidth ;
+        ctx.fillStyle="#2a7c6f";
+        ctx.arc(canvas.width/6,canvas.height/5 ,100,0,2*Math.PI);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.lineWidth=10 ;
+        ctx.strokeStyle="#2a7c6f";
+        ctx.arc(canvas.width-canvas.width/5,canvas.height-canvas.height/9 ,50,0,2*Math.PI);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.lineWidth=5 ;
+        ctx.strokeStyle="#ffa384";
+        ctx.moveTo(canvas.width/19,canvas.height-canvas.height/2)
+        ctx.lineTo(canvas.width/1.5,canvas.height-canvas.height/10);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.lineWidth=2 ;
+        ctx.strokeStyle="#2a7c6f";
+        ctx.moveTo(canvas.width/19,canvas.height-canvas.height/4)
+        ctx.lineTo(canvas.width/1.5,canvas.height-canvas.height/1);
+        ctx.stroke();
+
+    </script>
+  </body>
+</html>
