@@ -6,7 +6,7 @@
     img{
         width: 10rem;
         aspect-ratio: 4/2;
-            object-fit: contain;
+            object-fit: cover;
     }
 }
 
@@ -15,7 +15,7 @@
         img{
             width: 7rem;
             aspect-ratio: 4/2;
-            object-fit: contain;
+            object-fit: cover;
         }
     }
 }

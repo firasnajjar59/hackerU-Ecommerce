@@ -28,12 +28,11 @@ import  { addArrProductToCart } from 'store/cart';
 import Wishlist from 'pages/Wishlist/Wishlist';
 import { addArrProductToWishlist } from 'store/wishlist';
 import useUpdateUserRedux from 'hooks/useUpdateUserRedux';
-import { Helmet } from 'react-helmet';
 import PlaceOrder from 'pages/PlaceOrder/PlaceOrder';
+import axios from 'axios';
+import { setLogoImg } from 'store/logo';
 const App = () => {
   const updateUser=useUpdateUserRedux()
-  const cart=useSelector(state=>state.cart.cart)
-  const wishlist=useSelector(state=>state.wishlist.wishlist)
   const dispatch = useDispatch();
   const [animate, setAnimate] = useState(true);
   const loading = useSelector(state => state.loading.loading);
@@ -41,7 +40,7 @@ const App = () => {
 useEffect(()=>{
   setTimeout(() => {
     setAnimate(false);
-  }, 300);//3000
+  },3000);//3000
 },[])
 
 
@@ -78,6 +77,22 @@ useEffect(()=>{
         dispatch(doneLoading())
     })();
   }, []);
+  useEffect(()=>{
+    (async()=>{
+      try {
+        const light=await axios.get('/v1/users/admin/webcontent/lightlogo')
+        const dark=await axios.get('/v1/users/admin/webcontent/darklogo')
+        console.log(light);
+       dispatch(setLogoImg({
+        dark:dark.data.data.doc[0].img,
+        light:light.data.data.doc[0].img,
+      }))
+        console.log(dark);
+      } catch (error) {
+        console.log(error);
+      }
+    })()
+  },[])
   return (
     
     <div className='container-fluid App'>

@@ -10,6 +10,7 @@ import CategorySection from 'components/common/CategoryRound/CategorySection';
 import categoryArr from 'data/category';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import SubscribeSection from 'components/specific/SubscribeSection/SubscribeSection';
 const HomePage = () => {
   const [productArr,setProudactArr]= useState([])
   document.title = 'HomePage | ofwood';
@@ -31,11 +32,12 @@ const HomePage = () => {
 
 
      <CategorySection options={categoryArr}/>
+     <SubscribeSection/>
       <MainImg
         alt='Main img'
         src='https://static.wixstatic.com/media/1d63b2_6c40dcff0d9947138f630628db17f25b~mv2.jpg/v1/fill/w_1440,h_393,al_c,q_85,enc_auto/1d63b2_6c40dcff0d9947138f630628db17f25b~mv2.jpg'
       />
-      <div className='container-fluid bg-primary-opacity'>
+      <div className='bg-primary-opacity'>
         <OurCustemersCarusel>
           {custemersArr.map((item,indx) => (
             <RoundedImg key={indx} src={item} />

@@ -30,8 +30,8 @@ const getCheckoutSession = catchAsync(async (req,res,next)=>{
 // creat session
     const session= await stripe.checkout.sessions.create({
         payment_method_types:["card"],
-        success_url:`${req.protocol}://localhost:3000/order/${orderToken}`,
-        cancel_url:`${req.protocol}://localhost:3000/cart`,
+        success_url:`${process.env.REACT_APP_URL}/order/${orderToken}`,
+        cancel_url:`${process.env.REACT_APP_URL}/cart`,
         customer_email:req.doc.email,
         mode: 'payment',
         line_items:products

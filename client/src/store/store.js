@@ -9,6 +9,7 @@ import loggedUserReducer from './loggedUser';
 import loadingReducer from './loading';
 import cartReducer from './cart';
 import wishlistReducer from './wishlist';
+import logoReducer from './logo';
 
 const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ const store = configureStore({
     loading: loadingReducer,
     cart: cartReducer,
     wishlist: wishlistReducer,
+    logo: logoReducer,
   },
 });
 export default store;

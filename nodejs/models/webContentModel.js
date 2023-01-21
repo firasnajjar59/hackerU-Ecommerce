@@ -6,6 +6,7 @@ const webContentSchema = new mongoose.Schema(
   {
     name: { type: String, required:[true,"Please give a name for this content. must be unique"],unique:true, trim:true },
     content: { type: String },
+    contents: [{title:{type: String},content:{type: String} }],
     imgs: [ String ],
     img: { type: String },
   },

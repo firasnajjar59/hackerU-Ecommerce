@@ -11,10 +11,10 @@ const catchAsync = require('../services/catchAsync');
 const generateToken = require('../middlewares/generateToken');
 const AppError = require('../utils/appError');
 // middlewares
+router.use('/webcontent', webContentRouter);
 router.use(protect);
 router.use(permissionTo('admin'));
 //* nested route api/v1/users/admin/webcontent
-router.use('/webcontent', webContentRouter);
 
 
 /*

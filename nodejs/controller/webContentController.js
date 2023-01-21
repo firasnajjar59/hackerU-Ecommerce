@@ -20,12 +20,15 @@ const createContent = catchAsync(async (req, res, next) => {
   res.status(201).json({ status: 'success', data: content });
 });
 const editContent = catchAsync(async (req, res, next) => {
+  
   let content = await WebContent.findOne({ name: req.body.name });
+  console.log(content);
   if (!content)
     return next(new AppError('No content belong this name found.', 404));
-  if (req.body.img) content.img = req.body.img;
+  if (req.file) content.img = req.file.filename;
   if (req.body.imgs) content.imgs = req.body.imgs;
   if (req.body.content) content.content = req.body.content;
+  if (req.body.contents) content.contents = req.body.contents;
   content.save();
   res.status(200).json({ status: 'success', data: content });
 });

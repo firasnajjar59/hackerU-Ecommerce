@@ -26,9 +26,8 @@ const multerFilter = (req, file, cb) => {
 
 
 const resizePhoto = (name)=>catchAsync(async (req, res, next) => {
-  console.log("resize1");
   if (!req.file) return next();
-  console.log("resize12");
+  
   req.file.filename = `${name}-${req.doc._id}-${Date.now()}.png`;
   await sharp(req.file.buffer)
     .resize(500, 500,{fit:"contain",background: { r: 255, g: 255, b: 255, alpha: 0 }})

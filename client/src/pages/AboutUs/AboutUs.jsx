@@ -5,6 +5,7 @@ import './aboutUs.scss';
 import { useSelector } from 'react-redux';
 import Circles from 'models/CanvasClasses/Circles';
 import Line from 'models/CanvasClasses/Line';
+import { AboutUsContent } from './AboutUsContent';
 const AboutUs = () => {
   document.title = `About Us | ofwood`;
   const screenWidth=useSelector(state=>state.screenSize.screenWidth)
@@ -53,18 +54,7 @@ const AboutUs = () => {
         <div className='content'>
           <h1>ABOUT US</h1>
           <div className="content-wrapper">
-            <div className="">
-              <h4>Who We Are</h4>
-              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum molestias vitae ipsa aspernatur fugit! Qui, non! Voluptas hic optio iusto voluptatibus. Itaque accusamus eum soluta aliquid dolor cupiditate, nulla doloribus. Similique beatae ut nulla! Sequi exercitationem illum magnam consequatur fuga.</p>  
-            </div>
-            <div className="">
-              <h4>Our Services</h4>
-              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum molestias vitae ipsa aspernatur fugit! Qui, non! Voluptas hic optio iusto voluptatibus. Itaque accusamus eum soluta aliquid dolor cupiditate, nulla doloribus. Similique beatae ut nulla! Sequi exercitationem illum magnam consequatur fuga.</p>  
-            </div>
-            <div className="">
-              <h4>Our Customers</h4>
-              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum molestias vitae ipsa aspernatur fugit! Qui, non! Voluptas hic optio iusto voluptatibus. Itaque accusamus eum soluta aliquid dolor cupiditate, nulla doloribus. Similique beatae ut nulla! Sequi exercitationem illum magnam consequatur fuga.</p>  
-            </div>
+           <AboutUsContent/>
           </div>
         </div>
       </div>

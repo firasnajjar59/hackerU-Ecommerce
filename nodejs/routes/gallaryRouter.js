@@ -11,5 +11,5 @@ router
   .route('/')
   .get(
     gallaryController.getImgs
-  ).post(protect,permissionTo("admin") ,gallaryController.uploadGallaryImg,resizePhoto("gallary"),gallaryController.createImg);
+  ).post(protect,permissionTo("admin", 'contributor') ,gallaryController.uploadGallaryImg,resizePhoto("gallary"),gallaryController.createImg);
   module.exports = router;
