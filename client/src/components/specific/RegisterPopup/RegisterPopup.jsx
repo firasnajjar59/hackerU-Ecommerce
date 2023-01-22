@@ -11,9 +11,16 @@ import axios from 'axios';
 import validate from 'validations/validate';
 import registerSchema from 'validations/registerSchema';
 import Error from 'components/common/Errors/Error';
+import useUpdateUserRedux from 'hooks/useUpdateUserRedux';
+import { useDispatch } from 'react-redux';
+import { resetMessage, setMessage } from 'store/toast';
+import { useHistory } from 'react-router-dom';
 
 const RegisterPopup = props => {
   document.title = `Register | ofwood`;
+  const updateUser=useUpdateUserRedux()
+  const dispatch=useDispatch()
+  const history=useHistory()
   const [loaded, setLoaded] = useState(false)
   const [inputs, setInputs] = useState({
     name: '',
@@ -43,6 +50,12 @@ const RegisterPopup = props => {
       if(error)  throw(error) 
       let { data } = await axios.post('/v1/users/auth/signup', inputs);
       localStorage.setItem('token', data.data.token);
+      updateUser(data.data.token)
+      dispatch(setMessage("Thanks for becoming a member"))
+        setTimeout(()=>{
+          dispatch(resetMessage())
+        },2000)
+        history.push("/")
     } catch (error) {
       if(error.error&&error.error.name=="ValidationError"){
         console.log(error);

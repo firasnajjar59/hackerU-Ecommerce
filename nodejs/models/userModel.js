@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const { createHash } = require('../config/bcrypt');
 const crypto = require('crypto');
-
+const randomNum=require('../services/randonNum')
 const usersSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -136,7 +136,16 @@ usersSchema.methods.changedPasswordAfter = function (JWTTimesStamp) {
 };
 usersSchema.methods.createPasswordResetToken = function () {
   // build a random string by buildin crypto
-  const resetToken = crypto.randomBytes(32).toString('hex');
+  // const resetToken = crypto.randomBytes(32).toString('hex');
+  const resetToken = (()=>{
+    let arr=[]
+    for(let i=1;i<7;i++){
+      arr.push(randomNum(0,9))
+    }
+    arr=arr.join("")
+    console.log(arr);
+    return arr
+  })()
   // we hash the random string we generate one step before and save it in database
   this.passwordResetToken = crypto
     .createHash('sha256')
@@ -150,6 +159,7 @@ usersSchema.methods.createPasswordResetToken = function () {
 usersSchema.methods.createOrderToken = function () {
   // build a random string by buildin crypto
   const resetToken = crypto.randomBytes(32).toString('hex');
+  
   // we hash the random string we generate one step before and save it in database
   this.orderToken = crypto
     .createHash('sha256')

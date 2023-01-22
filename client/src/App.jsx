@@ -31,6 +31,8 @@ import useUpdateUserRedux from 'hooks/useUpdateUserRedux';
 import PlaceOrder from 'pages/PlaceOrder/PlaceOrder';
 import axios from 'axios';
 import { setLogoImg } from 'store/logo';
+import ResetPasswordPopUp from 'components/specific/ResetPasswordPopUp/ResetPasswordPopUp';
+import Toast from 'components/common/Toast/Toast';
 const App = () => {
   const updateUser=useUpdateUserRedux()
   const dispatch = useDispatch();
@@ -103,7 +105,7 @@ useEffect(()=>{
       <Header classes='container m-auto'>
         <NavBar />
       </Header>
-
+    <Toast />
       <Body>
         {!loading&&!animate&&<Switch>
           <Route
@@ -154,6 +156,10 @@ useEffect(()=>{
           <Route
             path={`/signin`}
             component={LoginPopUp}
+          />
+          <Route
+            path={`/resetpassword`}
+            component={ResetPasswordPopUp}
           />
           <LoginGard path={`/profile`}
             component={Profile} />

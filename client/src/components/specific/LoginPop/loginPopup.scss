@@ -17,7 +17,11 @@
     border-top: var(--medium-border) solid var(--border-color);
     box-shadow: 5px 5px 10px 0px var(--shadow-color),-5px 0px 10px 0px var(--shadow-color);
 }
-
+.forget-password{
+    color: var(--primary-text);
+    cursor: pointer;
+    user-select: none;
+}
 @media screen and (max-width: 600px) {
     .login-popup{
         left: 0;

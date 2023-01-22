@@ -11,6 +11,7 @@ import Box from 'components/common/Box/Box';
 import useUpdateUserRedux from 'hooks/useUpdateUserRedux';
 import { addArrProductToCart } from 'store/cart';
 import { Link, useHistory } from 'react-router-dom';
+import { resetMessage, setMessage } from 'store/toast';
 const Cart = props => {
   document.title = `Cart | ofwood`;
   const history=useHistory()
@@ -74,8 +75,16 @@ const Cart = props => {
             cart: cartArr,
           });
           updateUser(data.data.token);
+          dispatch(setMessage("The product removed from your cart"))
+                setTimeout(()=>{
+                  dispatch(resetMessage())
+                },2000)
         } catch (error) {
           console.log(error);
+          dispatch(setMessage("Somthing went wrong please try later"))
+                setTimeout(()=>{
+                  dispatch(resetMessage())
+                },2000)
         }
       })();
     } else {
@@ -87,6 +96,10 @@ const Cart = props => {
         prev.splice(indx, 1);
         return [...prev];
       });
+      dispatch(setMessage("The product removed from your cart"))
+                setTimeout(()=>{
+                  dispatch(resetMessage())
+                },2000)
     }
   };
 

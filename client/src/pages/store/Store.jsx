@@ -2,21 +2,23 @@
 import './store.scss'
 import Card from 'components/common/Card/Card';
 import Ribbon from 'components/common/Ribbon/Ribbon';
-import SideSortComponent from 'components/common/BoxContainer/BoxContainer';
+import BoxContainer from 'components/common/BoxContainer/BoxContainer';
 import FilterByElement from 'components/specific/FilterByElement/filterByElement/FilterByElement';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import PlaceholderCard from 'components/common/PlaceholderCard/PlaceholderCard';
 import { useHistory, useLocation } from 'react-router-dom';
+import { resetMessage, setMessage } from 'store/toast';
 
 const Store = () => {
   document.title = 'Store | ofwood';
+  const dispatch=useDispatch()
   const history=useHistory()
   const location=useLocation()
   const queryObj=new URLSearchParams(location.search)
   const [paginationArr,setPaginationArr]=useState()
-  const [limit,setLimit]=useState(3)
+  const [limit,setLimit]=useState(6)
   const [page,setPage]=useState(1)
   const [proudactArr,setProudactArr] = useState([]);
   const screenWidth = useSelector(state => state.screenSize.screenWidth);
@@ -24,13 +26,25 @@ const Store = () => {
   useEffect(()=>{
     (async ()=>{
       try {
-        const querystr=location.search.length>0?location.search:`?fields=name,description,imgs,slug&limit=${limit}&page=${1}`
+        const querystr=location.search.length>0?location.search:`?limit=${limit}&page=${1}`
         let {data:res}=await axios.get(`/v1/products${querystr}`)
           queryObj.has("page")&&setPage(queryObj.get("page"))
           setProudactArr(res.data.doc)
           setPaginationArr(res.docsInDB)
       } catch (error) {
-        console.log(error);
+        console.log(error.response.data.message);
+        if(error.response.data.err.statusCode==404){
+          dispatch(setMessage("No product found"))
+            setTimeout(()=>{
+              dispatch(resetMessage())
+            },5000)
+        }
+        if(error.response.data.err.statusCode==500){
+          dispatch(setMessage("Something went wrong"))
+            setTimeout(()=>{
+              dispatch(resetMessage())
+            },5000)
+        }
       }
     })()
   },[location])
@@ -39,14 +53,14 @@ const Store = () => {
     queryObj.set("page",page)
     setPage(page)
     queryObj.has("limit")?setLimit(queryObj.get("limit")):queryObj.set("limit",limit)
-    const querystr=location.search.length>0?`?${queryObj.toString().replaceAll("%2C",",")}`:`?fields=name,description,imgs,slug&limit=${limit}&page=${queryObj.get("page")}`
+    const querystr=location.search.length>0?`?${queryObj.toString().replaceAll("%2C",",")}`:`?&limit=${limit}&page=${queryObj.get("page")}`
     history.push(`/store${querystr}`)
   }
   const handlePrev=()=>{
     if(queryObj.get("page")!=1&&queryObj.get("page").length>0){
       queryObj.set("page",(1*queryObj.get("page"))-1)
       setPage(queryObj.get("page"))
-      const querystr=location.search.length>0?`?${queryObj.toString().replaceAll("%2C",",")}`:`?fields=name,description,imgs,slug&limit=${limit}&page=${queryObj.get("page")}`
+      const querystr=location.search.length>0?`?${queryObj.toString().replaceAll("%2C",",")}`:`?&limit=${limit}&page=${queryObj.get("page")}`
       history.push(`/store${querystr}`)
     }
   }
@@ -55,40 +69,50 @@ const Store = () => {
     if(Math.ceil(paginationArr/limit)>queryObj.get("page")||!queryObj.has("page")){
       queryObj.has("page")?queryObj.set("page",(1*queryObj.get("page"))+1):queryObj.set("page",2)
       setPage(queryObj.get("page"))
-      const querystr=location.search.length>0?`?${queryObj.toString().replaceAll("%2C",",")}`:`?fields=name,description,imgs,slug&limit=${limit}&page=${queryObj.get("page")}`
+      const querystr=location.search.length>0?`?${queryObj.toString().replaceAll("%2C",",")}`:`?&limit=${limit}&page=${queryObj.get("page")}`
       history.push(`/store${querystr}`)
     }
+  }
+  const handleSort=(ev)=>{
+    if(ev.target.innerText=="Higher Price"){
+      console.log("good");
+      queryObj.set("sort","-price")
+    }
+    if(ev.target.innerText=='Lower Price'){
+      console.log("bad");
+      queryObj.set("sort","price")
+    }
+    if(ev.target.innerText=='A-z'){
+      console.log("bad");
+      queryObj.set("sort","name")
+    }
+    if(ev.target.innerText=='Z-a'){
+      console.log("bad");
+      queryObj.set("sort","-name")
+    }
+    const querystr=queryObj.toString().replaceAll("%2C",",")
+    history.push(`/store?${querystr}`)
   }
   return (
     <div className='container m-auto'>
       <div className='row p-2 w-100 mt-3 mb-3'>
         <div className={screenWidth > 600 ? 'col-3' : 'col-sm'}>
           <div className='row'>
-            <div className='col '>
-              <SideSortComponent
-                title='Filter By:'
-                color={window.getComputedStyle(document.documentElement).getPropertyValue('--primary-color')}>
-                <FilterByElement
-                  title='Category'
-                  options={['Cabinet', 'Tables']}
-                />
-                <FilterByElement
-                  title='Category'
-                  options={['Cabinet', 'Tables']}
-                />
-              </SideSortComponent>
-            </div>
-          </div>
-          <div className='row'>
             <div className='col mt-3'>
-              <SideSortComponent
+              <BoxContainer
                 title='Sort By:'
                 color={theme&&window.getComputedStyle(document.documentElement).getPropertyValue('--third-color')}>
                 <FilterByElement
-                  title='Sort'
-                  options={['Price', 'A-Z']}
+                  title='Price'
+                  options={['Higher Price','Lower Price']}
+                  onclick={handleSort}
                 />
-              </SideSortComponent>
+                <FilterByElement
+                  title='Name'
+                  options={['A-z','Z-a']}
+                  onclick={handleSort}
+                />
+              </BoxContainer>
             </div>
           </div>
         </div>

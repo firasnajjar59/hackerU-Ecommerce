@@ -7,6 +7,7 @@ import axios from 'axios';
 import Box from 'components/common/Box/Box';
 import { addArrProductToWishlist } from 'store/wishlist';
 import useUpdateUserRedux from 'hooks/useUpdateUserRedux';
+import { resetMessage, setMessage } from 'store/toast';
 
 
 const Wishlist = props => {
@@ -31,6 +32,7 @@ const Wishlist = props => {
           )()
       }else{
         setwishlistProduct(wishlist)
+     
       }
     },[])
     // 
@@ -49,8 +51,15 @@ const Wishlist = props => {
             wishlistArr=wishlistArr.map(product=>product.id)
             let { data } = await axios.patch('/v1/users/updateme', {wishlist:wishlistArr});
             updateUser(data.data.token)
+            dispatch(setMessage("The product removed from your wishlist"))
+            setTimeout(()=>{
+              dispatch(resetMessage())
+            },2000)
         } catch (error) {
-          console.log(error);
+          dispatch(setMessage("Something went wrong"))
+          setTimeout(()=>{
+            dispatch(resetMessage())
+          },2000)
         }
       }
       )()

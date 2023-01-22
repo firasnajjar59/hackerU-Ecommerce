@@ -9,6 +9,7 @@ import Box from '../Box/Box';
 import useUpdateUserRedux from 'hooks/useUpdateUserRedux';
 import axios from 'axios';
 import { addArrProductToWishlist } from 'store/wishlist';
+import { resetMessage, setMessage } from 'store/toast';
 const Card = props => {
   const loggedIn=useSelector(state=>state.loggedIn.loggedIn)
   const wishlist=useSelector(state=>state.wishlist.wishlist)
@@ -31,9 +32,17 @@ const Card = props => {
             wishlistArr.push(props._id)
             let { data } = await axios.patch('/v1/users/updateme', {wishlist:wishlistArr});
             updateUser(data.data.token)
+            dispatch(setMessage("Added to your wishlist"))
+            setTimeout(()=>{
+              dispatch(resetMessage())
+            },2000)
           }
         } catch (error) {
           console.log(error);
+          dispatch(setMessage("Somthing went wrong"))
+          setTimeout(()=>{
+            dispatch(resetMessage())
+          },2000)
         }
       }
       )()
@@ -47,11 +56,16 @@ const Card = props => {
         wishlistArr.push(props._id);
         localStorage.setItem("wishlist",JSON.stringify(wishlistArr))
         dispatch(addArrProductToWishlist(wishlistArr))
+        dispatch(setMessage("Added to your wishlist"))
+        setTimeout(()=>{
+          dispatch(resetMessage())
+        },2000)
       }
     }
   }
   return (
     <div className='caruselCardWrapper'>
+      
       <Box onclick={handleAddToWishlist} classes="bg-secondary-ofwood wishlist-icon">
       <MaterialIcon classes="" title="favorite"/>
       </Box>

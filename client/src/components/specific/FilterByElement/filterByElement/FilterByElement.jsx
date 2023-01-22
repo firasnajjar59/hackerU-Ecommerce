@@ -24,7 +24,7 @@ const FilterByElement = props => {
       </div>
       <div className='categore-Item'>
         <Ul classes={hidden?"hidden":""}>
-          {props.options.map((item,indx) =><Li key={indx} classes={`ps-3`} title={item}/>)}
+          {props.options.map((item,indx) =><Li onclick={props.onclick} key={indx} classes={`ps-3`} title={item}/>)}
         </Ul>
       </div>
     </div>

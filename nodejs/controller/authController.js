@@ -37,9 +37,9 @@ const login = catchAsync(async (req, res, next) => {
 const forgotPassword = catchAsync(async (req, res, next) => {
   // cheack if user provid an email
   if (!req.body.email) {
-    return next(new AppError('Please send email.', 404));
+    return next(new AppError('Please send email.', 400));
   }
-
+  
   // get user based on email
   const user = await Users.findOne({ email: req.body.email });
   if (!user) {
@@ -47,14 +47,15 @@ const forgotPassword = catchAsync(async (req, res, next) => {
   }
   // generate random reset token
   const resetToken = user.createPasswordResetToken();
+  console.log(resetToken);
   await user.save();
   // send token to user's email
   //   build a url
-  const resetUrl = `${req.protocol}://${req.get(
-    'host'
-  )}/api/v1/users/auth/resetpassword/${resetToken}`;
+                            // const resetUrl = `${req.protocol}://${req.get(
+                            //   'host'
+                            // )}/resetpassword/${resetToken}`;
   //   build a email message
-  const message = `Submit a PATCH request with your new password to: ${resetUrl}.\nIf you didn't forget your password,please ignore this email!`;
+  const message = `This is your password reset code: ${resetToken}.\nIf you didn't forget your password,please ignore this email!`;
   // send response
   try {
     await sendEmail({
@@ -87,7 +88,7 @@ const resrtPassword = catchAsync(async (req, res, next) => {
   // get user based on the token
   const hashedToken = crypto
     .createHash('sha256')
-    .update(req.params.token)
+    .update(req.body.token)
     .digest('hex');
   const user = await Users.findOne({
     passwordResetToken: hashedToken,

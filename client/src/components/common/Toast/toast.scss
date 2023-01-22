@@ -1,0 +1,20 @@
+.toast-ofwood{
+    position: fixed;
+    z-index: 2000;
+    bottom: 3%;
+    left: 50vw;
+    transform: translate(-50%,0);
+    padding: var(--medium-padding) !important;
+    border-radius: var(--medium-radius);
+    max-width: 50%;
+    background-color: var(--primary-back-ground);
+    color: var(--secondary-color);
+    .toast-ofwood-wrapper{
+        display: flex;
+        justify-content: space-between;
+        gap: var(--medium-gap);
+        .toast-ofwood-body{
+            font-weight: 400;
+        }
+    }
+}

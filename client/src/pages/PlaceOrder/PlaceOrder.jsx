@@ -5,8 +5,11 @@ import './placeOrder.scss';
 import { useEffect } from 'react';
 import axios from 'axios';
 import useUpdateUserRedux from 'hooks/useUpdateUserRedux';
+import { useDispatch } from 'react-redux';
+import { resetMessage, setMessage } from 'store/toast';
 
 const PlaceOrder = () => {
+    const dispatch=useDispatch()
     const history=useHistory()
     const updateUser=useUpdateUserRedux()
     const {ordertoken}=useParams()
@@ -15,12 +18,21 @@ const PlaceOrder = () => {
         (async()=>{
             try {
                 const {data}=await axios.get(`/v1/order/placeorder/${ordertoken}`)
+                dispatch(setMessage("Your order placed. Thank you for shopping with us."))
+                setTimeout(()=>{
+                  dispatch(resetMessage())
+                },2000)
                 updateUser(data.data.token)
                 setTimeout(()=>{
                   history.push("/profile/myorders")
                 },3000)
+           
             } catch (error) {
                 console.log(error);
+                dispatch(setMessage("Somthing went wrong while placing your order. please contact us"))
+                setTimeout(()=>{
+                  dispatch(resetMessage())
+                },5000)
             }
         })()
     },[])

@@ -22,7 +22,7 @@ router.post('/forgotpassword', authController.forgotPassword);
 
 /* /api/v1/users/auth  reset password */
 router.patch(
-  '/resetpassword/:token',
+  '/resetpassword',
   authController.resrtPassword,
   generateToken
 );

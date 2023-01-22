@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import useUpdateUserRedux from 'hooks/useUpdateUserRedux';
 import { addArrProductToCart } from 'store/cart';
+import { resetMessage, setMessage } from 'store/toast';
 
 const LeftsideProductPage = (props) => {
   const updateUser=useUpdateUserRedux()
@@ -59,6 +60,10 @@ const handleInputs = ev => updateInputs(ev, setInputs);
           console.log(cartArr);
           let { data } = await axios.patch('/v1/users/updateme', {cart:cartArr});
           updateUser(data.data.token)
+          dispatch(setMessage("The product added to your cart"))
+                setTimeout(()=>{
+                  dispatch(resetMessage())
+                },2000)
       }} catch (error) {
         console.log(error);
       }

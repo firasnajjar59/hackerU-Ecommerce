@@ -13,8 +13,12 @@ class ApiFeatures {
     exludedKeys.forEach(el => delete queryObj[el]);
     //* advanced filter
     let queryStr = JSON.stringify(queryObj);
-    queryStr = queryStr.replace(/\b(gte|gt|lt|lte|ne)\b/g, match => `$${match}`);
+    queryStr = queryStr.replace(/\b(gte|gt|lt|lte|ne|regex)\b/g, match => `$${match}`);
+    console.log(queryStr);
     this.query = this.query.find(JSON.parse(queryStr));
+    if(queryObj.name){
+      this.query = this.query.find({name:new RegExp('^' +queryObj.name, 'i')});
+    }
     return this;
   }
 
@@ -23,7 +27,7 @@ class ApiFeatures {
       const sortStr = this.requestQuery.sort.split(',').join(' ');
       this.query = this.query.sort(sortStr);
     } else {
-      this.query = this.query.sort('name');
+      this.query = this.query.sort('-createdAt');
     }
     return this;
   }
