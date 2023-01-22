@@ -3,7 +3,7 @@
 import './App.scss';
 import Body from 'layout/body/Body';
 import Header from 'layout/header/Header';
-import Store from 'pages/Store/Store';
+import Store from 'pages/store/Store';
 import { Route, Switch } from 'react-router-dom';
 import HomePage from 'pages/Home/HomePage';
 import ProductPage from 'pages/ProductPage/ProductPage';
