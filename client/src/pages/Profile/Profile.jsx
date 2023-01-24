@@ -1,26 +1,26 @@
-import './profile.scss'
-import Ul from 'components/specific/FilterByElement/List/Ul/Ul'
-import Li from 'components/specific/FilterByElement/List/Li/Li'
-import { Route, Switch, useRouteMatch } from 'react-router-dom'
-import NavBarLink from 'components/common/NavLink/NavLink'
-import ChangeInfo from 'components/common/ChangeInfo/ChangeInfo'
-import Cart from 'pages/Cart/Cart'
-import { useSelector } from 'react-redux'
-import { useState } from 'react'
-import MaterialIcon from 'components/common/MaterialIcon/MaterialIcon'
-import CreateProduct from 'components/specific/admin/CreateProduct/CreateProduct'
-import AdminGard from 'guards/AdminGard'
-import BoxContainer from 'components/common/BoxContainer/BoxContainer'
-import Wishlist from 'pages/Wishlist/Wishlist'
-import AdminProductsPage from 'pages/AdminProductsPage/AdminProductsPage'
-import AdminUser from 'pages/AminUser/AdminUser'
-import ContributorGard from 'guards/ContributorGard'
-import MyOrders from 'pages/MyOrders/MyOrders'
-import Order from 'components/specific/admin/Order/Order'
-import OneOrder from 'components/specific/admin/OneOrder/OneOrder'
-import WebContent from 'pages/WebContent/WebContent'
-import NewsLetter from 'pages/NewsLetter/NewsLetter'
-import EditProduct from 'components/specific/admin/EditProduct/EditProduct'
+import './profile.scss';
+import Ul from 'components/specific/FilterByElement/List/Ul/Ul';
+import Li from 'components/specific/FilterByElement/List/Li/Li';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import NavBarLink from 'components/common/NavLink/NavLink';
+import ChangeInfo from 'components/common/ChangeInfo/ChangeInfo';
+import Cart from 'pages/Cart/Cart';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import MaterialIcon from 'components/common/MaterialIcon/MaterialIcon';
+import CreateProduct from 'components/specific/admin/CreateProduct/CreateProduct';
+import AdminGard from 'guards/AdminGard';
+import BoxContainer from 'components/common/BoxContainer/BoxContainer';
+import Wishlist from 'pages/Wishlist/Wishlist';
+import AdminProductsPage from 'pages/AdminProductsPage/AdminProductsPage';
+import AdminUser from 'pages/AminUser/AdminUser';
+import ContributorGard from 'guards/ContributorGard';
+import MyOrders from 'pages/MyOrders/MyOrders';
+import Order from 'components/specific/admin/Order/Order';
+import OneOrder from 'components/specific/admin/OneOrder/OneOrder';
+import WebContent from 'pages/WebContent/WebContent';
+import NewsLetter from 'pages/NewsLetter/NewsLetter';
+import EditProduct from 'components/specific/admin/EditProduct/EditProduct';
 
 
 const Profile = () => {
