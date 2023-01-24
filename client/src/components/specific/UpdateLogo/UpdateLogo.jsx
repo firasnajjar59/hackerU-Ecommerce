@@ -8,8 +8,13 @@ import axios from 'axios';
 import { useState } from 'react';
 import updateInputs from 'functions/updateInputs';
 import ExpandSection from 'components/common/ExpandSection/ExpandSection';
+import useOfwoodErrorhandler from 'components/common/Errors/errorhandler';
+import { useDispatch } from 'react-redux';
+import { resetMessage, setMessage } from 'store/toast';
 
 const UpdateLogo = () => {
+  const ofwoodErrorhandler=useOfwoodErrorhandler()
+  const dispatch=useDispatch()
     const [logo,setLogo]=useState()
   const [logoName,setlogoName]=useState("example.jpg/png")
   const handleInputs = ev => updateInputs(ev, setInputs);
@@ -17,13 +22,12 @@ const UpdateLogo = () => {
     name:"What to update"
 })
   const AddImgTologo = async () => {
-      console.log(logo);
     try {
       const formData = new FormData();
       if(inputs.name!="What to update"){
           formData.append('name',inputs.name)
           formData.append('img', logo)
-        let { data } = await axios.patch(
+        await axios.patch(
             '/v1/users/admin/webcontent',
             formData,
             { headers: { 'Content-Type': 'multipart/form-data' } }
@@ -33,10 +37,13 @@ const UpdateLogo = () => {
             name:"",
         })
         setLogo()
-          console.log(data);
       }
+      dispatch(setMessage("The logo updated"))
+      setTimeout(()=>{
+        dispatch(resetMessage())
+      },3000)
     } catch (error) {
-      console.log(error);
+      ofwoodErrorhandler(error.response.data)
     }
   };
   return (
@@ -47,7 +54,7 @@ const UpdateLogo = () => {
         <label htmlFor='logo' className='file-input-label'>
           Select Image
           <MaterialIcon title="image" />
-          <Input type="file" classes="file-input" onchange={(ev)=>{setLogo(ev.target.files[0]);setlogoName(ev.target.files[0].name);console.log(ev);}} name="logo" id="logo" />
+          <Input type="file" classes="file-input" onchange={(ev)=>{setLogo(ev.target.files[0]);setlogoName(ev.target.files[0].name);}} name="logo" id="logo" />
           <span className='file-name'>{logoName}</span>
         </label>
         <Button

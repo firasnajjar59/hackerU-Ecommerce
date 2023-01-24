@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import MaterialIcon from '../MaterialIcon/MaterialIcon';
 import './loginWidget.scss';
 import { Link } from 'react-router-dom';
-import { setLogOut } from 'store/loggedIn';
 import useLogoutUser from 'hooks/useLogoutUser';
 
 const LoginWidget = props => {
@@ -12,7 +11,6 @@ const LoginWidget = props => {
   const cart = useSelector(state => state.cart.cart);
   const wishlist = useSelector(state => state.wishlist.wishlist);
   const loggedIn = useSelector(state => state.loggedIn.loggedIn);
-  const dispatch = useDispatch();
   const logout=useLogoutUser()
   const handleLogout=()=>{
     logout()

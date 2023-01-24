@@ -10,8 +10,10 @@ import axios from 'axios';
 import updateInputs from 'functions/updateInputs';
 import Error from '../Errors/Error';
 import { Success } from '../Success/Success';
+import useOfwoodErrorhandler from '../Errors/errorhandler';
 
 const SendEmail = props => {
+  const ofwoodErrorhandler=useOfwoodErrorhandler()
     const [error,setError]=useState("")
     const [success,setSuccess]=useState("")
     const [sending,setSending]=useState(false)
@@ -47,8 +49,12 @@ const SendEmail = props => {
             setSending(false)
             setSuccess("The email has been sent")
         } catch (error) {
+          if(error.response.data.err.statusCode==400){
             setSending(false)
             setError(error.response.data.message)
+          }else{
+            ofwoodErrorhandler(error.response.data)
+          }
         }
     }
 

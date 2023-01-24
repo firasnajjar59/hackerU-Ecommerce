@@ -8,9 +8,13 @@ import axios from 'axios';
 import Box from 'components/common/Box/Box';
 import Circles from 'models/CanvasClasses/Circles';
 import Line from 'models/CanvasClasses/Line';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import useOfwoodErrorhandler from 'components/common/Errors/errorhandler';
+import { resetMessage, setMessage } from 'store/toast';
 
 const SubscribeSection = () => {
+  const ofwoodErrorhandler=useOfwoodErrorhandler()
+const dispatch=useDispatch()
     const [email,setEmail]=useState()
     const canvasRef = useRef();
     const wrapperRef = useRef();
@@ -60,11 +64,14 @@ const SubscribeSection = () => {
     }, [canvasHeight,canvasWidth,theme]);
     const handleSubscribeBtn=async()=>{
         try {
-            const {data}=await axios.post("/v1/newsletter",{newsletterEmail:email})
-            console.log(data);
+            await axios.post("/v1/newsletter",{newsletterEmail:email})
             setEmail("Thanks for subscription")
+            dispatch(setMessage("The E-mail added to our newsletter"))
+            setTimeout(()=>{
+              dispatch(resetMessage())
+            },3000)
         } catch (error) {
-            console.log(error);
+          ofwoodErrorhandler(error.response.data)
         }
     }
   return (

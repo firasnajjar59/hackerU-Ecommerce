@@ -1,16 +1,17 @@
 import axios from "axios"
+import useOfwoodErrorhandler from "components/common/Errors/errorhandler"
 import { useEffect, useState } from "react"
 
 export const AboutUsContent = () => {
+    const ofwoodErrorhandler=useOfwoodErrorhandler()
     const [contents,setContents]=useState([])
     useEffect(()=>{
         (async()=>{
             try {
                 const { data } = await axios.get('/v1/users/admin/webcontent/aboutus');
-                console.log(data.data.doc[0].contents);
                 setContents(data.data.doc[0].contents)
             } catch (error) {
-                console.log(error);
+                ofwoodErrorhandler(error.response.data)
             }
         })()
     },[])

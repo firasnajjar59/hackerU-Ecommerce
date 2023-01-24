@@ -1,29 +1,23 @@
 import axios from 'axios'
 import Button from '../Button/Button'
 import './deactivateAccount.scss'
-import { useDispatch } from 'react-redux'
-import { setLogOut } from 'store/loggedIn'
-import { removeUser } from 'store/loggedUser'
-import { useHistory } from 'react-router-dom'
 import ExpandSection from '../ExpandSection/ExpandSection'
 import Box from '../Box/Box'
+import useOfwoodErrorhandler from '../Errors/errorhandler'
+import useLogoutUser from 'hooks/useLogoutUser'
 
 
 const DeactivateAccount = () => {
- const dispatch=useDispatch()
- const history=useHistory()
+  const ofwoodErrorhandler=useOfwoodErrorhandler()
+  const logout=useLogoutUser()
+
 
     const handleDeactivateAccount=async()=>{
         try {
-            let {data}=await axios.delete("/v1/users/deleteme")
-            console.log(data);
-            localStorage.removeItem("token")
-            dispatch(setLogOut())
-            dispatch(removeUser())
-            history.push("/")
-            console.log(data);
+            await axios.delete("/v1/users/deleteme")
+            logout()
         } catch (error) {
-            console.log(error);
+          ofwoodErrorhandler(error.response.data)
         }
     }
   return (

@@ -83,6 +83,11 @@ module.exports = (err, req, res, next) => {
     if (err.name === 'TokenExpiredError') err = handleTokenExpiredError();
     sendErrorProd(err, res);
   } else if (process.env.NODE_ENV === 'development') {
+    if (err.name === 'CastError') err = handleCastError(err);
+    if (err.code === 11000) err = handleDuplicateField(err);
+    if (err.name === 'ValidationError') err = handleValidatorError(err);
+    if (err.name === 'JsonWebTokenError') err = handleJsonWebTokenError();
+    if (err.name === 'TokenExpiredError') err = handleTokenExpiredError();
     sendErrorDev(err, res);
   }
 };

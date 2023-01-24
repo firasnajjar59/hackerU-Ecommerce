@@ -32,7 +32,7 @@ exports.getAllDocumants = Model =>
         result: doc.length,
         previous:
           skip / limit
-            ? `${req.protocol}://${req.host}:${8000}${req.baseUrl}?page=${
+            ? `${req.protocol}://${req.hostname}:${8000}${req.baseUrl}?page=${
                 skip / limit
               }&limit=${limit}`
             : null,
@@ -65,6 +65,7 @@ console.log(doc);
 //* send success response
 exports.createDocumant = Model =>
   catchAsync(async (req, res, next) => {
+    console.log(req.body);
     let doc = new Model(req.body);
     doc = await doc.save();
     // check if we create a user if yes we pass to next middleware

@@ -8,12 +8,12 @@ import DisplayOrder from 'components/specific/DisplayOrder/DisplayOrder';
 import Button from 'components/common/Button/Button';
 import DropMenu from 'components/common/Input/DropMenu';
 import updateInputs from 'functions/updateInputs';
-import TextArea from 'components/common/Input/TextArea';
-import Input from 'components/common/Input/Input';
 import ExpandSection from 'components/common/ExpandSection/ExpandSection';
 import SendEmail from 'components/common/SendEmail/SendEmail';
+import useOfwoodErrorhandler from 'components/common/Errors/errorhandler';
 
 const OneOrder = () => {
+    const ofwoodErrorhandler=useOfwoodErrorhandler()
 const history=useHistory()
 const {order_id}=useParams()
 const [order,setOrder]=useState()
@@ -34,9 +34,8 @@ useEffect(()=>{
                         ...prev
                     }
                 })
-                console.log(data)
             } catch (error) {
-                console.log(error);
+                ofwoodErrorhandler(error.response.data)
             }
         }
     )()

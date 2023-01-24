@@ -11,8 +11,13 @@ import useUpdateUserRedux from 'hooks/useUpdateUserRedux'
 import { useHistory } from 'react-router-dom'
 import validate from 'validations/validate'
 import resetPasswordSchema from 'validations/resetPasswordSchema'
+import { useDispatch } from 'react-redux'
+import useOfwoodErrorhandler from 'components/common/Errors/errorhandler'
+import { resetMessage, setMessage } from 'store/toast'
 
 const ResetPasswordPopUp = (props) => {
+  const dispatch=useDispatch()
+  const ofwoodErrorhandler=useOfwoodErrorhandler()
   const updateUser=useUpdateUserRedux()
   const history=useHistory()
   const [loaded, setLoaded] = useState(false)
@@ -50,25 +55,24 @@ const ResetPasswordPopUp = (props) => {
               })
         }
       },[inputs])
-      useEffect(()=>{
-        console.log(error);
-      },[error])
       const handleInputs = ev => updateInputs(ev, setInputs);
       const handleResetBtn=async()=>{
         try {
             const {error}=validate(inputs,resetPasswordSchema)
             if(error) throw(error)
             const {data}=await axios.patch("/v1/users/auth/resetpassword",inputs)
-            console.log(data);
             updateUser(data.data.token)
+            dispatch(setMessage("Your password updated"))
+            setTimeout(()=>{
+              dispatch(resetMessage())
+            },3000)
             history.push('/')
         } catch (error) {
-            console.log(error);
             if(error.error&&error.error.name=="ValidationError"){
                 setServerError("Please check the fields")
               }else{
-                // console.log(error);
                 setServerError(error.response.data.message)
+                ofwoodErrorhandler(error.response.data)
               }
         }
       }

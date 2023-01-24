@@ -19,18 +19,30 @@ router.use('/product/:id', reviewsRouter);
 router
   .route('/')
   .get(productController.getAllProducts)
-  .post(protect, permissionTo('admin'),productController.uploadProductPhotos,resizeMultiPhotos,productController.handleOptionsInReq, productController.createProduct);
-  
-  /* /api/v1/products/cart */
-  router
-    .route('/cart')
-    .post(cartController.getAllCartProducts)
+  .post(
+    protect,
+    permissionTo('admin'),
+    productController.uploadProductPhotos,
+    resizeMultiPhotos('products'),
+    productController.handleOptionsInReq,
+    productController.createProduct
+  );
+
+/* /api/v1/products/cart */
+router.route('/cart').post(cartController.getAllCartProducts);
 
 /* /api/v1/products/:productId get user products */
 router
   .route('/:id')
   .get(productController.getProductByID)
-  .patch(protect, permissionTo('admin', 'contributor'),productController.uploadProductPhotos,resizeMultiPhotos("products"),productController.handleOptionsInReq, productController.updateProduct)
+  .patch(
+    protect,
+    permissionTo('admin', 'contributor'),
+    productController.uploadProductPhotos,
+    resizeMultiPhotos('products'),
+    productController.handleOptionsInReq,
+    productController.updateProduct
+  )
   .delete(
     protect,
     permissionTo('admin', 'contributor'),

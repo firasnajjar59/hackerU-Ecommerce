@@ -13,11 +13,13 @@ import Input from 'components/common/Input/Input';
 import DropMenu from 'components/common/Input/DropMenu';
 import { handleSearchBtn } from './orderPageFunctions';
 import sortFunction from 'functions/sortByDate';
+import useOfwoodErrorhandler from 'components/common/Errors/errorhandler';
 
 let ordersArr=[];
 const Order = () => {
   document.title = `Orders | ofwood`;
-
+  const ofwoodErrorhandler=useOfwoodErrorhandler()
+  // const hanlerError = useErrorHandler()
   const history = useHistory();
   const {url}=useRouteMatch();
   const [orders, setOrders] = useState([]);
@@ -34,7 +36,7 @@ const Order = () => {
         ordersArr=data.data.doc;
         sortFunction(ordersArr,setOrders)
       } catch (error) {
-        console.log(error);
+        ofwoodErrorhandler(error.response.data)
       }
     })();
   }, []);

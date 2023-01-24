@@ -1,11 +1,11 @@
 /** @format */
 
 const { upload } = require('../middlewares/multer');
-const Products = require('../models/productmodel');
+const Products = require('../models/productModel');
 const functionsFactory = require('../services/functionsFactory');
 const AppError = require('../utils/appError');
-// 
-const uploadProductPhotos = upload.array('images',3);
+//
+const uploadProductPhotos = upload.array('images', 3);
 const createProduct = functionsFactory.createDocumant(Products);
 const getAllProducts = functionsFactory.getAllDocumants(Products);
 const deleteProduct = functionsFactory.deleteDocumant(Products);
@@ -16,18 +16,19 @@ const getProductByID = catchAsync(async (req, res, next) => {
   }
   res.json({ status: 'success', doc });
 });
-// 
-const updateProduct=functionsFactory.updateDocumantByID(Products)
-// 
-const handleOptionsInReq=(req,res,next)=>{
-  if (req.body.selectOption){
-    req.body.selectOption=JSON.parse(req.body.selectOption)
+//
+const updateProduct = functionsFactory.updateDocumantByID(Products);
+//
+const handleOptionsInReq = (req, res, next) => {
+  console.log(req.body);
+  if (req.body.selectOption) {
+    req.body.selectOption = JSON.parse(req.body.selectOption);
   }
-  if (req.body.properties){
-    req.body.properties=JSON.parse(req.body.properties)
+  if (req.body.properties) {
+    req.body.properties = JSON.parse(req.body.properties);
   }
-  next()
-}
+  next();
+};
 
 module.exports = {
   createProduct,
@@ -36,14 +37,5 @@ module.exports = {
   getProductByID,
   uploadProductPhotos,
   handleOptionsInReq,
-  updateProduct
+  updateProduct,
 };
-
-// exports.getDocumantByID = Model =>
-// catchAsync(async (req, res, next) => {
-//   const doc = await Model.findById(req.params.id);
-//   if (!doc) {
-//     return next(new AppError('document not found', 404));
-//   }
-//   res.json({ status: 'success', doc });
-// });

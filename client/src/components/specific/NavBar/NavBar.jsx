@@ -14,7 +14,7 @@ const NavBar = props => {
     <LogoAndProfile src={theme=="theme-dark"?"White on Transparent.png":'OriginalonTransparent.png'} />
       <hr />
       <div className='navBarWrapper '>
-        <SearchBar value="" onchange={()=>{}}/>
+        <SearchBar/>
         <div className='navLinks'>
           {navLinks.map((item,indx)=><NavBarLink key={indx}
             path={item.path}

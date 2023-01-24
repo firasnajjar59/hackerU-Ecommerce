@@ -81,7 +81,7 @@ const Profile = () => {
                     <Route path={`${path}/wishlist`}><Wishlist/></Route>
                     {/* contributor */}
                     <ContributorGard path={`${path}/products`} exact component={AdminProductsPage} />
-                    <ContributorGard path={`${path}/products/:slug`} component={EditProduct} />
+                    <ContributorGard path={`${path}/products/:slug/:id`} component={EditProduct} />
                     <ContributorGard path={`${path}/orders`} exact component={Order} />
                     <ContributorGard path={`${path}/orders/:order_id`} component={OneOrder} />
                     <ContributorGard path={`${path}/webcontent`} component={WebContent} />

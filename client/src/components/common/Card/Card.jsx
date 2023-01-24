@@ -10,7 +10,9 @@ import useUpdateUserRedux from 'hooks/useUpdateUserRedux';
 import axios from 'axios';
 import { addArrProductToWishlist } from 'store/wishlist';
 import { resetMessage, setMessage } from 'store/toast';
+import useOfwoodErrorhandler from '../Errors/errorhandler';
 const Card = props => {
+  const ofwoodErrorhandler=useOfwoodErrorhandler()
   const loggedIn=useSelector(state=>state.loggedIn.loggedIn)
   const wishlist=useSelector(state=>state.wishlist.wishlist)
   const updateUser=useUpdateUserRedux()
@@ -18,7 +20,7 @@ const Card = props => {
   // forword page
   const history = useHistory();
   const handleClickedProduct = () => {
-    history.push({pathname:`/products/${props.slug}`,state:{id:props._id}});
+    history.push({pathname:`/products/${props.slug}/${props._id}`});
   };
   // 
   const handleAddToWishlist=()=>{
@@ -35,14 +37,10 @@ const Card = props => {
             dispatch(setMessage("Added to your wishlist"))
             setTimeout(()=>{
               dispatch(resetMessage())
-            },2000)
+            },3000)
           }
         } catch (error) {
-          console.log(error);
-          dispatch(setMessage("Somthing went wrong"))
-          setTimeout(()=>{
-            dispatch(resetMessage())
-          },2000)
+          ofwoodErrorhandler(error.response.data)
         }
       }
       )()

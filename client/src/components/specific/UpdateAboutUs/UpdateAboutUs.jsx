@@ -9,8 +9,13 @@ import TextArea from 'components/common/Input/TextArea';
 import Input from 'components/common/Input/Input';
 import MaterialIcon from 'components/common/MaterialIcon/MaterialIcon';
 import Button from 'components/common/Button/Button';
+import useOfwoodErrorhandler from 'components/common/Errors/errorhandler';
+import { useDispatch } from 'react-redux';
+import { resetMessage, setMessage } from 'store/toast';
 
 const UpdateAboutUs = () => {
+  const ofwoodErrorhandler=useOfwoodErrorhandler()
+  const dispatch=useDispatch()
   const [inputs, setInputs] = useState({
     contents: [],
   });
@@ -18,18 +23,14 @@ const UpdateAboutUs = () => {
     (async () => {
       try {
         const { data } = await axios.get('/v1/users/admin/webcontent/aboutus');
-        console.log(data.data.doc[0]);
         setInputs({
           contents: data.data.doc[0].contents,
         });
       } catch (error) {
-        console.log(error);
+      ofwoodErrorhandler(error.response.data)
       }
     })();
   }, []);
-  useEffect(() => {
-    console.log(inputs);
-  }, [inputs]);
   const deleteOneOption = indx => () => {
     setInputs(prev => {
       prev.contents.splice(indx, 1);
@@ -50,13 +51,16 @@ const UpdateAboutUs = () => {
   };
   const handleAboutUsChange = async () => {
     try {
-      const { data } = await axios.patch('/v1/users/admin/webcontent', {
+      await axios.patch('/v1/users/admin/webcontent', {
         name: 'aboutus',
         contents: inputs.contents,
       });
-      console.log('hi');
+      dispatch(setMessage("The content updated"))
+      setTimeout(()=>{
+        dispatch(resetMessage())
+      },3000)
     } catch (error) {
-      console.log(error);
+      ofwoodErrorhandler(error.response.data)
     }
   };
   return (

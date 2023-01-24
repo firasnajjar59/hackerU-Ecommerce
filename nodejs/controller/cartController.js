@@ -1,4 +1,4 @@
-const Products = require('../models/productmodel');
+const Products = require('../models/productModel');
 const functionsFactory = require('../services/functionsFactory');
 const AppError = require('../utils/appError');
 

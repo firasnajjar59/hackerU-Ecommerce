@@ -12,8 +12,10 @@ import useUpdateUserRedux from 'hooks/useUpdateUserRedux';
 import { addArrProductToCart } from 'store/cart';
 import { Link, useHistory } from 'react-router-dom';
 import { resetMessage, setMessage } from 'store/toast';
+import useOfwoodErrorhandler from 'components/common/Errors/errorhandler';
 const Cart = props => {
   document.title = `Cart | ofwood`;
+  const ofwoodErrorhandler=useOfwoodErrorhandler()
   const history=useHistory()
   const dispatch = useDispatch();
   const updateUser = useUpdateUserRedux();
@@ -42,7 +44,7 @@ const Cart = props => {
           });
           setCartProduct(cartArr);
         } catch (error) {
-          console.log(error);
+          ofwoodErrorhandler(error.response.data)
         }
       })();
     } else {
@@ -78,13 +80,9 @@ const Cart = props => {
           dispatch(setMessage("The product removed from your cart"))
                 setTimeout(()=>{
                   dispatch(resetMessage())
-                },2000)
+                },5000)
         } catch (error) {
-          console.log(error);
-          dispatch(setMessage("Somthing went wrong please try later"))
-                setTimeout(()=>{
-                  dispatch(resetMessage())
-                },2000)
+         ofwoodErrorhandler(error.response.data)
         }
       })();
     } else {
@@ -107,9 +105,8 @@ const Cart = props => {
     try {
       const {data}=await axios.get('/v1/order/checkout')
       window.location.href=`${data.session.url}`;
-    
     } catch (error) {
-      console.log(error);
+      ofwoodErrorhandler(error.response.data)
     }
   }
 

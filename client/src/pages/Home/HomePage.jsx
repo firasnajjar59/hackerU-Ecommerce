@@ -11,7 +11,9 @@ import categoryArr from 'data/category';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import SubscribeSection from 'components/specific/SubscribeSection/SubscribeSection';
+import useOfwoodErrorhandler from 'components/common/Errors/errorhandler';
 const HomePage = () => {
+  const ofwoodErrorhandler=useOfwoodErrorhandler()
   const [productArr,setProudactArr]= useState([])
   document.title = 'HomePage | ofwood';
   useEffect(()=>{
@@ -20,7 +22,7 @@ const HomePage = () => {
         let {data:res}=await axios.get("/v1/products?fields=name,description,imgs,slug&limit=100")
         setProudactArr(res.data.doc)
       } catch (error) {
-        console.log(error);
+        ofwoodErrorhandler(error.response.data)
       }
     })()
   },[])

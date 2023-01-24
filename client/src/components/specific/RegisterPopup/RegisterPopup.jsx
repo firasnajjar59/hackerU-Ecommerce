@@ -15,9 +15,11 @@ import useUpdateUserRedux from 'hooks/useUpdateUserRedux';
 import { useDispatch } from 'react-redux';
 import { resetMessage, setMessage } from 'store/toast';
 import { useHistory } from 'react-router-dom';
+import useOfwoodErrorhandler from 'components/common/Errors/errorhandler';
 
 const RegisterPopup = props => {
   document.title = `Register | ofwood`;
+  const ofwoodErrorhandler=useOfwoodErrorhandler()
   const updateUser=useUpdateUserRedux()
   const dispatch=useDispatch()
   const history=useHistory()
@@ -54,15 +56,14 @@ const RegisterPopup = props => {
       dispatch(setMessage("Thanks for becoming a member"))
         setTimeout(()=>{
           dispatch(resetMessage())
-        },2000)
+        },5000)
         history.push("/")
     } catch (error) {
       if(error.error&&error.error.name=="ValidationError"){
-        console.log(error);
         setServerError("Please check the User fields")
       }else{
-        console.log(error);
         setServerError(error.response.data.message)
+        ofwoodErrorhandler(error.response.data)
       }
     }
   };
@@ -82,7 +83,6 @@ const RegisterPopup = props => {
                   prev[document.activeElement.dataset.label].push(err.message)
                 }
               }
-
             }
             return{
               ...prev

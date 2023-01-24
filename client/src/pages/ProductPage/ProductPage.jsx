@@ -7,9 +7,10 @@ import RightSideProductPage from 'components/specific/RightSideProductPage/Right
 import OneProductCarusel from 'components/common/OneProductCarusel/OneProductCarusel';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import useOfwoodErrorhandler from 'components/common/Errors/errorhandler';
 const ProductPage = (props) => {
-  const {id:productId}=props.location.state
-  const {slug}=useParams()
+  const ofwoodErrorhandler=useOfwoodErrorhandler()
+  const {slug,id}=useParams()
   const [product,setProudact]=useState()
   const [reviews,setReviews]=useState()
   document.title = `Product | ${slug.split("-").join(" ").toUpperCase()}`;
@@ -17,13 +18,12 @@ const ProductPage = (props) => {
     (
       async ()=>{
         try {
-          let {data:products}=await axios.get(`/v1/products/${productId}`)
-          let {data:reviews}=await axios.get(`/v1/products/product/${productId}/reviews`)
-          console.log(products);
+          let {data:products}=await axios.get(`/v1/products/${id}`)
+          let {data:reviews}=await axios.get(`/v1/products/product/${id}/reviews`)
           setProudact(products.doc)
           setReviews(reviews.doc)
         } catch (error) {
-          console.log(error);
+          ofwoodErrorhandler(error.response.data)
         }
       }
     )()
@@ -36,10 +36,10 @@ const ProductPage = (props) => {
      {product&&<> <div className="title-wrapper">
       <h1>{product.name}</h1>
       </div>
-      <OneProductCarusel imgs={product.imgs} _id={productId} />
+      <OneProductCarusel imgs={product.imgs} _id={id} />
       <div className='descriptionWrapper'>
-        <LeftsideProductPage id={productId} selectOption={product.selectOption} classes="descriptionWrapper-left" product={product} />
-        <RightSideProductPage properties={product.properties} classes="descriptionWrapper-right" reviews={reviews} id={productId} onAddReview={handLocalReview} description={product.description} />
+        <LeftsideProductPage id={id} selectOption={product.selectOption} classes="descriptionWrapper-left" product={product} />
+        <RightSideProductPage properties={product.properties} classes="descriptionWrapper-right" reviews={reviews} id={id} onAddReview={handLocalReview} description={product.description} />
       </div></>}
     </div>
   );

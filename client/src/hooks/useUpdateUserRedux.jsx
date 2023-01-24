@@ -10,7 +10,6 @@ const dispatch=useDispatch()
 return (token)=>{
     localStorage.setItem('token', token);
     let user = jwtDecode(token);
-    console.log(user);
     dispatch(setLogIn());
     dispatch(setUser(user));
     dispatch(addArrProductToWishlist(user.wishlist));

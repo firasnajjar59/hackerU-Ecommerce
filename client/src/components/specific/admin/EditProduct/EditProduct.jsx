@@ -1,4 +1,4 @@
-import { useHistory, useLocation, useParams, useRouteMatch } from 'react-router-dom'
+import { useHistory, useLocation, useParams } from 'react-router-dom'
 import './editProduct.scss'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
@@ -11,15 +11,18 @@ import Input from 'components/common/Input/Input'
 import updateInputs from 'functions/updateInputs'
 import UploadMultiImgs from 'components/common/UploadMultiImgs/UploadMultiImgs'
 import MaterialIcon from 'components/common/MaterialIcon/MaterialIcon'
+import useOfwoodErrorhandler from 'components/common/Errors/errorhandler'
+import { useDispatch } from 'react-redux'
+import { resetMessage, setMessage } from 'store/toast'
 
 
 const EditProduct = () => {
-  const {slug}=useParams()
+  const {slug,id}=useParams()
+  const ofwoodErrorhandler=useOfwoodErrorhandler()
+  const dispatch=useDispatch()
   document.title = `Edit ${slug.split("-").join(" ").toUpperCase()} | ofwood`;
-    const {url,path}=useRouteMatch()
     const history=useHistory()
-    // 
-    const {state}=useLocation()
+
     // 
     const [imgs,setImgs]=useState([])
     const [imgsName,setImgsName]=useState([])
@@ -35,7 +38,7 @@ const EditProduct = () => {
     useEffect(()=>{
         (async ()=>{
             try {
-                const {data}=await axios.get(`/v1/products/${state.id}`)
+                const {data}=await axios.get(`/v1/products/${id}`)
                 setInputs(prev=>{
                     const {doc}=data
                     prev.name=doc.name;
@@ -49,14 +52,11 @@ const EditProduct = () => {
                 })
                 setImgsName(data.doc.imgs)
             } catch (error) {
-                console.log(error);
+              ofwoodErrorhandler(error.response.data)
             }
         })()
     },[])
-    // 
-    useEffect(()=>{
-     
-    },[inputs,imgsName])
+
 // 
     const handleInputs = ev => updateInputs(ev, setInputs);
     const backward = () => history.goBack();
@@ -86,12 +86,16 @@ const EditProduct = () => {
         propertiesArr=JSON.stringify(inputs.properties)
         inputs.properties.length>0&&formData.append('properties',propertiesArr)
         // 
+        console.log(imgs);
         imgs.length>0&&imgs.forEach(file=>formData.append('images',file))
         // 
-        let {data}= await axios.patch(`/v1/products/${state.id}`,formData,{ headers: {'Content-Type': 'multipart/form-data'}})
-        console.log(data);
+        await axios.patch(`/v1/products/${id}`,formData,{ headers: {'Content-Type': 'multipart/form-data'}})
+        dispatch(setMessage("The product updated"))
+            setTimeout(()=>{
+              dispatch(resetMessage())
+            },3000)
         } catch (error) {
-            console.log(error);
+          ofwoodErrorhandler(error.response.data)
         }
       }
     //   

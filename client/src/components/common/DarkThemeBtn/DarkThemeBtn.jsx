@@ -23,7 +23,7 @@ const DarkThemeBtn = (props) => {
     },[theme])
   return (
     <div className={`theme-wrapper ${props.classes}`}>
-        <div onClick={()=>{dispatch(setTheme(theme=='theme-dark'?'theme-light':'theme-dark'))}} className='theme-btn' ref={innerBtnRef}>
+        <div onClick={handleThemeBtn} className='theme-btn' ref={innerBtnRef}>
           <div  className='theme-btn-inner' ></div>
         </div>
       </div>

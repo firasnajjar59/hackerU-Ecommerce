@@ -10,9 +10,11 @@ import axios from 'axios';
 import PlaceholderCard from 'components/common/PlaceholderCard/PlaceholderCard';
 import { useHistory, useLocation } from 'react-router-dom';
 import { resetMessage, setMessage } from 'store/toast';
+import useOfwoodErrorhandler from 'components/common/Errors/errorhandler';
 
 const Store = () => {
   document.title = 'Store | ofwood';
+  const ofwoodErrorhandler=useOfwoodErrorhandler()
   const dispatch=useDispatch()
   const history=useHistory()
   const location=useLocation()
@@ -32,7 +34,6 @@ const Store = () => {
           setProudactArr(res.data.doc)
           setPaginationArr(res.docsInDB)
       } catch (error) {
-        console.log(error.response.data.message);
         if(error.response.data.err.statusCode==404){
           dispatch(setMessage("No product found"))
             setTimeout(()=>{
@@ -40,10 +41,7 @@ const Store = () => {
             },5000)
         }
         if(error.response.data.err.statusCode==500){
-          dispatch(setMessage("Something went wrong"))
-            setTimeout(()=>{
-              dispatch(resetMessage())
-            },5000)
+         ofwoodErrorhandler(error.resoponse.data)
         }
       }
     })()
@@ -75,19 +73,15 @@ const Store = () => {
   }
   const handleSort=(ev)=>{
     if(ev.target.innerText=="Higher Price"){
-      console.log("good");
       queryObj.set("sort","-price")
     }
     if(ev.target.innerText=='Lower Price'){
-      console.log("bad");
       queryObj.set("sort","price")
     }
     if(ev.target.innerText=='A-z'){
-      console.log("bad");
       queryObj.set("sort","name")
     }
     if(ev.target.innerText=='Z-a'){
-      console.log("bad");
       queryObj.set("sort","-name")
     }
     const querystr=queryObj.toString().replaceAll("%2C",",")

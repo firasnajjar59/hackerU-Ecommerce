@@ -4,11 +4,12 @@ import axios from 'axios'
 import Box from 'components/common/Box/Box'
 import DisplayOrder from 'components/specific/DisplayOrder/DisplayOrder'
 import sortFunction from 'functions/sortByDate'
+import useOfwoodErrorhandler from 'components/common/Errors/errorhandler'
 
 
 const MyOrders = () => {
     document.title = `My Orders | ofwood`;
-
+    const ofwoodErrorhandler=useOfwoodErrorhandler()
     const [orders,setOrders]=useState([])
     useEffect(()=>{
         (async ()=>{
@@ -16,7 +17,7 @@ const MyOrders = () => {
                 const {data}=await axios.get('/v1/order/myorders')
                 sortFunction(data.data.doc,setOrders)
             } catch (error) {
-                console.log(error);
+                ofwoodErrorhandler(error.response.data)
             }
         })()
     },[])

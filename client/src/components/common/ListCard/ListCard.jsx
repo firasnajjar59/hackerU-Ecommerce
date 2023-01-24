@@ -22,7 +22,7 @@ const ListCard = props => {
     }
   },[props.edit])
   const handleEditButton = () => {
-    history.push({ pathname: `${url}/${props.slug}`, state: { id: props.id } });
+    history.push({ pathname: `${url}/${props.slug}/${props.id}`});
   };
 
   return (

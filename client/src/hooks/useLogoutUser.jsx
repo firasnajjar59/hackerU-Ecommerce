@@ -1,12 +1,16 @@
 import { useDispatch } from "react-redux"
+import { useHistory, useLocation } from "react-router-dom";
 import { addArrProductToCart } from "store/cart";
 import { setLogOut } from "store/loggedIn";
 import { removeUser } from "store/loggedUser";
 import { addArrProductToWishlist } from "store/wishlist";
 
 const useLogoutUser = () => {
-const dispatch=useDispatch()
-return ()=>{
+    const dispatch=useDispatch()
+    const history=useHistory()
+    const location=useLocation()
+    return ()=>{
+    history.push("/")
     localStorage.removeItem('token');
     dispatch(setLogOut());
     dispatch(removeUser());

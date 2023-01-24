@@ -11,10 +11,14 @@ import updateInputs from 'functions/updateInputs';
 import axios from 'axios';
 import UploadMultiImgs from 'components/common/UploadMultiImgs/UploadMultiImgs';
 import Box from 'components/common/Box/Box';
+import { useDispatch } from 'react-redux';
+import { resetMessage, setMessage } from 'store/toast';
+import useOfwoodErrorhandler from 'components/common/Errors/errorhandler';
 
 const CreateProduct = () => {
   document.title = `Create Product | ofwood`;
-
+const dispatch=useDispatch()
+const ofwoodErrorhandler=useOfwoodErrorhandler()
   const [imgs,setImgs]=useState([])
   const [imgsName,setImgsName]=useState([])
   const [inputs, setInputs] = useState({
@@ -38,17 +42,23 @@ const CreateProduct = () => {
   const handleFilesFromInput=(ev)=>{
     let files=[]
     let filesName=[]
-    console.log(ev);
     for (let file of Object.values(ev.target.files)){
       files.push(file)
       filesName.push(file.name)
-      console.log(file);
     }
     setImgs(files)
     setImgsName(filesName)
   }
   const createProduct= async()=>{
     try {
+      // eslint-disable-next-line no-throw-literal
+      if(inputs.name.length==0) throw ({message:"name can't be empty"})
+      // eslint-disable-next-line no-throw-literal
+      if(inputs.description==0) throw ({message:"Description can't be empty"})
+      // eslint-disable-next-line no-throw-literal
+      if(inputs.price.length==0) throw ({message:"Price can't be empty"})
+      // eslint-disable-next-line no-throw-literal
+      if(isNaN(inputs.price)) throw ({message:"Price must be a number"})
     const formData=new FormData();
     // 
     formData.append('name',inputs.name)
@@ -64,12 +74,26 @@ const CreateProduct = () => {
     propertiesArr=JSON.stringify(inputs.properties)
     inputs.properties.length>0&&formData.append('properties',propertiesArr)
     // 
-    imgs.length>0&&imgs.forEach(file=>formData.append('images',file))
+    console.log(imgs);
+    if(imgs.length>0){
+      imgs.forEach(file=>formData.append('images',file))
+    }else{
+      throw ({message:"Please you can't create a product without photos"})
+    }
     // 
+    
     let {data}= await axios.post("/v1/products",formData,{ headers: {'Content-Type': 'multipart/form-data'}})
     console.log(data);
+    dispatch(setMessage("The product created"))
+            setTimeout(()=>{
+              dispatch(resetMessage())
+            },3000)
     } catch (error) {
-        console.log(error);
+      if(error.response){
+        ofwoodErrorhandler(error.response.data)
+      }else{
+        ofwoodErrorhandler(error)
+      }
     }
   }
   return (

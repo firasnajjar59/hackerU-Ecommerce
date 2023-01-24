@@ -11,7 +11,7 @@ const LoginGard = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={props =>
-        isLogged ? <Component {...props} /> : <Redirect to='/signin'></Redirect>
+        isLogged ? <Component {...props} /> : <Redirect to='/'></Redirect>
       }
     />
   );

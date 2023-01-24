@@ -7,6 +7,7 @@ const OurCustemersCarusel = props => {
   const div = useRef();
   const [counter, setCounter] = useState(0);
   const [timer, setTimer] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   let globalAnimateID;
   useEffect(() => {
     displayDiv.current.style.height = `${

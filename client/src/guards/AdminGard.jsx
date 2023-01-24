@@ -14,7 +14,7 @@ const AdminGard = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={props =>
-        isLogged&&isAdmin ? <Component {...props} /> : <Redirect to='/signin'></Redirect>
+        isLogged&&isAdmin ? <Component {...props} /> : <Redirect to='/'></Redirect>
       }
     />
   );

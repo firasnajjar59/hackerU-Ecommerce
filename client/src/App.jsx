@@ -15,7 +15,6 @@ import { setScreenSize } from 'store/screenSize';
 import GalleryPage from 'pages/Gallery/GalleryPage';
 import ContactUsPage from 'pages/ContactUs/ContactUsPage';
 import Cart from 'pages/Cart/Cart';
-import jwtDecode from 'jwt-decode';
 import LoginPopUp from 'components/specific/LoginPop/LoginPopUp';
 import RegisterPopup from 'components/specific/RegisterPopup/RegisterPopup';
 import HumburgerMenu from 'components/specific/HumburgerMenu/HumburgerMenu';
@@ -33,7 +32,12 @@ import axios from 'axios';
 import { setLogoImg } from 'store/logo';
 import ResetPasswordPopUp from 'components/specific/ResetPasswordPopUp/ResetPasswordPopUp';
 import Toast from 'components/common/Toast/Toast';
+import { ErrorBoundary } from 'react-error-boundary';
+import ErrorBoundaryComponent from 'components/common/Errors/ErrorBoundaryComponent';
+import myErrorHandler from 'components/common/Errors/MyErrorHandler';
+import useOfwoodErrorhandler from 'components/common/Errors/errorhandler';
 const App = () => {
+  const ofwoodErrorhandler=useOfwoodErrorhandler()
   const updateUser=useUpdateUserRedux()
   const dispatch = useDispatch();
   const [animate, setAnimate] = useState(true);
@@ -67,13 +71,10 @@ useEffect(()=>{
       if (localStorage.getItem('token')) {
         let token = localStorage.getItem('token');
         try {
-          let user = await jwtDecode(token);
          updateUser(token)
       
         } catch (error) {
-          localStorage.removeItem('token');
-          console.log(error);
-       
+          ofwoodErrorhandler(error)
         }
       }
         dispatch(doneLoading())
@@ -84,20 +85,19 @@ useEffect(()=>{
       try {
         const light=await axios.get('/v1/users/admin/webcontent/lightlogo')
         const dark=await axios.get('/v1/users/admin/webcontent/darklogo')
-        console.log(light);
        dispatch(setLogoImg({
         dark:dark.data.data.doc[0].img,
         light:light.data.data.doc[0].img,
       }))
-        console.log(dark);
       } catch (error) {
-        console.log(error);
+        ofwoodErrorhandler(error.response.data)
       }
     })()
   },[])
   return (
-    
     <div className='container-fluid App'>
+      <ErrorBoundary FallbackComponent={ErrorBoundaryComponent} onError={myErrorHandler}>
+
       <LoadingAnimate
         imgClasses={animate||loading ? `img-fade-in` : `img-fade-out`}
         classes={animate||loading ? `fade-in` : `fade-out`}
@@ -122,7 +122,7 @@ useEffect(()=>{
             component={Store}
           />
           <Route
-            path='/products/:slug'
+            path='/products/:slug/:id'
             component={ProductPage}
           />
           <Route
@@ -167,6 +167,7 @@ useEffect(()=>{
             component={PlaceOrder} />
         </Switch>}
       </Body>
+      </ErrorBoundary>
     </div>
   );
 };

@@ -3,8 +3,13 @@ import { useEffect, useState } from 'react'
 import ListCard from 'components/common/ListCard/ListCard'
 import axios from 'axios'
 import BoxContainer from 'components/common/BoxContainer/BoxContainer'
+import useOfwoodErrorhandler from 'components/common/Errors/errorhandler'
+import { useDispatch } from 'react-redux'
+import { resetMessage, setMessage } from 'store/toast'
 
 const ProductList = () => {
+const ofwoodErrorhandler=useOfwoodErrorhandler()
+const dispatch=useDispatch()
     const [arr,setArr]=useState()
     useEffect(()=>{
         (async ()=>{
@@ -12,18 +17,22 @@ const ProductList = () => {
             let {data:res}=await axios.get(`/v1/products?fields=name,imgs,slug`)
             setArr(res.data.doc)
           } catch (error) {
-            console.log(error);
+            ofwoodErrorhandler(error.response.data)
           }
         })()
       },[])
 
       const haundleLocalDelete=(id)=>async()=>{
         try {
-          const data=await axios.delete(`/v1/products/${id}`)
+          await axios.delete(`/v1/products/${id}`)
           const filterdArr=arr.filter((item)=>item._id!=id)
           setArr(filterdArr)
+          dispatch(setMessage("The product deleted"))
+            setTimeout(()=>{
+              dispatch(resetMessage())
+            },3000)
       } catch (error) {
-          console.log(error);
+        ofwoodErrorhandler(error.response.data)
       }
       }
   return (

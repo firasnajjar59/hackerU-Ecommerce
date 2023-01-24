@@ -7,8 +7,13 @@ import { useEffect, useState } from 'react';
 import Button from 'components/common/Button/Button';
 import updateInputs from 'functions/updateInputs';
 import axios from 'axios';
+import { resetMessage, setMessage } from 'store/toast';
+import { useDispatch } from 'react-redux';
+import useOfwoodErrorhandler from 'components/common/Errors/errorhandler';
 
 const EditUser = (props) => {
+  const dispatch=useDispatch()
+  const ofwoodErrorhandler=useOfwoodErrorhandler()
     const [inputs,setInputs]=useState({role:"",activeUser:""})
     useEffect(()=>{
         setInputs({
@@ -21,10 +26,13 @@ const EditUser = (props) => {
     // 
     const handleAppleButton=async ()=>{
         try {
-            const {data}=await axios.patch(`/v1/users/admin/${props.id}`,inputs)
-            console.log(data);
+            await axios.patch(`/v1/users/admin/${props.id}`,inputs)
+            dispatch(setMessage("The user updated"))
+            setTimeout(()=>{
+              dispatch(resetMessage())
+            },3000)
         } catch (error) {
-            console.log(error);
+          ofwoodErrorhandler(error.response.data)
         }
     }
 

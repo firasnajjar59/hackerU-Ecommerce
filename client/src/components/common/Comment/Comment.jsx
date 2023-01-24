@@ -3,7 +3,6 @@ import './comment.scss'
 
 
 const Comment = ({review}) => {
-  const user=useSelector(state=>state.loggedUser.user)
   return (
     <div className='comment'>
           <div className='comment-img'>

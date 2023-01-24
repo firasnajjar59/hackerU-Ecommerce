@@ -7,13 +7,14 @@ import axios from 'axios';
 import useUpdateUserRedux from 'hooks/useUpdateUserRedux';
 import { useDispatch } from 'react-redux';
 import { resetMessage, setMessage } from 'store/toast';
+import useOfwoodErrorhandler from 'components/common/Errors/errorhandler';
 
 const PlaceOrder = () => {
+    const ofwoodErrorhandler=useOfwoodErrorhandler()
     const dispatch=useDispatch()
     const history=useHistory()
     const updateUser=useUpdateUserRedux()
     const {ordertoken}=useParams()
-    console.log(ordertoken);
     useEffect(()=>{
         (async()=>{
             try {
@@ -28,7 +29,7 @@ const PlaceOrder = () => {
                 },3000)
            
             } catch (error) {
-                console.log(error);
+              // ofwoodErrorhandler(error.response.data)
                 dispatch(setMessage("Somthing went wrong while placing your order. please contact us"))
                 setTimeout(()=>{
                   dispatch(resetMessage())

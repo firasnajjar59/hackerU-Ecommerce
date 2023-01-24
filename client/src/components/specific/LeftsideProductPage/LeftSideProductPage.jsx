@@ -11,6 +11,7 @@ import axios from 'axios';
 import useUpdateUserRedux from 'hooks/useUpdateUserRedux';
 import { addArrProductToCart } from 'store/cart';
 import { resetMessage, setMessage } from 'store/toast';
+import useOfwoodErrorhandler from 'components/common/Errors/errorhandler';
 
 const LeftsideProductPage = (props) => {
   const updateUser=useUpdateUserRedux()
@@ -35,14 +36,12 @@ const LeftsideProductPage = (props) => {
       }
     })
   },[])
-  useEffect(()=>{
-    console.log(inputs);
-  },[inputs])
+
 // 
 const handleInputs = ev => updateInputs(ev, setInputs);
 // 
+const ofwoodErrorhandler=useOfwoodErrorhandler()
   const handleSelect=(indx)=>(ev)=>{ 
-    console.log(ev);
     setInputs(prev=>{
     prev.selectOption[indx].option=ev.target.value
     return {
@@ -56,16 +55,14 @@ const handleInputs = ev => updateInputs(ev, setInputs);
         if(cartArr.length==0){
           let cartArr=JSON.parse(JSON.stringify(cart))
           cartArr.push(inputs)
-          console.log(inputs);
-          console.log(cartArr);
           let { data } = await axios.patch('/v1/users/updateme', {cart:cartArr});
           updateUser(data.data.token)
           dispatch(setMessage("The product added to your cart"))
                 setTimeout(()=>{
                   dispatch(resetMessage())
-                },2000)
+                },5000)
       }} catch (error) {
-        console.log(error);
+        ofwoodErrorhandler(error.respone.data)
       }
     }else{
       let cartArr=[]

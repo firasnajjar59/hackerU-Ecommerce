@@ -15,10 +15,12 @@ import Error from 'components/common/Errors/Error';
 import emailSchema from 'validations/emailSchema';
 import { useDispatch } from 'react-redux';
 import { resetMessage, setMessage } from 'store/toast';
+import useOfwoodErrorhandler from 'components/common/Errors/errorhandler';
 const LoginPopUp = props => {
   document.title = `Sign In | ofwood`;
 const updateUser=useUpdateUserRedux()
 const dispatch=useDispatch()
+const ofwoodErrorhandler=useOfwoodErrorhandler()
   //
   const history = useHistory();
   //
@@ -87,18 +89,16 @@ const dispatch=useDispatch()
   const handleLogin = async () => {
     try {
       const {error}=validate(inputs,loginSchema)
-      console.log(error);
       if(error)  throw(error) 
       let data  = await axios.post('/v1/users/auth/login', inputs);
       updateUser(data.data.data.token)
       history.goBack();
     } catch (error) {
       if(error.error&&error.error.name=="ValidationError"){
-        console.log(error);
         setServerError("Please check the login fields")
       }else{
-        // console.log(error);
         setServerError(error.response.data.message)
+        ofwoodErrorhandler(error.response.data)
       }
     }
   };
@@ -107,7 +107,7 @@ const dispatch=useDispatch()
       const {error}=validate(email,emailSchema)
       console.log(error);
       if(error)  throw(error) 
-      let data  = await axios.post('/v1/users/auth/forgotpassword', email);
+      await axios.post('/v1/users/auth/forgotpassword', email);
       dispatch(setMessage("Check your email inbox."))
       setTimeout(()=>{
         dispatch(resetMessage())
@@ -115,15 +115,10 @@ const dispatch=useDispatch()
       history.push("/resetpassword");
     } catch (error) {
       if(error.error&&error.error.name=="ValidationError"){
-        console.log(error);
         setServerError("Please check the login fields")
       }else{
-        console.log(error);
         setServerError(error.response.data.message)
-        dispatch(setMessage(error.response.data.message))
-        setTimeout(()=>{
-          dispatch(resetMessage())
-        },2000)
+      ofwoodErrorhandler(error.response.data)
       }
     }
   };

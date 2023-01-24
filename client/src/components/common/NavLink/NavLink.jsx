@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import "./navlink.scss"
 const NavBarLink = props => {
   return (
-    // <li className="nav-item">
     <NavLink
     onClick={props.onclick?props.onclick:()=>{}}
       isActive={match => match && match.isExact}

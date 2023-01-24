@@ -1,6 +1,6 @@
 /** @format */
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Input from '../Input/Input';
 import './userDetailsChange.scss';
 import updateInputs from 'functions/updateInputs';
@@ -10,8 +10,12 @@ import axios from 'axios';
 import ExpandSection from '../ExpandSection/ExpandSection';
 import Box from '../Box/Box';
 import useUpdateUserRedux from 'hooks/useUpdateUserRedux';
+import useOfwoodErrorhandler from '../Errors/errorhandler';
+import { resetMessage, setMessage } from 'store/toast';
 
 const UserDetailsChange = () => {
+  const dispatch=useDispatch()
+  const ofwoodErrorhandler=useOfwoodErrorhandler()
   const updateUser=useUpdateUserRedux()
   const user = useSelector(state => state.loggedUser.user);
   const [inputs, setInputs] = useState({
@@ -38,8 +42,12 @@ const UserDetailsChange = () => {
     try {
       let { data } = await axios.patch('/v1/users/updateme', inputs);
       updateUser(data.data.token)
+      dispatch(setMessage("The user details updated"))
+            setTimeout(()=>{
+              dispatch(resetMessage())
+            },3000)
     } catch (error) {
-      console.log(error);
+      ofwoodErrorhandler(error.respone.data)
     }
   };
   return (

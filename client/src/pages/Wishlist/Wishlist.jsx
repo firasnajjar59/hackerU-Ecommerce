@@ -8,10 +8,12 @@ import Box from 'components/common/Box/Box';
 import { addArrProductToWishlist } from 'store/wishlist';
 import useUpdateUserRedux from 'hooks/useUpdateUserRedux';
 import { resetMessage, setMessage } from 'store/toast';
+import useOfwoodErrorhandler from 'components/common/Errors/errorhandler';
 
 
 const Wishlist = props => {
     document.title = `Wishlist | ofwood`;
+    const ofwoodErrorhandler=useOfwoodErrorhandler()
     const dispatch=useDispatch()
     const wishlist=useSelector(state=>state.wishlist.wishlist)
     const loggedIn=useSelector(state=>state.loggedIn.loggedIn)
@@ -26,7 +28,7 @@ const Wishlist = props => {
             const {data}=await axios.post("/v1/products/cart",{_id:wishlist})
               setwishlistProduct(data.data.doc)
             } catch (error) {
-              console.log(error);
+              ofwoodErrorhandler(error.response.data)
             }
           }
           )()
@@ -54,12 +56,9 @@ const Wishlist = props => {
             dispatch(setMessage("The product removed from your wishlist"))
             setTimeout(()=>{
               dispatch(resetMessage())
-            },2000)
+            },5000)
         } catch (error) {
-          dispatch(setMessage("Something went wrong"))
-          setTimeout(()=>{
-            dispatch(resetMessage())
-          },2000)
+          ofwoodErrorhandler(error.response.data)
         }
       }
       )()
@@ -87,7 +86,6 @@ const Wishlist = props => {
               <img
                 src={product?.imgs[0].length>0&&product.imgs[0].startsWith("http")?product.imgs[0]:`${process.env.REACT_APP_SERVER_URL}/images/products/${product.imgs[0]}`}
                 alt=''
-                onClick={()=>console.log(`${process.env.REACT_APP_SERVER_URL}/images/products/${product.imgs[0]}`)}
               />
             </div>
             <div className='product-list-details-wrapper'>

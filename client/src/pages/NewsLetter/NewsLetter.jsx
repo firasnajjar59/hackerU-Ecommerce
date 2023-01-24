@@ -7,8 +7,13 @@ import TextArea from 'components/common/Input/TextArea'
 import Button from 'components/common/Button/Button'
 import updateInputs from 'functions/updateInputs'
 import Error from 'components/common/Errors/Error'
+import useOfwoodErrorhandler from 'components/common/Errors/errorhandler'
+import { useDispatch } from 'react-redux'
+import { resetMessage, setMessage } from 'store/toast'
 
 const NewsLetter = () => {
+    const ofwoodErrorhandler=useOfwoodErrorhandler()
+    const dispatch= useDispatch()
     const [sending,setSending]=useState(false)
     const [error,setError]=useState("")
     const [emails,setEmails]=useState([])
@@ -23,7 +28,7 @@ const NewsLetter = () => {
                 const emailArr=data.data.doc.map((obj)=>obj.newsletterEmail)
                 setEmails(emailArr)
             } catch (error) {
-                console.log(error);
+                ofwoodErrorhandler(error.response.data)
             }
         })()
     },[])
@@ -42,8 +47,13 @@ const NewsLetter = () => {
                 message:""
             })
             setSending(false)
+            dispatch(setMessage("The E-mail sent"))
+            setTimeout(()=>{
+              dispatch(resetMessage())
+            },3000)
         } catch (error) {
             setError(error.response.data.message)
+            ofwoodErrorhandler(error.response.data)
             setSending(false)
         }
     }

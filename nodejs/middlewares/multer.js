@@ -16,7 +16,9 @@ const catchAsync = require('../services/catchAsync');
 // })
 const multerStorge = multer.memoryStorage();
 const multerFilter = (req, file, cb) => {
+  
   if (file.mimetype.startsWith('image')) {
+    console.log("hi");
     cb(null, true);
   } else
     cb(new AppError('Not an image! please upload images only', 400), false);
@@ -27,7 +29,6 @@ const multerFilter = (req, file, cb) => {
 
 const resizePhoto = (name)=>catchAsync(async (req, res, next) => {
   if (!req.file) return next();
-  
   req.file.filename = `${name}-${req.doc._id}-${Date.now()}.png`;
   await sharp(req.file.buffer)
     .resize(500, 500,{fit:"contain",background: { r: 255, g: 255, b: 255, alpha: 0 }})
@@ -38,8 +39,8 @@ const resizePhoto = (name)=>catchAsync(async (req, res, next) => {
 });
 
 
-const resizeMultiPhotos =(name)=> catchAsync(async (req, res, next) => {
-  if (!req.files.length>0) return next();
+const resizeMultiPhotos =(name)=> catchAsync(async (req, res, next) => { 
+  if (!req.files||req.files.length==0) return next();
   req.body.imgs=[]
   await Promise.all(req.files.map(async (file,i)=>{
     const filename = `${name}-${req.doc._id}-${Date.now()}-${i+1}.png`;
