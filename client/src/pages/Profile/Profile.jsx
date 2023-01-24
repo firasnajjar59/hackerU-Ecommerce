@@ -1,7 +1,7 @@
 import './profile.scss'
 import Ul from 'components/specific/FilterByElement/List/Ul/Ul'
 import Li from 'components/specific/FilterByElement/List/Li/Li'
-import { Route, useRouteMatch } from 'react-router-dom'
+import { Route, Switch, useRouteMatch } from 'react-router-dom'
 
 import NavBarLink from 'components/common/NavLink/NavLink'
 import ChangeInfo from 'components/common/ChangeInfo/ChangeInfo'
@@ -73,6 +73,7 @@ const Profile = () => {
                     </div>:null}
                 </div>
                 <div className="profile-right bg-primary-opacity">
+                    <Switch>
                     {/* user */}
                     <Route path={`${path}`} exact component={ChangeInfo} />
                     <Route path={`${path}/myorders`} component={MyOrders} />
@@ -88,6 +89,7 @@ const Profile = () => {
                     <AdminGard path={`${path}/users`} component={AdminUser} />
                     <AdminGard path={`${path}/createproducts`} component={CreateProduct} />
                     <AdminGard path={`${path}/newsletter`} component={NewsLetter} />
+                    </Switch>
                 </div>
             </div>
         </BoxContainer>
