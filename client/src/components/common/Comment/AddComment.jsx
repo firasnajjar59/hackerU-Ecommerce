@@ -12,7 +12,7 @@ const AddComment = (props) => {
   const loggedIn=useSelector(state=>state.loggedIn.loggedIn)
 const ofwoodErrorhandler=useOfwoodErrorhandler()
 const user=useSelector(state=>state.loggedUser.user)
-const {id:productId}=props.id
+const productId=props.id
 const [inputs,setInputs]=useState({
   reviewValue:"",
   productId:productId,

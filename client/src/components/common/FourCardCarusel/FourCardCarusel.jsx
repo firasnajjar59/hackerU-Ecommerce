@@ -47,21 +47,21 @@ const FourCardCarusel = props => {
         screenWidth>600?
         <>
         <Card _id={productArr[cardToDisplay.firstCard]._id} slug={productArr[cardToDisplay.firstCard].slug} title={productArr[cardToDisplay.firstCard].name} img={productArr[cardToDisplay.firstCard].imgs[0]} desc={productArr[cardToDisplay.firstCard].description}>
-          <Ribbon>new</Ribbon>
+        <Ribbon classes={productArr[cardToDisplay.firstCard].stock<5?"last-units":"new"}>{productArr[cardToDisplay.firstCard].stock<5?"Last units left":"New"}</Ribbon>
         </Card>
         <Card _id={productArr[cardToDisplay.secondCard]._id} slug={productArr[cardToDisplay.secondCard].slug} title={productArr[cardToDisplay.secondCard].name} img={productArr[cardToDisplay.secondCard].imgs[0]} desc={productArr[cardToDisplay.secondCard].description}>
-          <Ribbon>new</Ribbon>
+        <Ribbon classes={productArr[cardToDisplay.secondCard].stock<5?"last-units":"new"}>{productArr[cardToDisplay.secondCard].stock<5?"Last units left":"New"}</Ribbon>
         </Card>
         <Card _id={productArr[cardToDisplay.thirdCard]._id} slug={productArr[cardToDisplay.thirdCard].slug} title={productArr[cardToDisplay.thirdCard].name} img={productArr[cardToDisplay.thirdCard].imgs[0]} desc={productArr[cardToDisplay.thirdCard].description}>
-          <Ribbon>new</Ribbon>
+        <Ribbon classes={productArr[cardToDisplay.thirdCard].stock<5?"last-units":"new"}>{productArr[cardToDisplay.thirdCard].stock<5?"Last units left":"New"}</Ribbon>
         </Card>
         <Card _id={productArr[cardToDisplay.fourthCard]._id} slug={productArr[cardToDisplay.fourthCard].slug} title={productArr[cardToDisplay.fourthCard].name} img={productArr[cardToDisplay.fourthCard].imgs[0]} desc={productArr[cardToDisplay.fourthCard].description}>
-          <Ribbon>new</Ribbon>
+        <Ribbon classes={productArr[cardToDisplay.fourthCard].stock<5?"last-units":"new"}>{productArr[cardToDisplay.fourthCard].stock<5?"Last units left":"New"}</Ribbon>
         </Card>
         </>
         :
         productArr.map((product,indx)=><Card key={indx} slug={product.slug} _id={product._id} img={product.imgs[0]} title={product.name} desc={product.description}>
-          <Ribbon>new</Ribbon>
+        <Ribbon classes={product.stock<5?"last-units":"new"}>{product.stock<5?"Last units left":"New"}</Ribbon>
         </Card>)
         :<>
         <PlaceholderCard/>

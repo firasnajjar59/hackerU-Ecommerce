@@ -7,6 +7,7 @@ import AddComment from 'components/common/Comment/AddComment';
 import BoxContainer from 'components/common/BoxContainer/BoxContainer';
 
 const RightSideProductPage = (props) => {
+  console.log(props.id)
   return (
     <div className={`rightAside ${props.classes}`}>
       <BoxContainer title='Description'>

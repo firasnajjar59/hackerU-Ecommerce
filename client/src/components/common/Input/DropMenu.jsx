@@ -4,7 +4,7 @@ const DropMenu = (props) => {
   
   return (  
     <select data-label={props.datalabel} value={props.value} onChange={props.onchange} className={`${props.classes}`} id={props.id}>
-      {props.options?props.options.map((item,indx)=><option key={indx}>{item}</option>):null}
+      {props.options?props.options.map((item,indx)=><option key={indx} value={props.optionValue?props.optionValue[indx]:item} >{item}</option>):null}
     </select>
   )
 }

@@ -2,7 +2,6 @@
 
 const Reviews = require('../models/reviewModel');
 const functionsFactory = require('../services/functionsFactory');
-const catchAsync = require('../services/catchAsync');
 
 const createReview = functionsFactory.createDocumant(Reviews);
 const getAllReviews = functionsFactory.getAllDocumants(Reviews);

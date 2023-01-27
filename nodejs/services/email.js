@@ -11,10 +11,6 @@ const sendEmail= async options=>{
             user:process.env.EMAIL_USERNAME,
             pass:process.env.EMAIL_PASSWORD
         },
-        // pool: true, // use pooled connection
-        // rateLimit: true, // enable to make sure we are limiting
-        // maxConnections: 1, // set limit to 1 connection only
-        // maxMessages: 3, // send 3 emails per second
     })
     // define the email provider
         const mailOptions={

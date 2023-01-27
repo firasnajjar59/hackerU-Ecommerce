@@ -1,0 +1,22 @@
+.popular-card-wrapper{
+    position: relative;
+    width: 25%;
+    img{
+        width: 100%;
+        aspect-ratio: 1/1;
+        object-fit: contain;
+    }
+}
+
+
+
+@media screen and (max-width: 600px) {
+    .popular-card-wrapper{
+        width: 60vw !important;
+        img{
+            width: 60vw;
+            aspect-ratio: 1/1;
+            object-fit: contain;
+        }
+    }
+}

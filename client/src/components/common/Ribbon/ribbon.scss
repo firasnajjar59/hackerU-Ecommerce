@@ -1,9 +1,21 @@
 .ribbon{
     padding: var(--small-padding) var(--medium-padding);
-    background-color: var(--primary-back-ground);
     position: absolute;
     right: 0;
     top: 0;
     color: var(--secondary-color);
     font-size: var(--medium-p);
+}
+.new{
+    background-color: var(--primary-back-ground);
+}
+.last-units{
+    background-color: var(--primary-back-ground);
+}
+.last-units{
+    background-color: var(--third-color);
+}
+.out-of-stock{
+    background-color: var(--secondary-back-ground);
+    color: var(--primary-color);
 }

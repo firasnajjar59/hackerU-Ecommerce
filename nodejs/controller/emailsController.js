@@ -2,7 +2,6 @@
 
 const catchAsync = require('../services/catchAsync');
 const AppError = require('../utils/appError');
-const functionsFactory = require('../services/functionsFactory');
 const sendEmail = require('../services/email');
 
 //
@@ -12,7 +11,6 @@ const sendEmailToCustemer = catchAsync(async (req, res, next) => {
     req.body.message.length > 0 &&
     req.body.subject.length > 0
   ) {
-    console.log(req.body);
     const data = await sendEmail({
       email: req.body.email,
       subject: req.body.subject,

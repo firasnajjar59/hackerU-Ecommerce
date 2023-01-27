@@ -1,0 +1,132 @@
+.popular-cards-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: row;
+    gap: var(--medium-gap);
+}
+.statistics{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: var(--medium-gap);
+    .statistic-unit{
+        min-height: 8em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .statistic-unit-details{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--medium-gap);
+            p{
+                color: var(--bold-text);
+                font-weight: 600;
+            }
+        }
+    }
+}
+.graph{
+    width: 100%;
+    .graph-title-wrapper{
+        display: flex;
+        justify-content: space-between;
+        input{
+            width: 25% !important;
+        }
+    }
+    .graph-wrapper{
+        height: 18em;
+        display: flex;
+        flex-direction: column;
+        gap: var(--big-gap);
+        .graph-year{
+            flex-grow: 1;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            width: 100%;
+            .month{
+                height: 0%;
+                width: 2em;
+                background-color: var(--secondary-back-ground);
+                border-top-left-radius: 2em;
+                border-top-right-radius: 2em;
+                position: relative;
+                bottom: 0;
+                position: relative;
+                transition: height 3000ms ease-in-out;
+                p{
+                    position: absolute;
+                    top: -2em;
+                    left: 50%;
+                    transform: translate(-50%,0);
+                    color: var(--primary-text);
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}
+.no-data{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    p{
+        color: var(--secondary-text);
+        font-size: var(--big-title);
+
+    }
+}
+
+
+
+
+@media screen and (max-width: 600px) {
+    .popular-cards-wrapper{
+        width: 70vw;
+        overflow-x: scroll !important;
+    }
+    
+    .statistics{
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        gap: var(--medium-gap);
+        .statistic-unit{
+            min-height: 8em;
+            display: flex;
+            align-items: center;
+            .statistic-unit-details{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: var(--medium-gap);
+            }
+        }
+    }
+    .graph{
+        width: 70vw;
+        .graph-wrapper{
+            height: 18em;
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            gap: var(--big-gap);
+            position: relative;
+            .graph-year{
+                padding: 0 var(--big-padding) !important;
+                overflow-x: scroll !important;
+                display: grid;
+                grid-template-columns: repeat(11,1fr);
+                gap: var(--big-gap);
+                justify-content: start;
+                .month{
+                 justify-self: center;
+                    p{
+                       
+                    }
+                }
+            }
+        }
+    }
+}

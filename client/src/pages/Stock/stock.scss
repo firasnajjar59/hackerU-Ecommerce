@@ -1,0 +1,40 @@
+.stock-list{
+    display: flex;
+    align-items: center;
+    gap: var(--medium-gap);
+
+    .img-wrapper{
+        width: 10%;
+        img{
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: contain;
+        }
+    }
+    .select-wrapper{
+        width: 30%;
+    }
+    .btn-wrapper{
+        flex-grow: 1;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .stock-list{
+      flex-direction: column;
+    
+        .img-wrapper{
+            width: 100%;
+            img{
+            
+            }
+        }
+        .select-wrapper{
+            width: 100%;
+        }
+        .btn-wrapper{
+            width: 100%;
+        }
+    }
+
+}

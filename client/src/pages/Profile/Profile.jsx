@@ -21,6 +21,8 @@ import OneOrder from 'components/specific/admin/OneOrder/OneOrder';
 import WebContent from 'pages/WebContent/WebContent';
 import NewsLetter from 'pages/NewsLetter/NewsLetter';
 import EditProduct from 'components/specific/admin/EditProduct/EditProduct';
+import Stock from 'pages/Stock/Stock';
+import Statistics from 'components/specific/Statistics/Statistics';
 
 
 const Profile = () => {
@@ -49,8 +51,10 @@ const Profile = () => {
                             <Li classes="menu-list-item"><NavBarLink classes="nav" onclick={()=>{setDisplayMenu(false)}} path={`${url}`} label="Profile"/></Li>
                             {user.role=="admin"?
                                 <>
+                                <Li classes="menu-list-item"><NavBarLink classes="nav" onclick={()=>{setDisplayMenu(false)}} path={`${url}/statistics`} label="Statistics"/></Li>
                                 <Li classes="menu-list-item"><NavBarLink classes="nav" onclick={()=>{setDisplayMenu(false)}} path={`${url}/users`} label="Users"/></Li>
                                 <Li classes="menu-list-item"><NavBarLink classes="nav" onclick={()=>{setDisplayMenu(false)}} path={`${url}/products`} label="Products"/></Li>
+                                <Li classes="menu-list-item"><NavBarLink classes="nav" onclick={()=>{setDisplayMenu(false)}} path={`${url}/stock`} label="Stock"/></Li>
                                 <Li classes="menu-list-item"><NavBarLink classes="nav" onclick={()=>{setDisplayMenu(false)}} path={`${url}/createproducts`} label="Add Products"/></Li>
                                 <Li classes="menu-list-item"><NavBarLink classes="nav" onclick={()=>{setDisplayMenu(false)}} path={`${url}/orders`} label="Orders"/></Li>
                                 <Li classes="menu-list-item"><NavBarLink classes="nav" onclick={()=>{setDisplayMenu(false)}} path={`${url}/webcontent`} label="Web content"/></Li>
@@ -60,6 +64,7 @@ const Profile = () => {
                             {user.role=="contributor"?
                                 <>
                                 <Li classes="menu-list-item"><NavBarLink classes="nav" onclick={()=>{setDisplayMenu(false)}} path={`${url}/products`} label="Products"/></Li>
+                                <Li classes="menu-list-item"><NavBarLink classes="nav" onclick={()=>{setDisplayMenu(false)}} path={`${url}/stock`} label="Stock"/></Li>
                                 <Li classes="menu-list-item"><NavBarLink classes="nav" onclick={()=>{setDisplayMenu(false)}} path={`${url}/orders`} label="Orders"/></Li>
                                 <Li classes="menu-list-item"><NavBarLink classes="nav" onclick={()=>{setDisplayMenu(false)}} path={`${url}/webcontent`} label="Web content"/></Li>
                             </>:""
@@ -83,7 +88,9 @@ const Profile = () => {
                     <ContributorGard path={`${path}/orders`} exact component={Order} />
                     <ContributorGard path={`${path}/orders/:order_id`} component={OneOrder} />
                     <ContributorGard path={`${path}/webcontent`} component={WebContent} />
+                    <ContributorGard path={`${path}/stock`} component={Stock} />
                     {/* admin */}
+                    <AdminGard path={`${path}/statistics`} component={Statistics} />
                     <AdminGard path={`${path}/users`} component={AdminUser} />
                     <AdminGard path={`${path}/createproducts`} component={CreateProduct} />
                     <AdminGard path={`${path}/newsletter`} component={NewsLetter} />

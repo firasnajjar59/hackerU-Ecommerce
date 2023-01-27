@@ -47,14 +47,7 @@ const forgotPassword = catchAsync(async (req, res, next) => {
   }
   // generate random reset token
   const resetToken = user.createPasswordResetToken();
-  console.log(resetToken);
   await user.save();
-  // send token to user's email
-  //   build a url
-                            // const resetUrl = `${req.protocol}://${req.get(
-                            //   'host'
-                            // )}/resetpassword/${resetToken}`;
-  //   build a email message
   const message = `This is your password reset code: ${resetToken}.\nIf you didn't forget your password,please ignore this email!`;
   // send response
   try {

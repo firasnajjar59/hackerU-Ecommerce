@@ -19,7 +19,7 @@ const HomePage = () => {
   useEffect(()=>{
     (async ()=>{
       try {
-        let {data:res}=await axios.get("/v1/products?fields=name,description,imgs,slug&limit=100")
+        let {data:res}=await axios.get("/v1/products?fields=name,description,imgs,slug,stock&limit=100")
         setProudactArr(res.data.doc)
       } catch (error) {
         ofwoodErrorhandler(error.response.data)

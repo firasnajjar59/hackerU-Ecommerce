@@ -16,8 +16,20 @@
             display: none;
         }
         .file-name{
+            width: 100%;
+            overflow: hidden;
             color: var(--bold-text);
             font-size: var(--small-p);
             font-weight: 400;
+        }
+    }
+    @media screen and (max-width: 600px) {
+        .file-input-label{
+       
+            .file-input{
+            }
+            .file-name{
+             
+            }
         }
     }

@@ -117,7 +117,7 @@ const Store = () => {
                 key={indx}
                 className={screenWidth > 600 ? 'col-sm-4 p-2' : 'col-sm py-3'}>
                 <Card _id={product._id} slug={product.slug} title={product.name} img={product.imgs[0]} desc={product.description}>
-                  <Ribbon>new</Ribbon>
+                  <Ribbon classes={product.stock<5?"last-units":"new"}>{product.stock<5?"Last units left":"New"}</Ribbon>
                 </Card>
               </div>
             )):Array(limit).fill(1).map((item,indx)=><div

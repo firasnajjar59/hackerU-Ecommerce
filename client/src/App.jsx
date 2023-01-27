@@ -46,7 +46,7 @@ const App = () => {
 useEffect(()=>{
   setTimeout(() => {
     setAnimate(false);
-  },3000);//3000
+  },300);//3000
 },[])
 
 

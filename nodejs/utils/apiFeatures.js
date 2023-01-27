@@ -14,7 +14,6 @@ class ApiFeatures {
     //* advanced filter
     let queryStr = JSON.stringify(queryObj);
     queryStr = queryStr.replace(/\b(gte|gt|lt|lte|ne|regex)\b/g, match => `$${match}`);
-    console.log(queryStr);
     this.query = this.query.find(JSON.parse(queryStr));
     if(queryObj.name){
       this.query = this.query.find({name:new RegExp('^' +queryObj.name, 'i')});

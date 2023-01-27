@@ -20,7 +20,6 @@ const getProductByID = catchAsync(async (req, res, next) => {
 const updateProduct = functionsFactory.updateDocumantByID(Products);
 //
 const handleOptionsInReq = (req, res, next) => {
-  console.log(req.body);
   if (req.body.selectOption) {
     req.body.selectOption = JSON.parse(req.body.selectOption);
   }

@@ -8,6 +8,7 @@ import Joi from "joi-browser";
     phone: Joi.string().min(9).max(14).required().label("phone"),
     url: Joi.string().min(6).max(1024).label("url"),
     alt: Joi.string().min(2).max(256).label("alt"),
+    stock:Joi.number().label("stock")
   }
 
 export default cardSchema

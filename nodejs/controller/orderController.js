@@ -4,6 +4,8 @@ const Orders = require("../models/orderModel");
 const catchAsync = require("../services/catchAsync");
 const AppError = require('../utils/appError');
 const functionsFactory = require('../services/functionsFactory');
+const Products = require('../models/productModel');
+const sendEmail = require('../services/email');
 
 
 //
@@ -52,7 +54,7 @@ const placeOrder=catchAsync(async(req,res,next)=>{
     if(req.doc.orderToken!=orderToken)next(new AppError("Please provide a valid token",401))
     //create order
     const order={
-        products:req.doc.cart,
+        products:JSON.parse(JSON.stringify(req.doc.cart)),
         user_id:req.doc._id,
     }
     const createdOrder=await Orders.create(order)
@@ -61,6 +63,26 @@ const placeOrder=catchAsync(async(req,res,next)=>{
     // delete cart from user
     req.doc.cart=[]
     const newUser=await req.doc.save()
+    // update stock
+    const products_id=order.products.map((item)=>item.product_id)
+    const products=await Products.find({_id:products_id})
+    for(let product of products){
+        let orderProduct=order.products.map((item)=>{
+            if(item.product_id._id==product._id){
+                product.stock=product.stock-item.quantity
+                return product
+            }
+        })
+        await orderProduct[0].save()
+        if(orderProduct[0].stock<5){
+            await sendEmail({
+                email: "firasnajjar92@gmail.com",
+                subject: "Inventory has reached a low point",
+                message:`The inventory of the ${orderProduct[0].name} has reached its lowest point. It is currently at ${orderProduct[0].stock} units. Please place a new order as soon as possible`,
+              })
+        }
+    }
+    // 
     req.doc=newUser;
 
     // next middleware to generate new token

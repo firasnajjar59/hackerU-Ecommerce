@@ -88,15 +88,17 @@ const ofwoodErrorhandler=useOfwoodErrorhandler()
   // 
   const handleLogin = async () => {
     try {
-      const {error}=validate(inputs,loginSchema)
-      if(error)  throw(error) 
+      const error=validate(inputs,loginSchema)
+      if(error.error)  throw(error) 
       let data  = await axios.post('/v1/users/auth/login', inputs);
       updateUser(data.data.data.token)
       history.goBack();
-    } catch (error) {
+    } catch (error) { 
+      console.log(error);
       if(error.error&&error.error.name=="ValidationError"){
         setServerError("Please check the login fields")
-      }else{
+      }
+      else{
         setServerError(error.response.data.message)
         ofwoodErrorhandler(error.response.data)
       }

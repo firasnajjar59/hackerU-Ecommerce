@@ -11,6 +11,7 @@ const Input = (props) => {
   data-label={props.datalabel}
   name={props.name}
   multiple={props.multi&&props.multi}
+  min={props.min}
 />
   )
 }

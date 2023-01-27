@@ -34,6 +34,7 @@ const productsSchema = new mongoose.Schema({
     }
   ],
   category:[String],
+  stock:{type:Number,default:1,}
 },
 {
   toJSON:{virtuals:true},

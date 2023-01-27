@@ -11,18 +11,15 @@ const uploadContentPhotos = upload.array('imgs');
 const getAllContent = functionsFactory.getAllDocumants(WebContent);
 const getContent = functionsFactory.getAllDocumantsNOQuery(WebContent);
 const createContent = catchAsync(async (req, res, next) => {
-  console.log('controller');
 
   if (req.file) req.body.img = req.file.filename;
   // update user document
   const content = await WebContent.create(req.body);
-  console.log(content);
   res.status(201).json({ status: 'success', data: content });
 });
 const editContent = catchAsync(async (req, res, next) => {
   
   let content = await WebContent.findOne({ name: req.body.name });
-  console.log(content);
   if (!content)
     return next(new AppError('No content belong this name found.', 404));
   if (req.file) content.img = req.file.filename;

@@ -50,7 +50,7 @@ catchAsync(async (req, res, next) => {
 if (!doc.length) {
   return next(new AppError('document not found', 404));
 }
-console.log(doc);
+
 
     res.json({
       status: 'success',
@@ -65,7 +65,6 @@ console.log(doc);
 //* send success response
 exports.createDocumant = Model =>
   catchAsync(async (req, res, next) => {
-    console.log(req.body);
     let doc = new Model(req.body);
     doc = await doc.save();
     // check if we create a user if yes we pass to next middleware

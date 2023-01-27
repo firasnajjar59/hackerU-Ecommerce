@@ -106,6 +106,7 @@ usersSchema.pre(/^find/, function (next) {
   this.populate({ path: 'wishlist', select: 'name imgs price' });
   next();
 });
+
 // save when the password changed
 usersSchema.pre('save', function (next) {
   if (!this.isModified('password') || this.isNew) return next();
@@ -143,7 +144,6 @@ usersSchema.methods.createPasswordResetToken = function () {
       arr.push(randomNum(0,9))
     }
     arr=arr.join("")
-    console.log(arr);
     return arr
   })()
   // we hash the random string we generate one step before and save it in database

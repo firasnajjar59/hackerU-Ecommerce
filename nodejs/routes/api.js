@@ -6,6 +6,7 @@ const reviewsRouter = require("./reviewsRouter");
 const orderRouter = require("./orderRouter");
 const gallaryRouter = require("./gallaryRouter");
 const newsletterRouter = require("./newsletterRouter");
+const aggregationRouter = require("./aggregationRouter");
 
 /* GET Products Router. */
 router.use('/products', productsRouter);
@@ -19,5 +20,7 @@ router.use('/order', orderRouter);
 router.use('/gallary', gallaryRouter);
 /* GET reviews Router. */
 router.use('/newsletter', newsletterRouter);
+/* GET reviews Router. */
+router.use('/aggregation', aggregationRouter);
 
 module.exports = router;
