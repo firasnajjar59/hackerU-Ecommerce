@@ -23,7 +23,7 @@ router.use(protect);
  * /api/v1/users
  */
 router.get('/', permissionTo('admin'), userController.getAllUsers);
-router.route('/:id').get(userController.getUserById);
+router.route('/:id').get(permissionTo('admin'),userController.getUserById);
 // * id from token
 router.patch(
   '/updateme',

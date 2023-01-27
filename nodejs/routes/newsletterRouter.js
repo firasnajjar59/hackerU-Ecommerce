@@ -8,13 +8,17 @@ const permissionTo = require('../middlewares/permissionTo');
 
 router
   .route('/')
-  .get(protect, permissionTo('admin', 'contributor'), newsletterController.getAllEmails)
-  .post(
-    newsletterController.postEmail
-  );
+  .get(
+    protect,
+    permissionTo('admin', 'contributor'),
+    newsletterController.getAllEmails
+  )
+  .post(newsletterController.postEmail);
 router
   .route('/sendemails')
   .post(
+    protect,
+    permissionTo('admin', 'contributor'),
     newsletterController.sendNewsletter
   );
 module.exports = router;

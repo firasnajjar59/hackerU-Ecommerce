@@ -30,15 +30,6 @@ exports.getAllDocumants = Model =>
       docsInDB:docNumber,
       info: {
         result: doc.length,
-        previous:
-          skip / limit
-            ? `${req.protocol}://${req.hostname}:${8000}${req.baseUrl}?page=${
-                skip / limit
-              }&limit=${limit}`
-            : null,
-        next: `${req.protocol}://${req.hostname}:${8000}${req.baseUrl}?page=${
-          (skip + 2 * limit) / limit
-        }&limit=${limit}`,
       },
       data: { doc },
     });

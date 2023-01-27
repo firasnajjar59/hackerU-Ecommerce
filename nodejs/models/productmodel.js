@@ -65,7 +65,6 @@ productsSchema.virtual('reviews', {
 
 const Products = mongoose.model('products', productsSchema);
 module.exports = Products;
-
 //* after finish save
 // productsSchema.post('save', function (doc,next) {
 //   console.log("done");

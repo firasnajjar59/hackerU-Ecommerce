@@ -18,9 +18,7 @@ router.use(permissionTo('admin'));
 /*
  * api/v1/users/admin
  */
-router.route('/').get((req,res,next)=>{
-  return next(new AppError('Route not defined yet',400))
-}).post(adminController.createAdmin,generateToken);
+router.route('/').post(adminController.createAdmin,generateToken);
 
 router
   .route('/:id')
