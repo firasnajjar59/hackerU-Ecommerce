@@ -23,6 +23,7 @@ import NewsLetter from 'pages/NewsLetter/NewsLetter';
 import EditProduct from 'components/specific/admin/EditProduct/EditProduct';
 import Stock from 'pages/Stock/Stock';
 import Statistics from 'components/specific/Statistics/Statistics';
+import PageNotFound from 'pages/PageNotFound/PageNotFound';
 
 
 const Profile = () => {
@@ -94,6 +95,8 @@ const Profile = () => {
                     <AdminGard path={`${path}/users`} component={AdminUser} />
                     <AdminGard path={`${path}/createproducts`} component={CreateProduct} />
                     <AdminGard path={`${path}/newsletter`} component={NewsLetter} />
+                    {/* 404 not found */}
+                    <Route path={`${path}/*`} component={PageNotFound}/>
                     </Switch>
                 </div>
             </div>

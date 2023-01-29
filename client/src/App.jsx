@@ -36,6 +36,8 @@ import { ErrorBoundary } from 'react-error-boundary';
 import ErrorBoundaryComponent from 'components/common/Errors/ErrorBoundaryComponent';
 import myErrorHandler from 'components/common/Errors/MyErrorHandler';
 import useOfwoodErrorhandler from 'components/common/Errors/errorhandler';
+import PageNotFound from 'pages/PageNotFound/PageNotFound';
+import Doc from 'pages/Doc/Doc';
 const App = () => {
   const ofwoodErrorhandler=useOfwoodErrorhandler()
   const updateUser=useUpdateUserRedux()
@@ -165,6 +167,14 @@ useEffect(()=>{
             component={Profile} />
           <LoginGard path={`/order/:ordertoken`}
             component={PlaceOrder} />
+          <Route
+            path={`/doc`}
+            component={Doc}
+          />
+          <Route
+            path={`/*`}
+            component={PageNotFound}
+          />
         </Switch>}
       </Body>
       </ErrorBoundary>
