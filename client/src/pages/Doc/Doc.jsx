@@ -140,7 +140,7 @@ const Doc = () => {
                 Live site
               </a>
               <a
-                href='../../../favicon.jpg'
+                href='../../../מדריך.pdf'
                 rel='noreferrer'
                 download>
                 Download instractions
